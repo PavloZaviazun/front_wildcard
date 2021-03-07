@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import {vocabularyService} from "./services";
+import {useState, useEffect} from "react";
 
 function App() {
+
+  const [vocabulary, setVocabulary] = useState([]);
+
+  useEffect(() => {
+    vocabularyService.getVocabulary().then(el => {
+      setVocabulary(el)
+    })
+  }, []);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {vocabulary && vocabulary.map(el => {
+       return <div key={el.id}>{el.word} + {el.part_of_speech} + {el.description} + {el.example} + {el.translation}</div>
+      })}
     </div>
   );
 }
