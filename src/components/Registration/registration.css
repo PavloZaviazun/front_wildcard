@@ -1,0 +1,42 @@
+.reg-div {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 100%;
+}
+
+.reg-div-form {
+    height: 220px;
+    width: 100%;
+    background-color: beige;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid grey;
+    font-size: 13pt;
+}
+
+.reg-div-form form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg-div-form input {
+    width: 250px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+
+.reg-div-form input:focus::-webkit-input-placeholder { color:transparent; }
+.reg-div-form input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+.reg-div-form input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+.reg-div-form input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+.reg-div-form button {
+    height: 25px;
+    width: 110px;
+    font-size: 12pt;
+}

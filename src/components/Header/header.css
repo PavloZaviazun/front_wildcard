@@ -1,0 +1,22 @@
+.div-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: darkseagreen;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+
+}
+
+.div-header a {
+    text-decoration: none;
+    color: white;
+}
+.div-header a:hover {
+    text-decoration: underline;
+}
