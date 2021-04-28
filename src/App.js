@@ -17,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+      <br/>
       {vocabulary && vocabulary.map(el => {
        return <div key={el.id}>{el.word} + {el.part_of_speech} + {el.description} + {el.example} + {el.translation}</div>
       })}

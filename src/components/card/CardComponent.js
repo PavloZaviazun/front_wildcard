@@ -43,7 +43,7 @@ export const CardComponent = () => {
                 <div className={"arrow prev"} onClick={prevArrowClick}> </div>
                 <div className={"card"} onClick={cardClick}>
                     <div className={"front-side"}>
-                        <div><span>{lib.length === 0 ? "value" : lib[0].word}</span></div>
+                        <div><span>{lib.length === 0 ? "Abundant" : lib[0].word}</span></div>
                     </div>
                     <div className={"back-side"}>
                         <div>Обильный, изобилующий</div>
@@ -53,9 +53,9 @@ export const CardComponent = () => {
                 </div>
                 <div className={"arrow next"} onClick={nextArrowClick}> </div>
             </div>
-            <div>
-                <button onClick={getLib}>Request Lib</button>
-            </div>
+            {/*<div>*/}
+            {/*    <button onClick={getLib}>Request Lib</button>*/}
+            {/*</div>*/}
         </div>
     )
 }
