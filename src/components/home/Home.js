@@ -1,6 +1,6 @@
 import "./home.css"
-import {LeftMenu} from "../LeftMenu";
-import {Body} from "../Body";
+import {LeftMenu} from "../leftMenu";
+import {Body} from "../body";
 
 export const Home = () => {
 
