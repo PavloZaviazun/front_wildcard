@@ -7,6 +7,7 @@ import {Home} from "./components/Home";
 import {User} from "./components/User";
 import {Login} from "./components/Login";
 import {Registration} from "./components/Registration";
+import {Library} from "./components/Library";
 
 function App() {
     //
@@ -41,6 +42,9 @@ function App() {
                             </Route>
                             <Route exact path="/registration">
                                 <Registration/>
+                            </Route>
+                            <Route exact path="/library/:name">
+                                <Library/>
                             </Route>
                         </Switch>
                     </PageLayout>
