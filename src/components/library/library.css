@@ -4,21 +4,9 @@
     align-self: center;
 }
 
-.div-card {
-    height: 200px;
-    width: 400px;
-    background-color: aquamarine;
-}
-
 .div-cardspace {
     display: flex;
 
-}
-
-.div-cardnav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .div-cardbutt {
@@ -58,6 +46,11 @@
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.3s ease-in-out;
+    background-color: #f1f1f1;
+}
+.content_show {
+    padding: 0 18px;
+    max-height: 100%;
     background-color: #f1f1f1;
 }

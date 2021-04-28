@@ -1,35 +1,32 @@
 import './library.css';
+import {CardComponent} from "../card";
+import {libService, vocabularyService} from "../../services";
 
 export const Library = () => {
 
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
-        let i;
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                const content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        }
+        const content = document.getElementsByClassName("content");
+        coll[0].classList.toggle("active");
+        content[0].classList.toggle("content_show");
+    }
+
+    const getWord = () => {
+        vocabularyService.getVocabulary().then(r => console.log(r))
     }
 
     return (
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
-                <div className={"div-cardnav"}>
-                    <div>Nav back</div>
-                    <div className={"div-card"}>Card</div>
-                    <div>Nav forward</div>
-                </div>
+                <CardComponent/>
             </div>
             <div className={"div-cardbutt"}>
-                <div><button>Shuffle</button></div>
-                <div><button>Add to fav</button></div>
+                <div>
+                    <button onClick={getWord}>Shuffle</button>
+                </div>
+                <div>
+                    <button>Add to fav</button>
+                </div>
             </div>
             <button className="collapsible" onClick={collapse}>Open Collapsible</button>
             <div className="content">

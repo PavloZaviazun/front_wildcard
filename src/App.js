@@ -30,7 +30,7 @@ import './App.css';
 import {BrowserRouter as Router, Switch,Route} from 'react-router-dom';
 import {Provider} from "react-redux";
 import {store} from "./redux";
-import {PageLayout} from "./layouts/PageLayout";
+import {PageLayout} from "./layouts";
 import {Home} from "./components/home";
 import {User} from "./components/user";
 import {Login} from "./components/login";
