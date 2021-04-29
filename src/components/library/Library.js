@@ -1,9 +1,14 @@
 import './library.css';
 import {CardComponent} from "../card";
-import {libService, vocabularyService} from "../../services";
+import {vocabularyService} from "../../services";
+import {useCallback, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setVocabulary} from "../../redux";
 
 export const Library = () => {
 
+    const {vocabulary: {vocabulary}} = useSelector(state => state);
+    const dispatch = useDispatch();
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
         const content = document.getElementsByClassName("content");
@@ -11,8 +16,18 @@ export const Library = () => {
         content[0].classList.toggle("content_show");
     }
 
-    const getWord = () => {
-        vocabularyService.getVocabulary().then(r => console.log(r))
+    const getWord = useCallback(async () => {
+        const data = await vocabularyService.getVocabulary();
+        dispatch(setVocabulary(data));
+    }, [])
+
+    useEffect(() => {
+        getWord();
+    }, [])
+
+    const shuffle = () => {
+        vocabulary.sort(() => Math.random() - 0.5);
+        dispatch(setVocabulary(vocabulary));
     }
 
     return (
@@ -22,17 +37,15 @@ export const Library = () => {
             </div>
             <div className={"div-cardbutt"}>
                 <div>
-                    <button onClick={getWord}>Shuffle</button>
+                    <button id="shuffle" onClick={shuffle}>Shuffle</button>
                 </div>
                 <div>
                     <button>Add to fav</button>
                 </div>
             </div>
-            <button className="collapsible" onClick={collapse}>Open Collapsible</button>
+            <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.</p>
+                {vocabulary.map(e => <p key={e.id}>{e.word}</p>)}
             </div>
         </div>
     )

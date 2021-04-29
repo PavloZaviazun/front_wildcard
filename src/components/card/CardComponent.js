@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
-import {libService} from "../../services";
+import {useSelector} from "react-redux";
 
 export const CardComponent = () => {
 
+    const {vocabulary: {vocabulary}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
-    const [lib, setLib] = useState([]);
+    const [word, setWord] = useState({});
+    let [i, setI] = useState(0);
 
     const cardClick = () => {
         setCardBack(!cardBack);
@@ -13,49 +15,49 @@ export const CardComponent = () => {
 
     const prevArrowClick = () => {
         setCardBack(false);
+        if (vocabulary != null) {
+            if (i - 1 < 0) setI(vocabulary.length - 1);
+            else setI(--i);
+            setWord(vocabulary[i]);
+        }
     }
 
     const nextArrowClick = () => {
         setCardBack(false);
-    }
-
-    const getLib = () => {
-        libService.getLib().then(library => {
-            setLib(library)
-        })
+        if (i + 1 >= vocabulary.length) setI(0)
+        else setI(++i);
+        setWord(vocabulary[i]);
     }
 
     useEffect(() => {
         let frontSide = document.getElementsByClassName("front-side")[0];
         let backSide = document.getElementsByClassName("back-side")[0];
-        if(cardBack) {
+        setWord(vocabulary.length === 0 ? "" : vocabulary[i]);
+        if (cardBack) {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(180deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(360deg)";
         } else {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-    }, [cardBack, lib]);
+    }, [cardBack, vocabulary, i, vocabulary[i]]);
 
     return (
         <div className={"card-component"}>
             <div className={"card-outer"}>
-                <div className={"arrow prev"} onClick={prevArrowClick}> </div>
+                <div className={"arrow prev"} onClick={prevArrowClick}/>
                 <div className={"card"} onClick={cardClick}>
                     <div className={"front-side"}>
-                        <div><span>{lib.length === 0 ? "Abundant" : lib[0].word}</span></div>
+                        <div><span>{word == null || word.length === 0 ? "Cat" : word.word}</span></div>
                     </div>
                     <div className={"back-side"}>
-                        <div>Обильный, изобилующий</div>
-                        <div>Present in large quantities.</div>
-                        <div>Living close to a lake means we have an abundant supply of water.</div>
+                        <div>{word == null || word.length === 0 ? "котик" : word.translation}</div>
+                        <div>{word == null || word.length === 0 ? "домашний пушистик" : word.description}</div>
+                        <div>{word == null || word.length === 0 ? "Cat lies on the floor." : word.example}</div>
                     </div>
                 </div>
-                <div className={"arrow next"} onClick={nextArrowClick}> </div>
+                <div className={"arrow next"} onClick={nextArrowClick}/>
             </div>
-            {/*<div>*/}
-            {/*    <button onClick={getLib}>Request Lib</button>*/}
-            {/*</div>*/}
         </div>
     )
 }
