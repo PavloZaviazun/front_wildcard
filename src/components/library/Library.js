@@ -1,13 +1,15 @@
 import './library.css';
 import {CardComponent} from "../card";
-import {vocabularyService} from "../../services";
 import {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setVocabulary} from "../../redux";
+import {vocabularyService} from "../../services";
+
 
 export const Library = () => {
 
     const {vocabulary: {vocabulary}} = useSelector(state => state);
+
     const dispatch = useDispatch();
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
