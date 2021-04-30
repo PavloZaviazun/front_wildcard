@@ -9,6 +9,8 @@ import {Login} from "./components/login";
 import {Registration} from "./components/registration";
 import {Library} from "./components/library";
 import store from "./redux";
+import {Admin} from "./components/admin";
+import {Body} from "./components/body";
 
 function App() {
 
@@ -19,7 +21,7 @@ function App() {
             <PageLayout>
               <Switch>
                 <Route exact path="/">
-                  <Home/>
+                  <Home child={<Body/>}/>
                 </Route>
                 <Route exact path="/user/:id">
                   <User/>
@@ -31,7 +33,10 @@ function App() {
                   <Registration/>
                 </Route>
                 <Route exact path="/library/:name">
-                  <Library/>
+                  <Home child={<Library/>}/>
+                </Route>
+                <Route exact path="/admin">
+                  <Admin/>
                 </Route>
               </Switch>
             </PageLayout>

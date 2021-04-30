@@ -1,0 +1,41 @@
+.forWords {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease-in-out;
+    background-color: #f1f1f1;
+}
+
+.forWords_show {
+    max-height: 100%;
+    background-color: #f1f1f1;
+}
+
+.forUsers {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease-in-out;
+    background-color: #f1f1f1;
+}
+
+.forUsers_show {
+    max-height: 100%;
+    background-color: #f1f1f1;
+}
+
+.forLibraries {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease-in-out;
+    background-color: #f1f1f1;
+}
+
+.forLibraries_show {
+    max-height: 100%;
+    background-color: #f1f1f1;
+}
+
+.container-for-edition {
+    height: 100%;
+    width: 100%;
+    background-color: #61dafb;
+}

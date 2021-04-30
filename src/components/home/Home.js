@@ -1,14 +1,11 @@
 import "./home.css"
 import {LeftMenu} from "../leftMenu";
-import {Body} from "../body";
 import {libService} from "../../services";
-import {setLibrary} from "../../redux";
-import {useDispatch, useSelector} from "react-redux";
+import {setLibrary, setVocabulary} from "../../redux";
+import {useDispatch} from "react-redux";
 import {useCallback, useEffect} from "react";
 
-export const Home = () => {
-    const {library: {library}} = useSelector(state => state);
-
+export const Home = (child) => {
     const dispatch = useDispatch();
 
     const getLibraries = useCallback(async () => {
@@ -18,6 +15,7 @@ export const Home = () => {
 
     useEffect(() => {
         getLibraries();
+        dispatch(setVocabulary([]))
     }, [])
 
     return (
@@ -26,7 +24,7 @@ export const Home = () => {
                 <LeftMenu/>
             </div>
             <div className={"for-body"}>
-                <Body/>
+                {child.child}
             </div>
         </div>
     )

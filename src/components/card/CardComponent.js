@@ -2,15 +2,24 @@ import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {useSelector} from "react-redux";
 
+
+
 export const CardComponent = () => {
 
-    const {vocabulary: {vocabulary}} = useSelector(state => state);
+    const {vocabulary: {vocabulary}, language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
-    const [word, setWord] = useState({});
+    const [word, setWord] = useState([]);
     let [i, setI] = useState(0);
-
+    let translation = "";
     const cardClick = () => {
         setCardBack(!cardBack);
+    }
+
+    const getTranslation = () => {
+        let trans = JSON.parse(word.translation);
+        if (language === "ru") translation = trans.ru;
+        if (language === "ua") translation = trans.ua;
+        return translation;
     }
 
     const prevArrowClick = () => {
@@ -51,7 +60,7 @@ export const CardComponent = () => {
                         <div><span>{word == null || word.length === 0 ? "Cat" : word.word}</span></div>
                     </div>
                     <div className={"back-side"}>
-                        <div>{word == null || word.length === 0 ? "котик" : word.translation}</div>
+                        <div>{word == null || word.length === 0 ? "котик" : getTranslation()}</div>
                         <div>{word == null || word.length === 0 ? "домашний пушистик" : word.description}</div>
                         <div>{word == null || word.length === 0 ? "Cat lies on the floor." : word.example}</div>
                     </div>

@@ -1,5 +1,5 @@
 import "./updateWord.css";
-import {vocabularyService} from "../../services";
+import {vocabularyService} from "../../../services";
 import {useEffect} from "react";
 
 export const UpdateWord = () => {
@@ -21,7 +21,7 @@ export const UpdateWord = () => {
     }
 
     const deleteWord = () => {
-        //TODO find id
+        //TODO find word.id
         vocabularyService.deleteWord(2)
     }
 

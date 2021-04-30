@@ -49,6 +49,7 @@
     transition: max-height 0.3s ease-in-out;
     background-color: #f1f1f1;
 }
+
 .content_show {
     padding: 0 18px;
     max-height: 100%;

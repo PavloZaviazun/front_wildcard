@@ -1,15 +1,15 @@
 import axios from "axios";
-import React from "react";
 
 class VocabularyService {
     serverURL = "http://localhost:8080";
 
+//TODO hardcode library ID
     getVocabulary () {
-        return axios.get(this.serverURL + "/lib/1/vocabulary/get").then(el => el.data);
+        return axios.get(this.serverURL + "/lib/1/words/get").then(el => el.data);
     }
 
     addNewWord (word, partOfSpeech, description, example, translation) {
-        const formData = new FormData;
+        const formData = new FormData();
         formData.set("word", word);
         formData.set("partOfSpeech", partOfSpeech);
         formData.set("description", description);
@@ -32,7 +32,7 @@ class VocabularyService {
     }
 
     updateWord(id, word, partOfSpeech, description, example, image, translation) {
-        const formData = new FormData;
+        const formData = new FormData();
         formData.set("word", word);
         formData.set("partOfSpeech", partOfSpeech);
         formData.set("description", description);

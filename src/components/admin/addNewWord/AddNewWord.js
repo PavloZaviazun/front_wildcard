@@ -1,5 +1,5 @@
 import "./addNewWord.css"
-import {vocabularyService} from "../../services";
+import {vocabularyService} from "../../../services";
 
 export const AddNewWord = () => {
 

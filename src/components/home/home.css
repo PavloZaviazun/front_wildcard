@@ -1,11 +1,10 @@
 .home-div {
-    background-color: yellow;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
 .for-leftmenu{
@@ -16,4 +15,7 @@
 .for-body {
     height: 100%;
     width: 80%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }

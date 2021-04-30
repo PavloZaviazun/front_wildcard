@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {setVocabulary} from "../../redux";
 import {vocabularyService} from "../../services";
 
-
 export const Library = () => {
 
     const {vocabulary: {vocabulary}} = useSelector(state => state);
@@ -33,6 +32,7 @@ export const Library = () => {
     }
 
     return (
+
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
                 <CardComponent/>
