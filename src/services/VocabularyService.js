@@ -2,12 +2,7 @@ import axios from "axios";
 import React from "react";
 
 class VocabularyService {
-
-
     serverURL = "http://localhost:8080";
-    // function mapStateToProps (state) {
-    //     return {language: state.language }
-    // }
 
     getVocabulary () {
         return axios.get(this.serverURL + "/lib/1/vocabulary/get").then(el => el.data);
@@ -15,18 +10,43 @@ class VocabularyService {
 
     addNewWord (word, partOfSpeech, description, example, translation) {
         const formData = new FormData;
-        // console.log(this.state)
-        // this.mapStateToProps(this.state)
         formData.set("word", word);
         formData.set("partOfSpeech", partOfSpeech);
         formData.set("description", description);
         formData.set("example", example);
         formData.set("image", "");
-        const trans = {"ru": "", "ua": ""};
-        formData.set("translation", translation);
+        //TODO достать язык из редакса
+        const language = "ru";
+        let trans;
+        if (language === "ru") trans = {"ru": translation, "ua": ""};
+        else if (language === "ua") trans = {"ru": "", "ua": translation}
+        formData.set("translation", JSON.stringify(trans));
 
         return axios.post(
-            this.serverURL + "/vocabulary/add", formData
+            this.serverURL + "/word/add", formData
+        )
+    }
+
+    getWord(id) {
+        return axios.get(this.serverURL + "/word/" + id + "/get")
+    }
+
+    updateWord(id, word, partOfSpeech, description, example, image, translation) {
+        const formData = new FormData;
+        formData.set("word", word);
+        formData.set("partOfSpeech", partOfSpeech);
+        formData.set("description", description);
+        formData.set("example", example);
+        formData.set("image", "");
+        //TODO достать язык из редакса
+        const language = "ru";
+        let trans;
+        if (language === "ru") trans = {"ru": translation, "ua": ""};
+        else if (language === "ua") trans = {"ru": "", "ua": translation}
+        formData.set("translation", JSON.stringify(trans));
+
+        return axios.patch(
+            this.serverURL + "/word/:id/update", formData
         )
     }
 }
