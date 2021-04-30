@@ -1,10 +1,15 @@
 import "./updateWord.css";
 import {vocabularyService} from "../../services";
+import {useEffect} from "react";
 
 export const UpdateWord = () => {
-    let word = "";
-    vocabularyService.getWord(2).then(e => word = e);
-console.log(word)
+    let word;
+
+
+    useEffect(() => {
+        vocabularyService.getWord(2).then(e => word = e.data);
+    }, [])
+
     const updateWord = (e) => {
         e.preventDefault();
         const word = e.target[0].value;
@@ -12,16 +17,14 @@ console.log(word)
         const example = e.target[2].value;
         const description = e.target[3].value;
         const translation = e.target[4].value;
-        vocabularyService.updateWord(word, partOfSpeech, example, description, translation);
+        vocabularyService.updateWord(2, word, partOfSpeech, example, description, translation);
     }
-
-
 
 
     return(
         <div>
             <form onSubmit={updateWord}>
-                <input name={"word"} type={'text'} placeholder={word.word}/> word <br/>
+                <input name={"word"} type={'text'}/> word <br/>
                 <select name={"partOfSpeech"} >
                     <option value={"Noun"}>Noun</option>
                     <option value={"Adjective"}>Adjective</option>

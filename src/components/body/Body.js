@@ -27,7 +27,8 @@ export const Body = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at dolore doloremque est facere fuga
             incidunt labore maiores minima minus natus nulla numquam obcaecati quia rerum sunt suscipit, voluptas
             voluptatum!
-<UpdateWord/>
+
+            <UpdateWord/>
 
         </div>
     )

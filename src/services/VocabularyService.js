@@ -46,7 +46,7 @@ class VocabularyService {
         formData.set("translation", JSON.stringify(trans));
 
         return axios.patch(
-            this.serverURL + "/word/:id/update", formData
+            this.serverURL + "/word/" + id + "/update", formData
         )
     }
 }
