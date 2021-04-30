@@ -8,7 +8,7 @@ export const Admin = () => {
 
     function openWin(e, data) {
         const content = document.getElementsByClassName(data);
-        content[0].classList.toggle(data + "_show")
+        content[0].classList.add(data + "_show")
         const elems = ["forWords", "forUsers", "forLibraries"];
         for (let a = 0; a < elems.length; a++) {
             const content = document.getElementsByClassName(elems[a]);
@@ -18,14 +18,14 @@ export const Admin = () => {
     }
 
     return (
-        <div>
+        <div className={"admin-panel"}>
             <div className={"admin-menu"}>
                 <button onClick={e => openWin(e, "forWords")}>Words</button>
                 <button onClick={e => openWin(e, "forUsers")}>Users</button>
                 <button onClick={e => openWin(e, "forLibraries")}>Libraries</button>
             </div>
             <div className={"container-for-edition"}>
-                <div className={"forWords"}>
+                <div className={"forWords forWords_show"}>
                     <Words/>
                 </div>
                 <div className={"forUsers"}>
