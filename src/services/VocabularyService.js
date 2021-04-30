@@ -49,6 +49,11 @@ class VocabularyService {
             this.serverURL + "/word/" + id + "/update", formData
         )
     }
+
+    deleteWord(id) {
+        //TODO response
+        axios.delete(this.serverURL + "/word/" + id + "/delete")
+    }
 }
 
 export const vocabularyService = new VocabularyService();

@@ -20,6 +20,11 @@ export const UpdateWord = () => {
         vocabularyService.updateWord(2, word, partOfSpeech, example, description, translation);
     }
 
+    const deleteWord = () => {
+        //TODO find id
+        vocabularyService.deleteWord(2)
+    }
+
 
     return(
         <div>
@@ -36,6 +41,7 @@ export const UpdateWord = () => {
                 <input name={"Description"} type={'text'}/> description<br/>
                 <input name={"Translation"} type={'text'}/> translation <br/>
                 <button>Submit</button>
+                <button onClick={deleteWord}>Delete word</button>
             </form>
         </div>
     )
