@@ -3,7 +3,8 @@ import {CardComponent} from "../card";
 import {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setVocabulary} from "../../redux";
-import {vocabularyService} from "../../services";
+import {wordService} from "../../services";
+
 
 export const Library = () => {
 
@@ -18,7 +19,7 @@ export const Library = () => {
     }
 
     const getWord = useCallback(async () => {
-        const data = await vocabularyService.getVocabulary();
+        const data = await wordService.getWordsFromLib();
         dispatch(setVocabulary(data));
     }, [])
 

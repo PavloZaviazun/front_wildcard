@@ -20,9 +20,9 @@ export const Admin = () => {
     return (
         <div className={"admin-panel"}>
             <div className={"admin-menu"}>
-                <button onClick={e => openWin(e, "forWords")}>Words</button>
-                <button onClick={e => openWin(e, "forUsers")}>Users</button>
                 <button onClick={e => openWin(e, "forLibraries")}>Libraries</button>
+                <button onClick={e => openWin(e, "forUsers")}>Users</button>
+                <button onClick={e => openWin(e, "forWords")}>Words</button>
             </div>
             <div className={"container-for-edition"}>
                 <div className={"forWords forWords_show"}>

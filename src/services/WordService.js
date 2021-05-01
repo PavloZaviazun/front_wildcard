@@ -1,10 +1,10 @@
 import axios from "axios";
 
-class VocabularyService {
+class WordService {
     serverURL = "http://localhost:8080";
 
 //TODO hardcode library ID
-    getVocabulary () {
+    getWordsFromLib () {
         return axios.get(this.serverURL + "/lib/1/words/get").then(el => el.data);
     }
 
@@ -54,6 +54,10 @@ class VocabularyService {
         //TODO response
         axios.delete(this.serverURL + "/word/" + id + "/delete")
     }
+
+    getAllWordsFromBD() {
+        return axios.get(this.serverURL + "/words/get")
+    }
 }
 
-export const vocabularyService = new VocabularyService();
+export const wordService = new WordService();

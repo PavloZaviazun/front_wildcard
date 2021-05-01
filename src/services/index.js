@@ -1,2 +1,2 @@
-export * from "./VocabularyService";
+export * from "./WordService";
 export * from "./LibService";

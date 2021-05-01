@@ -47,3 +47,17 @@
     width: 100%;
     background-color: #61dafb;
 }
+
+.admin-menu button {
+    border: none;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    width: 200px;
+    height: 50px;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.admin-menu button:hover {
+    background-color: #dee3e4;
+}

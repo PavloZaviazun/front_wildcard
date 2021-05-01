@@ -1,0 +1,32 @@
+.words-edition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.words-edition-butt button{
+    border: none;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    width: 200px;
+    height: 50px;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.words-edition-allWords {
+    display: none;
+}
+
+.words-edition-allWords_show {
+    display: flex;
+}
+
+.words-edition-addNew {
+    display: none;
+}
+
+.words-edition-addNew_show {
+    display: flex;
+}

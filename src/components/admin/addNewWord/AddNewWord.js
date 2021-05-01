@@ -1,5 +1,6 @@
 import "./addNewWord.css"
-import {vocabularyService} from "../../../services";
+import {wordService} from "../../../services";
+
 
 export const AddNewWord = () => {
 
@@ -10,7 +11,7 @@ export const AddNewWord = () => {
         const example = e.target[2].value;
         const description = e.target[3].value;
         const translation = e.target[4].value;
-        vocabularyService.addNewWord(word, partOfSpeech, example, description, translation);
+        wordService.addNewWord(word, partOfSpeech, example, description, translation);
     }
 
     return(
