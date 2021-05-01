@@ -15,13 +15,7 @@ class WordService {
         formData.set("description", description);
         formData.set("example", example);
         formData.set("image", "");
-        //TODO достать язык из редакса
-        const language = "ru";
-        let trans;
-        if (language === "ru") trans = {"ru": translation, "ua": ""};
-        else if (language === "ua") trans = {"ru": "", "ua": translation}
-        formData.set("translation", JSON.stringify(trans));
-
+        formData.set("translation", JSON.stringify(translation));
         return axios.post(
             this.serverURL + "/word/add", formData
         )
@@ -39,12 +33,7 @@ class WordService {
         formData.set("example", example);
         formData.set("image", "");
         //TODO достать язык из редакса
-        const language = "ru";
-        let trans;
-        if (language === "ru") trans = {"ru": translation, "ua": ""};
-        else if (language === "ua") trans = {"ru": "", "ua": translation}
-        formData.set("translation", JSON.stringify(trans));
-
+        formData.set("translation", JSON.stringify(translation));
         return axios.patch(
             this.serverURL + "/word/" + id + "/update", formData
         )

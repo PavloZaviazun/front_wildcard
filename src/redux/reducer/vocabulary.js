@@ -2,7 +2,7 @@ import {SET_VOCABULARY} from "../action-types";
 
 const initialState = {vocabulary: []};
 
-export default (state = initialState, action) => {
+export const vocabulary = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_VOCABULARY: {

@@ -2,7 +2,7 @@ import {SET_LANGUAGE} from "../action-types";
 
 const initialState = {language: "ua"};
 
-export default (state = initialState, action) => {
+export const language = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_LANGUAGE: {

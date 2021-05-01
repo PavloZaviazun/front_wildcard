@@ -10,8 +10,9 @@ export const AddNewWord = () => {
         const partOfSpeech = e.target[1].value;
         const example = e.target[2].value;
         const description = e.target[3].value;
-        const translation = e.target[4].value;
-        wordService.addNewWord(word, partOfSpeech, example, description, translation);
+        const translationRu = e.target[4].value;
+        const translationUa = e.target[5].value;
+        wordService.addNewWord(word, partOfSpeech, example, description, {"ru":translationRu, "ua":translationUa});
     }
 
     return(
@@ -27,7 +28,8 @@ export const AddNewWord = () => {
                 </select> part of speech<br/>
                 <input name={"Example"} type={'text'}/> example<br/>
                 <input name={"Description"} type={'text'}/> description<br/>
-                <input name={"Translation"} type={'text'}/> translation <br/>
+                <input name={"TranslationRu"} type={'text'}/> translation Ru <br/>
+                <input name={"TranslationUa"} type={'text'}/> translation Ua<br/>
                 <button>Submit</button>
             </form>
         </div>
