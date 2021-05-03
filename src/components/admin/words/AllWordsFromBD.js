@@ -4,22 +4,22 @@ import {UpdateWord} from "../updateWord";
 
 export const AllWordsFromBD = () => {
     const [allwords, setAllwords] = useState([]);
-
+    const [updAllWords, setUpdAllWords] = useState(false);
 
     const getWords = () => {
         wordService.getAllWordsFromBD().then(e => setAllwords(e.data));
+        setUpdAllWords(false)
     }
 
     useEffect(() => {
-        getWords()
-    }, [])
+        getWords();
+    }, [updAllWords])
 
     return (
         <div className={"allWordsHereTable"}>
-
             {allwords.map(word => {
                 return <div key={word.id}>
-                    <UpdateWord word={word}/>
+                    <UpdateWord setUpdAllWords={setUpdAllWords} word={word}/>
                 </div>
             })}
 

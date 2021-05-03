@@ -3,7 +3,7 @@ import {Words} from "./words";
 import {Users} from "./users";
 import {Libraries} from "./libraries";
 
-export const Admin = () => {
+export const Admin = ({child}) => {
 
     function openWin(e, data) {
         const content = document.getElementsByClassName(data);
@@ -16,22 +16,27 @@ export const Admin = () => {
     }
 
     return (
-        <div className={"admin-panel"}>
-            <div className={"admin-menu"}>
-                <button onClick={e => openWin(e, "forLibraries")}>Libraries</button>
-                <button onClick={e => openWin(e, "forUsers")}>Users</button>
-                <button onClick={e => openWin(e, "forWords")}>Words</button>
+        <div>
+            <div className={"admin-panel"}>
+                <div className={"admin-menu"}>
+                    <button onClick={e => openWin(e, "forLibraries")}>Libraries</button>
+                    <button onClick={e => openWin(e, "forUsers")}>Users</button>
+                    <button onClick={e => openWin(e, "forWords")}>Words</button>
+                </div>
+                <div className={"container-for-edition"}>
+                    <div className={"forWords forWords_show"}>
+                        <Words/>
+                    </div>
+                    <div className={"forUsers"}>
+                        <Users/>
+                    </div>
+                    <div className={"forLibraries"}>
+                        <Libraries/>
+                    </div>
+                </div>
             </div>
-            <div className={"container-for-edition"}>
-                <div className={"forWords forWords_show"}>
-                    <Words/>
-                </div>
-                <div className={"forUsers"}>
-                    <Users/>
-                </div>
-                <div className={"forLibraries"}>
-                    <Libraries/>
-                </div>
+            <div className={"admin-child"}>
+                {child}
             </div>
         </div>
     )

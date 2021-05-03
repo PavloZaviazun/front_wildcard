@@ -11,6 +11,8 @@ import {Library} from "./components/library";
 import store from "./redux";
 import {Admin} from "./components/admin";
 import {Body} from "./components/body";
+import {AllWordsFromBD} from "./components/admin/words/AllWordsFromBD";
+import {AddNewWord} from "./components/admin/addNewWord";
 
 function App() {
 
@@ -36,7 +38,13 @@ function App() {
                   <Home child={<Library/>}/>
                 </Route>
                 <Route exact path="/admin">
-                  <Admin/>
+                  <Admin child={<div/>}/>
+                </Route>
+                <Route exact path="/admin/allwords">
+                  <Admin child={<AllWordsFromBD/>}/>
+                </Route>
+                <Route exact path="/admin/addnewword">
+                  <Admin child={<AddNewWord/>}/>
                 </Route>
               </Switch>
             </PageLayout>

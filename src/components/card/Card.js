@@ -6,7 +6,7 @@ import "./Card.css"
 
 export const Card = () => {
 
-    const {vocabulary: {vocabulary}, language: {language}} = useSelector(state => state);
+    const {words: {words}, language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
     const [word, setWord] = useState([]);
     let [i, setI] = useState(0);
@@ -24,24 +24,24 @@ export const Card = () => {
 
     const prevArrowClick = () => {
         setCardBack(false);
-        if (vocabulary != null) {
-            if (i - 1 < 0) setI(vocabulary.length - 1);
+        if (words != null) {
+            if (i - 1 < 0) setI(words.length - 1);
             else setI(--i);
-            setWord(vocabulary[i]);
+            setWord(words[i]);
         }
     }
 
     const nextArrowClick = () => {
         setCardBack(false);
-        if (i + 1 >= vocabulary.length) setI(0)
+        if (i + 1 >= words.length) setI(0)
         else setI(++i);
-        setWord(vocabulary[i]);
+        setWord(words[i]);
     }
 
     useEffect(() => {
         let frontSide = document.getElementsByClassName("front-side")[0];
         let backSide = document.getElementsByClassName("back-side")[0];
-        setWord(vocabulary.length === 0 ? "" : vocabulary[i]);
+        setWord(words.length === 0 ? "" : words[i]);
         if (cardBack) {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(180deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(360deg)";
@@ -49,7 +49,7 @@ export const Card = () => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-    }, [cardBack, vocabulary, i, vocabulary[i]]);
+    }, [cardBack, words, i, words[i]]);
 
     return (
         <div className={"card-component"}>

@@ -3,10 +3,11 @@ import {libService, wordService} from "../../../services";
 import {useEffect, useState} from "react";
 import {logDOM} from "@testing-library/react";
 
-export const UpdateWord = ({word}) => {
+export const UpdateWord = ({word, setUpdAllWords}) => {
+
     const trans = JSON.parse(word.translation);
     const [notAddedToLibs, setNotAddedToLibs] = useState([]);
-
+    const [updWord, setUpdWord] = useState(false)
     const allLibs = async () => {
         return await libService.getLibs().then(el => el);
     }
@@ -14,15 +15,6 @@ export const UpdateWord = ({word}) => {
     const allLibsOfWord = async () => {
         return await libService.getLibsOfWord(word.id).then(el => el);
     }
-
-    useEffect(() => {
-        const promise1 = allLibs();
-        const promise2 = allLibsOfWord();
-        Promise.all([promise1, promise2]).then(value => {
-            const nonAddedLi = value[0].filter(el => !value[1].find(el2 => el.id === el2.id));
-            setNotAddedToLibs(nonAddedLi);
-        })
-    }, [])
 
     const updateWord = (e) => {
         e.preventDefault();
@@ -35,18 +27,34 @@ export const UpdateWord = ({word}) => {
         wordService.updateWord(word.id, newWord, partOfSpeech, description, example, "", {
             "ru": translationRu,
             "ua": translationUa
-        });
+        }).then(el => setUpdWord(!updWord));
+
         const newLib = e.target[6].value;
         if (newLib.length > 0) {
             const Lib = notAddedToLibs.filter(el => el.name === newLib);
-            libService.addToLibExistingWord(Lib[0].id, word.id)
+            libService.addToLibExistingWord(Lib[0].id, word.id);
         }
-
     }
 
     const deleteWord = () => {
-        wordService.deleteWord(word.id)
+        wordService.deleteWord(word.id).then(el => {
+            setUpdAllWords(true)
+        });
+
     }
+
+    useEffect(() => {
+        //TODO update полностью слова
+        console.log("useeffect")
+        const promise1 = allLibs();
+        const promise2 = allLibsOfWord();
+        Promise.all([promise1, promise2]).then(value => {
+            const nonAddedLi = value[0].filter(el => !value[1].find(el2 => el.id === el2.id));
+            setNotAddedToLibs(nonAddedLi);
+        })
+    }, [updWord])
+
+
 
     return (
         <div className={"updateForm"}>

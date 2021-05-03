@@ -38,7 +38,7 @@ export const AddNewWord = () => {
     }
 
     return (
-        <div>
+        <div className={"addition-new-words"}>
             <form onSubmit={sendNewWord}>
                 <input name={"word"} type={'text'}/> word <br/>
                 <select name={"partOfSpeech"}>

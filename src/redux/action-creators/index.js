@@ -1,6 +1,6 @@
-import {SET_LIBRARY, SET_VOCABULARY, SET_LANGUAGE} from "../action-types";
+import {SET_LIBRARIES, SET_WORDS, SET_LANGUAGE} from "../action-types";
 
-export const setLibrary = (payload) => ({type: SET_LIBRARY, payload});
-export const setVocabulary = (payload) => ({type: SET_VOCABULARY, payload});
+export const setLibraries = (payload) => ({type: SET_LIBRARIES, payload});
+export const setWords = (payload) => ({type: SET_WORDS, payload});
 export const setLanguage = (payload) => ({type: SET_LANGUAGE, payload});
 

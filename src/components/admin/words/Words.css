@@ -2,10 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
-.words-edition-butt button{
+.words-edition div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
@@ -13,23 +16,16 @@
     height: 50px;
     border-radius: 0;
     cursor: pointer;
+    background-color: #f1f1f1;
 }
 
-.words-edition-allWords {
-    display: none;
+.words-edition div a {
+    text-decoration: none;
+    color: black;
 }
 
-.words-edition-allWords_show {
-    display: flex;
-    width: 100%;
-}
-
-.words-edition-addNew {
-    display: none;
-}
-
-.words-edition-addNew_show {
-    display: flex;
+.words-edition div:hover {
+    background-color: #dee3e4;
 }
 
 .allWordsHereTable {

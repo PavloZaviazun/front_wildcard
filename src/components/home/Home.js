@@ -1,7 +1,7 @@
 import "./Home.css"
 import {LeftMenu} from "../leftMenu";
 import {libService} from "../../services";
-import {setLibrary, setVocabulary} from "../../redux";
+import {setLibraries, setWords} from "../../redux";
 import {useDispatch} from "react-redux";
 import {useCallback, useEffect} from "react";
 
@@ -10,12 +10,12 @@ export const Home = (child) => {
 
     const getLibraries = useCallback(async () => {
         const data = await libService.getLibs();
-        dispatch(setLibrary(data));
+        dispatch(setLibraries(data));
     }, [])
 
     useEffect(() => {
         getLibraries();
-        dispatch(setVocabulary([]))
+        dispatch(setWords([]))
     }, [])
 
     return (

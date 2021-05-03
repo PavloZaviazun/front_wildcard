@@ -8,7 +8,6 @@ export const Body = () => {
         <div className={"body-div"}>
             <div><Card/> </div><br/>
             <div>Тут будет объяснение, как это работает</div>
-
         </div>
     )
 }

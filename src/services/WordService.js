@@ -4,7 +4,7 @@ import {logDOM} from "@testing-library/react";
 class WordService {
     serverURL = "http://localhost:8080";
 
-//TODO hardcode library ID
+//TODO hardcode libraries ID
     getWordsFromLib (idLib) {
         return axios.get(this.serverURL + "/lib/" + idLib + "/words/get").then(el => el.data);
     }
@@ -16,7 +16,6 @@ class WordService {
         formData.set("description", description);
         formData.set("example", example);
         formData.set("image", "");
-        console.log(description)
         formData.set("translation", JSON.stringify(translation));
         return axios.post(
             this.serverURL + "/word/add", formData
@@ -42,7 +41,7 @@ class WordService {
 
     deleteWord(id) {
         //TODO response
-        axios.delete(this.serverURL + "/word/" + id + "/delete")
+        return axios.delete(this.serverURL + "/word/" + id + "/delete")
     }
 
     getAllWordsFromBD() {
