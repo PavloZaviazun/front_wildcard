@@ -1,4 +1,4 @@
-import "./users.css"
+import "./Users.css"
 
 export const Users = () => {
 

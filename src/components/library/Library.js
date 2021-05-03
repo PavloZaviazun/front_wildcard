@@ -1,5 +1,5 @@
-import './library.css';
-import {CardComponent} from "../card";
+import './Library.css';
+import {Card} from "../card";
 import {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setVocabulary} from "../../redux";
@@ -8,9 +8,11 @@ import {wordService} from "../../services";
 
 export const Library = () => {
 
-    const {vocabulary: {vocabulary}} = useSelector(state => state);
-
+    const {vocabulary: {vocabulary}, library: {library}} = useSelector(state => state);
+    const nameLibrary = window.location.href.split("library/")[1];
+    const filtered = library.filter(el => el.name === nameLibrary)
     const dispatch = useDispatch();
+
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
         const content = document.getElementsByClassName("content");
@@ -18,14 +20,16 @@ export const Library = () => {
         content[0].classList.toggle("content_show");
     }
 
-    const getWord = useCallback(async () => {
-        const data = await wordService.getWordsFromLib();
-        dispatch(setVocabulary(data));
-    }, [])
-
     useEffect(() => {
-        getWord();
-    }, [])
+
+        if (filtered.length > 0)
+            getWord();
+    }, [filtered.length]);
+
+    const getWord = useCallback(async () => {
+        const data = await wordService.getWordsFromLib(filtered[0].id);
+        dispatch(setVocabulary(data));
+    }, [filtered])
 
     const shuffle = () => {
         vocabulary.sort(() => Math.random() - 0.5);
@@ -36,7 +40,7 @@ export const Library = () => {
 
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
-                <CardComponent/>
+                <Card/>
             </div>
             <div className={"div-cardbutt"}>
                 <div>

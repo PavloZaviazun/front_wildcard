@@ -1,8 +1,7 @@
-import "./admin.css"
+import "./Admin.css"
 import {Words} from "./words";
 import {Users} from "./users";
 import {Libraries} from "./libraries";
-
 
 export const Admin = () => {
 
@@ -14,7 +13,6 @@ export const Admin = () => {
             const content = document.getElementsByClassName(elems[a]);
             if (elems[a] !== data) content[0].classList.remove(elems[a] + "_show")
         }
-
     }
 
     return (

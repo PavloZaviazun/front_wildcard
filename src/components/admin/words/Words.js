@@ -1,4 +1,4 @@
-import "./words.css"
+import "./Words.css"
 import {AddNewWord} from "../addNewWord";
 import {AllWordsFromBD} from "./AllWordsFromBD";
 

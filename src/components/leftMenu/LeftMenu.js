@@ -1,4 +1,4 @@
-import "./left-menu.css"
+import "./LeftMenu.css"
 import {useSelector} from "react-redux";
 
 export const LeftMenu = () => {

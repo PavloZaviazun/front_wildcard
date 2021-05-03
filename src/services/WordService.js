@@ -1,11 +1,12 @@
 import axios from "axios";
+import {logDOM} from "@testing-library/react";
 
 class WordService {
     serverURL = "http://localhost:8080";
 
 //TODO hardcode library ID
-    getWordsFromLib () {
-        return axios.get(this.serverURL + "/lib/1/words/get").then(el => el.data);
+    getWordsFromLib (idLib) {
+        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get").then(el => el.data);
     }
 
     addNewWord (word, partOfSpeech, description, example, translation) {
@@ -15,6 +16,7 @@ class WordService {
         formData.set("description", description);
         formData.set("example", example);
         formData.set("image", "");
+        console.log(description)
         formData.set("translation", JSON.stringify(translation));
         return axios.post(
             this.serverURL + "/word/add", formData
@@ -32,7 +34,6 @@ class WordService {
         formData.set("description", description);
         formData.set("example", example);
         formData.set("image", "");
-        //TODO достать язык из редакса
         formData.set("translation", JSON.stringify(translation));
         return axios.patch(
             this.serverURL + "/word/" + id + "/update", formData

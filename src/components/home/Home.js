@@ -1,4 +1,4 @@
-import "./home.css"
+import "./Home.css"
 import {LeftMenu} from "../leftMenu";
 import {libService} from "../../services";
 import {setLibrary, setVocabulary} from "../../redux";

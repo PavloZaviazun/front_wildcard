@@ -1,0 +1,10 @@
+.updateForm {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.tableForUpdate {
+    display: flex;
+    width: 100%;
+}

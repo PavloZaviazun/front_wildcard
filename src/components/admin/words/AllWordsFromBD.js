@@ -5,6 +5,7 @@ import {UpdateWord} from "../updateWord";
 export const AllWordsFromBD = () => {
     const [allwords, setAllwords] = useState([]);
 
+
     const getWords = () => {
         wordService.getAllWordsFromBD().then(e => setAllwords(e.data));
     }

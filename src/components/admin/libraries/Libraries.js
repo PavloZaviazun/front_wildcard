@@ -1,4 +1,4 @@
-import "./libraries.css"
+import "./Libraries.css"
 
 export const Libraries = () => {
 

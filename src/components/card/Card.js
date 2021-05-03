@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {useSelector} from "react-redux";
+import "./Card.css"
 
 
-
-export const CardComponent = () => {
+export const Card = () => {
 
     const {vocabulary: {vocabulary}, language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);

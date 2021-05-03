@@ -1,4 +1,4 @@
-import "./registration.css"
+import "./Registration.css"
 
 export const Registration = () => {
 

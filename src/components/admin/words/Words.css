@@ -36,44 +36,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.allWordsHereTable table {
-    table-layout: fixed;
-    width: 90%;
-    border-collapse: collapse;
-    border: 2px solid purple;
-
-}
-
-.allWordsHereTable thead th:nth-child(1) {
-    width: 20%;
-}
-
-.allWordsHereTable thead th:nth-child(2) {
-    width: 10%;
-}
-
-.allWordsHereTable thead th:nth-child(3) {
-    width: 20%;
-}
-
-.allWordsHereTable thead th:nth-child(4) {
-    width: 20%;
-}
-
-.allWordsHereTable thead th:nth-child(5) {
-    width: 30%;
-}
-
-.allWordsHereTable thead th:nth-child(6) {
-    width: 15%;
+    align-items: center;
+    flex-direction: column;
 }
 
 
-
-.allWordsHereTable th, td, tr {
-
-    border: 1px solid black;
-}
 
