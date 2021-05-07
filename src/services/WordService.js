@@ -1,5 +1,4 @@
 import axios from "axios";
-import {logDOM} from "@testing-library/react";
 
 class WordService {
     serverURL = "http://localhost:8080";
@@ -46,6 +45,10 @@ class WordService {
 
     getAllWordsFromBD() {
         return axios.get(this.serverURL + "/words/get")
+    }
+
+    getPartsOfSpeech (word) {
+        return axios.get(this.serverURL + "/partsOfSpeech/" + word)
     }
 }
 

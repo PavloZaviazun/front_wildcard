@@ -11,7 +11,7 @@ import {Library} from "./components/library";
 import store from "./redux";
 import {Admin} from "./components/admin";
 import {Body} from "./components/body";
-import {AllWordsFromBD} from "./components/admin/words/AllWordsFromBD";
+import {AllWordsFromDB} from "./components/admin/words/AllWordsFromDB";
 import {AddNewWord} from "./components/admin/addNewWord";
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
                   <Admin child={<div/>}/>
                 </Route>
                 <Route exact path="/admin/allwords">
-                  <Admin child={<AllWordsFromBD/>}/>
+                  <Admin child={<AllWordsFromDB/>}/>
                 </Route>
                 <Route exact path="/admin/addnewword">
                   <Admin child={<AddNewWord/>}/>

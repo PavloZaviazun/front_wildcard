@@ -1,8 +1,18 @@
 import "./Words.css"
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {commonService, libService} from "../../../services";
+import {setLibraries, setPartsOfSpeech} from "../../../redux";
 
 
 export const Words = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        commonService.getAllPartsOfSpeech().then(el => dispatch(setPartsOfSpeech(el)));
+        libService.getLibs().then(el => dispatch(setLibraries(el)))
+    })
 
     return (
         <div className={"words-edition"}>

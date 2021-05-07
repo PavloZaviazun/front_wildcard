@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {wordService} from "../../../services";
 import {UpdateWord} from "../updateWord";
 
-export const AllWordsFromBD = () => {
+export const AllWordsFromDB = () => {
     const [allwords, setAllwords] = useState([]);
     const [updAllWords, setUpdAllWords] = useState(false);
 
