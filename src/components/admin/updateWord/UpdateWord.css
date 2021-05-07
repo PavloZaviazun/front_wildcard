@@ -7,4 +7,97 @@
 .tableForUpdate {
     display: flex;
     width: 100%;
+    height: 24px;
+}
+
+.tableForUpdate Input {
+    border: 1px solid grey;
+    height: 100%;
+}
+
+.updateform-form {
+    display: flex;
+    width: 100%;
+}
+
+.ant-input {
+    padding: 0;
+    height: 100%;
+}
+
+.ant-form-item {
+    padding: 0 5px 0 0;
+}
+
+.tableForUpdate-name {
+    width: 10%;
+}
+
+.tableForUpdate-name Input {
+    width: 100%;
+}
+
+.tableForUpdate-partOS {
+    width: 8%;
+}
+
+.tableForUpdate-partOS select {
+    width: 100%;
+}
+
+.tableForUpdate-description {
+    width: 14%;
+}
+
+.tableForUpdate-description Input {
+    width: 100%;
+}
+
+
+.tableForUpdate-example {
+    width: 20%;
+}
+
+.tableForUpdate-example Input {
+    width: 100%;
+}
+
+.tableForUpdate-translationRu {
+    width: 15%;
+}
+
+.tableForUpdate-translationRu Input {
+    width: 100%;
+}
+
+.tableForUpdate-translationUa {
+    width: 15%;
+}
+
+.tableForUpdate-translationUa Input {
+    width: 100%;
+}
+
+.tableForUpdate-notAddedLibs {
+    width: 8%;
+}
+
+.tableForUpdate-notAddedLibs select {
+    width: 100%;
+}
+
+.tableForUpdate-submit {
+    width: 5%;
+}
+
+.tableForUpdate-submit button {
+    width: 100%;
+}
+
+.tableForUpdate-delete {
+    width: 5%;
+}
+
+.tableForUpdate-delete button {
+    width: 100%;
 }

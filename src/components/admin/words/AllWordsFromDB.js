@@ -21,8 +21,19 @@ export const AllWordsFromDB = () => {
 
     return (
         <div className={"allWordsHereTable"}>
+            <div className={"div-head-for-words"}>
+                <div className={"div-head-for-words-name"}>Word</div>
+                <div className={"div-head-for-words-partOS"}>Part of speech</div>
+                <div className={"div-head-for-words-description"}>Description</div>
+                <div className={"div-head-for-words-example"}>Example</div>
+                <div className={"div-head-for-words-translationRu"}>Translation RU</div>
+                <div className={"div-head-for-words-translationUa"}>Translation UA</div>
+                <div className={"div-head-for-words-addtoLib"}>Add to library</div>
+                <div className={"div-head-for-words-submit"}>Submit</div>
+                <div className={"div-head-for-words-delete"}>Delete</div>
+            </div>
             {words.map(word => {
-                return <div key={word.id}>
+                return <div key={word.id} className={"div-for-table"}>
                     <UpdateWord setUpdAllWords={setUpdAllWords} word={word}/>
                 </div>
             })}

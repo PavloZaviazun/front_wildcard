@@ -107,9 +107,10 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     return (
         <div className={"updateForm"}>
-            <div>
+            <div className={"updateform-form"}>
                 <Form form={form} onFinish={updateWord} className={"tableForUpdate"}>
                     <Form.Item
+                        className={"tableForUpdate-name"}
                         name='word'
                         rules={[{
                                 message: 'Please input word!',
@@ -117,16 +118,18 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-partOS"}
                         name='partOfSpeech'
                         rules={[{
                                 message: 'Please input partOfSpeech!',
                             },]}>
-                        <select style={{ width: 100 }}>
+                        <select>
                             <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>
                             {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}
                         </select>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-description"}
                         name='description'
                         rules={[{
                                 message: 'Please input description!',
@@ -134,6 +137,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-example"}
                         name='example'
                         rules={[{
                                 // required: true,
@@ -142,6 +146,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-translationRu"}
                         name='translationRu'
                         rules={[{
                                 message: 'Please input translationRU!',
@@ -149,6 +154,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-translationUa"}
                         name='translationUa'
                         rules={[{
                                 message: 'Please input translationUA!',
@@ -157,23 +163,26 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
+                        className={"tableForUpdate-notAddedLibs"}
                         name='NotAddedToLibs'
                         rules={[{
                                 message: 'Please input NotAddedToLibs!',
                             },]}>
-                        <select name={"NotAddedToLibs"} style={{ width: 100 }}>
+                        <select name={"NotAddedToLibs"}>
                             <option value={""}/>
                             {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
                         </select>
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className={"tableForUpdate-submit"}>
+
                         <Button htmlType="submit">Submit</Button>
                     </Form.Item>
+                    <div className={"tableForUpdate-delete ant-row ant-form-item"}>
+                        <button onClick={deleteWord}>Delete</button>
+                    </div>
                 </Form>
             </div>
-            <div>
-                <button onClick={deleteWord}>Delete word</button>
-            </div>
+
         </div>
     )
 }

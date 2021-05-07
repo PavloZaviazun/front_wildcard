@@ -16,7 +16,7 @@ export const Admin = ({child}) => {
     }
 
     return (
-        <div>
+        <div className={"admin-div"}>
             <div className={"admin-panel"}>
                 <div className={"admin-menu"}>
                     <button onClick={e => openWin(e, "forLibraries")}>Libraries</button>

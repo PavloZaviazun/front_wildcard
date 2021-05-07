@@ -1,4 +1,80 @@
 .addition-new-words {
     display: flex;
-    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.addition-new-words-Forform{
+    width: 100%;
+}
+
+.addition-new-words-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 25px;
+}
+
+.addition-new-words-form-name {
+    width: 10%;
+}
+
+.addition-new-words-form-partOS {
+    width: 8%;
+}
+
+.addition-new-words-form-description {
+    width: 14%;
+}
+
+.addition-new-words-form-example {
+    width: 25%;
+}
+
+.addition-new-words-form-translationRU {
+    width: 15%;
+}
+
+.addition-new-words-form-translationUA {
+    width: 15%;
+}
+
+.addition-new-words-form-library {
+    width: 8%;
+}
+
+.addition-new-words-form-submit {
+    width: 5%;
+}
+
+.div-head-for-addwords-name {
+    width: 10%;
+}
+
+.div-head-for-addwords-partOS {
+    width: 8%;
+}
+
+.div-head-for-addwords-description {
+    width: 14%;
+}
+
+.div-head-for-addwords-example {
+    width: 25%;
+}
+
+.div-head-for-addwords-translationRu {
+    width: 15%;
+}
+
+.div-head-for-addwords-translationUa {
+    width: 15%;
+}
+
+.div-head-for-addwords-addtoLib {
+    width: 8%;
+}
+
+.div-head-for-addwords-submit {
+    width: 5%;
 }

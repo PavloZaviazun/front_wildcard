@@ -31,27 +31,39 @@ export const AddNewWord = () => {
 
     return (
         <div className={"addition-new-words"}>
-            <form onSubmit={sendNewWord}>
-                <input name={"word"} type={'text'}/> word <br/>
-                <select name={"partOfSpeech"}>
-                    <option value={"Noun"}>Noun</option>
-                    <option value={"Adjective"}>Adjective</option>
-                    <option value={"Adverb"}>Adverb</option>
-                    <option value={"Verb"}>Verb</option>
-                    <option value={"Preposition"}>Preposition</option>
-                </select>part of speech<br/>
-                <input name={"Description"} type={'text'}/> description<br/>
-                <input name={"Example"} type={'text'}/> example<br/>
-                <input name={"TranslationRu"} type={'text'}/> translation Ru <br/>
-                <input name={"TranslationUa"} type={'text'}/> translation Ua<br/>
-                <select name={"library"}>
-                    <option value={""}/>
-                    {libraries.map(el => {
-                        return  <option key={el.id} value={el.name}>{el.name}</option>
-                    })}
-                </select>add to library<br/>
-                <button>Submit</button>
-            </form>
+            <div className={"div-head-for-words"}>
+                <div className={"div-head-for-addwords-name"}>Word in English</div>
+                <div className={"div-head-for-addwords-partOS"}>Part of speech</div>
+                <div className={"div-head-for-addwords-description"}>Description in English</div>
+                <div className={"div-head-for-addwords-example"}>Example</div>
+                <div className={"div-head-for-addwords-translationRu"}>Translation RU</div>
+                <div className={"div-head-for-addwords-translationUa"}>Translation UA</div>
+                <div className={"div-head-for-addwords-addtoLib"}>Library</div>
+                <div className={"div-head-for-addwords-submit"}>Submit</div>
+            </div>
+            <div className={"addition-new-words-Forform"}>
+                <form onSubmit={sendNewWord} className={"addition-new-words-form"}>
+                    <input className={"addition-new-words-form-name"} name={"word"} type={'text'}/>
+                    <select className={"addition-new-words-form-partOS"} name={"partOfSpeech"}>
+                        <option value={"Noun"}>Noun</option>
+                        <option value={"Adjective"}>Adjective</option>
+                        <option value={"Adverb"}>Adverb</option>
+                        <option value={"Verb"}>Verb</option>
+                        <option value={"Preposition"}>Preposition</option>
+                    </select>
+                    <input className={"addition-new-words-form-description"} name={"Description"} type={'text'}/>
+                    <input className={"addition-new-words-form-example"} name={"Example"} type={'text'}/>
+                    <input className={"addition-new-words-form-translationRU"} name={"TranslationRu"} type={'text'}/>
+                    <input className={"addition-new-words-form-translationUA"} name={"TranslationUa"} type={'text'}/>
+                    <select className={"addition-new-words-form-library"} name={"library"}>
+                        <option value={""}/>
+                        {libraries.map(el => {
+                            return <option key={el.id} value={el.name}>{el.name}</option>
+                        })}
+                    </select>
+                    <button className={"addition-new-words-form-submit"}>Submit</button>
+                </form>
+            </div>
         </div>
     )
 }
