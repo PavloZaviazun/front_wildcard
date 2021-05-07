@@ -1,14 +1,25 @@
 import "./Login.css"
 import {Link} from "react-router-dom";
+import {authService} from "../../services/AuthService";
 
 export const Login = () => {
+
+    const loginHandle = (e) => {
+        e.preventDefault();
+        const username = e.target[0].value;
+        const password = e.target[1].value;
+        const myStorage = window.localStorage;
+        authService.loginHandle(username, password).then(el => {
+            myStorage.setItem("session", el.headers.authorization);
+        });
+    }
 
     return (
         <div className={"login-div"}>
             <div className={"login-div-form"}>
                 <div>Введите логин(e-mail) и пароль</div>
                 <div>
-                    <form>
+                    <form onSubmit={loginHandle}>
                         <div>
                             <input placeholder={"Логин"}/>
                         </div>
