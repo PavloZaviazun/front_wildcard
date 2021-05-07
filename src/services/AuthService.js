@@ -8,12 +8,12 @@ class AuthService {
         formData.set("username", username);
         formData.set("password", password);
         console.log(formData.get("username"))
-        return axios.post(this.serverURL + "/register", formData)
+        return axios.post(this.serverURL + "/auth/register", formData)
     }
 
     loginHandle(name, pass) {
         const user = {username: name, password: pass};
-        return axios.post(this.serverURL + "/login", JSON.stringify(user))
+        return axios.post(this.serverURL + "/auth/login", JSON.stringify(user))
     }
 
 }

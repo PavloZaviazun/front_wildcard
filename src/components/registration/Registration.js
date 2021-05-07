@@ -7,7 +7,13 @@ export const Registration = () => {
         e.preventDefault();
         const username = e.target[0].value;
         const password = e.target[1].value;
-        authService.registrationHandle(username, password).then(el => console.log(el));
+        const repeatPassword = e.target[2].value;
+        if (password === repeatPassword) {
+            authService.registrationHandle(username, password).then(el => console.log(el));
+        }
+        else {
+            //TODO показать сообщение что пароли не совпадают
+        }
     }
 
     return (
@@ -18,9 +24,9 @@ export const Registration = () => {
                         <div>Введите ваш e-mail</div>
                         <div><input placeholder={"E-mail"}/></div>
                         <div>Введите ваш пароль</div>
-                        <div><input placeholder={"Пароль"}/></div>
-                        {/*<div>Повторите пароль</div>*/}
-                        {/*<div><input placeholder={"Повторите пароль"}/></div>*/}
+                        <div><input type={"password"} placeholder={"Пароль"}/></div>
+                        <div>Повторите пароль</div>
+                        <div><input type={"password"} placeholder={"Повторите пароль"}/></div>
                         <button>Регистрация</button>
                     </form>
                 </div>

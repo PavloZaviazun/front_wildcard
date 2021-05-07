@@ -14,6 +14,8 @@ import {Body} from "./components/body";
 import {AllWordsFromDB} from "./components/admin/words/AllWordsFromDB";
 import {AddNewWord} from "./components/admin/addNewWord";
 import {Redirect} from "react-router";
+import {AddNewLibrary} from "./components/admin/addNewLibrary";
+import {AllLibraries} from "./components/admin/allLibraries";
 
 function App() {
 
@@ -49,6 +51,12 @@ function App() {
                 </Route>
                 <Route exact path="/admin/addnewword">
                   <Admin child={<AddNewWord/>}/>
+                </Route>
+                <Route exact path="/admin/addnewlibrary">
+                  <Admin child={<AddNewLibrary/>}/>
+                </Route>
+                <Route exact path="/admin/alllibraries">
+                  <Admin child={<AllLibraries/>}/>
                 </Route>
               </Switch>
             </PageLayout>
