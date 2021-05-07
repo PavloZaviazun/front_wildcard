@@ -13,6 +13,7 @@ import {Admin} from "./components/admin";
 import {Body} from "./components/body";
 import {AllWordsFromDB} from "./components/admin/words/AllWordsFromDB";
 import {AddNewWord} from "./components/admin/addNewWord";
+import {Redirect} from "react-router";
 
 function App() {
 
@@ -28,10 +29,13 @@ function App() {
                 <Route exact path="/user/:id">
                   <User/>
                 </Route>
-                <Route exact path="/login">
+                <Route exact path="/auth" >
+                  <Redirect to={"/auth/login"}/>
+                </Route>
+                <Route exact path="/auth/login">
                   <Login/>
                 </Route>
-                <Route exact path="/registration">
+                <Route exact path="/auth/registration">
                   <Registration/>
                 </Route>
                 <Route exact path="/library/:name">

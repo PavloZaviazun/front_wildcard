@@ -14,7 +14,7 @@ export const Header = () => {
                 вероятно тут будет поиск или слоган
             </div>
             <div>
-               <Link to={"/login"}>Login/Registration</Link>
+               <Link to={"/auth/login"}>Login/Registration</Link>
             </div>
         </div>
     )

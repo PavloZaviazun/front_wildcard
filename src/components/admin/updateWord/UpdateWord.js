@@ -2,14 +2,13 @@ import "./UpdateWord.css";
 import {libService, wordService} from "../../../services";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {Input, Form, Button, Select} from "antd";
-import {Login} from "../../login";
+import {Input, Form, Button} from "antd";
 
 export const UpdateWord = ({word, setUpdAllWords}) => {
     const [form] = Form.useForm();
-    console.log("hyu")
     const {partsOfSpeech: {partsOfSpeech}} = useSelector(state => state);
     const {libraries: {libraries}} = useSelector(state => state);
+    const {words: {words}} = useSelector(state => state);
     const [notAddedToLibs, setNotAddedToLibs] = useState([]);
     const [notPartsOfSpeechOfWord, setNotPartsOfSpeechOfWord] = useState([]);
     const [updWord, setUpdWord] = useState(false);
@@ -24,6 +23,18 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         word: word.word
     });
     const [translation1, setTranslation1] = useState(JSON.parse(currentWord.translation));
+
+    function loadForm() {
+        setTranslation1(JSON.parse(currentWord.translation))
+
+        form.setFieldsValue({word: currentWord.word,
+            partOfSpeech: currentWord.partOfSpeech,
+            description: currentWord.description,
+            example: currentWord.example,
+            translationRu: translation1.ru,
+            translationUa: translation1.ua,
+            notAddedToLibs: ""})
+    }
 
     const getLibsOfWord = async () => {
         return await libService.getLibsOfWord(word.id).then(el => el);
@@ -52,29 +63,18 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     const getCurrentWord = async () => {
         await wordService.getWord(word.id).then(el => {
             setCurrentWord(el.data);
-            setUpdWord(!updWord)
+            setUpdWord(!updWord);
+            loadForm();
         });
-    }
-
-    function loadForm() {
-        form.setFieldsValue({word: currentWord.word,
-            partOfSpeech: currentWord.partOfSpeech,
-            description: currentWord.description,
-        example: currentWord.example,
-        translationRU: translation1.ru,
-        translationUA: translation1.ua,
-        notAddedToLibs: ""})
     }
 
     useEffect(() => {
         getNotLibsOfWord();
         getNotPartsOfSpeechOfWord();
-        setTimeout(() => {}, 500)
-        loadForm()
-    }, [updWord]);
+        loadForm();
+    }, [updWord, words]);
 
-    const updateWordNew = values => {
-
+    const updateWord = values => {
         const newWord = values.word;
         const partOfSpeech = values.partOfSpeech;
         const description = values.description;
@@ -89,36 +89,11 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             getCurrentWord();
             if (partOfSpeech !== currentWord.partOfSpeech){
                 setUpdAllWords(true)
-                //TODO апдейт списка частей речи одинаковых слов
             }
         });
 
-
-
         const newLib = values.NotAddedToLibs;
         if (newLib != null) {
-            const Lib = notAddedToLibs.filter(el => el.name === newLib);
-            libService.addToLibExistingWord(Lib[0].id, word.id);
-            getNotLibsOfWord();
-        }
-    }
-
-    const updateWord = (e) => {
-        e.preventDefault();
-        const newWord = e.target[0].value;
-        const partOfSpeech = e.target[1].value;
-        const description = e.target[2].value;
-        const example = e.target[3].value;
-        const translationRu = e.target[4].value;
-        const translationUa = e.target[5].value;
-
-        wordService.updateWord(word.id, newWord, partOfSpeech, description, example, "", {
-            "ru": translationRu,
-            "ua": translationUa
-        }).then(el => setUpdWord(!updWord));
-
-        const newLib = e.target[6].value;
-        if (newLib.length > 0) {
             const Lib = notAddedToLibs.filter(el => el.name === newLib);
             libService.addToLibExistingWord(Lib[0].id, word.id);
             getNotLibsOfWord();
@@ -133,27 +108,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     return (
         <div className={"updateForm"}>
-            {/*<div>*/}
-            {/*    <form onSubmit={updateWord} className={"tableForUpdate"} id={currentWord.id}>*/}
-            {/*        <input name={"word"} type={'text'} defaultValue={currentWord.word}/>*/}
-            {/*        <select name={"partOfSpeech"}>*/}
-            {/*            <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>*/}
-            {/*            {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}*/}
-            {/*        </select>*/}
-            {/*        <input name={"Description"} type={'text'} onChange={handleChange} value={aba}/>*/}
-
-            {/*        <input name={"Example"} type={'text'} defaultValue={currentWord.example}/>*/}
-            {/*        <input name={"Translation ru"} type={'text'} defaultValue={translation1.ru}/>*/}
-            {/*        <input name={"Translation ua"} type={'text'} defaultValue={translation1.ua}/>*/}
-            {/*        <select name={"NotAddedToLibs"}>*/}
-            {/*            <option value={""}/>*/}
-            {/*            {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}*/}
-            {/*        </select>*/}
-            {/*        <button>Submit</button>*/}
-            {/*    </form>*/}
-            {/*</div>*/}
             <div>
-                <Form form={form} onFinish={updateWordNew} className={"tableForUpdate"}>
+                <Form form={form} onFinish={updateWord} className={"tableForUpdate"}>
                     <Form.Item
                         name='word'
                         rules={[{
@@ -187,14 +143,14 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item
-                        name='translationRU'
+                        name='translationRu'
                         rules={[{
                                 message: 'Please input translationRU!',
                             },]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item
-                        name='translationUA'
+                        name='translationUa'
                         rules={[{
                                 message: 'Please input translationUA!',
                             },

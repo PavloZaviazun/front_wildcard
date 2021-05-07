@@ -1,18 +1,10 @@
 import "./AddNewWord.css"
 import {libService, wordService} from "../../../services";
-import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 
 export const AddNewWord = () => {
-    const [libraries, setLibraries] = useState([]);
-
-    const allLibs = async () => {
-        return await libService.getLibs().then(el => el);
-    }
-
-    useEffect(() => {
-        allLibs().then(el => setLibraries(el));
-    },[])
+    const {libraries: {libraries}} = useSelector(state => state);
 
     const sendNewWord = (e) => {
         e.preventDefault();
@@ -57,7 +49,6 @@ export const AddNewWord = () => {
                     {libraries.map(el => {
                         return  <option key={el.id} value={el.name}>{el.name}</option>
                     })}
-
                 </select>add to library<br/>
                 <button>Submit</button>
             </form>
