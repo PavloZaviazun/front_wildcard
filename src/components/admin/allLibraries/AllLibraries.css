@@ -1,0 +1,28 @@
+.AllLibs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.divForAllLibraries{
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+.div-for-OneLib {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.div-for-OneLib button{
+    width: 100%;
+}
+
+.wordsOfThisLib {
+    width: 90%;
+    max-height: fit-content;
+    transition: max-height ease-in-out;
+}
+
+

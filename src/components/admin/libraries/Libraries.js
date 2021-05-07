@@ -1,8 +1,11 @@
 import "./Libraries.css"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {setWords} from "../../../redux";
 
 export const Libraries = () => {
+    const dispatch = useDispatch();
+    dispatch(setWords([]));
 
     return (
         <div>
