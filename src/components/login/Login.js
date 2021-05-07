@@ -22,7 +22,7 @@ export const Login = () => {
                 </div>
                 <div className={"login-div-reg"}>
                     <div>Ещё нет логина?</div>
-                    <div>Перейдите <Link to={"/registration"}>на страницу регистрации</Link></div>
+                    <div>Перейдите <Link to={"/auth/registration"}>на страницу регистрации</Link></div>
                 </div>
             </div>
         </div>

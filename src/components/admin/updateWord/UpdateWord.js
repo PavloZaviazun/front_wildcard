@@ -25,6 +25,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     const [translation1, setTranslation1] = useState(JSON.parse(currentWord.translation));
 
     function loadForm() {
+        console.log("loadform")
+
         setTranslation1(JSON.parse(currentWord.translation))
 
         form.setFieldsValue({word: currentWord.word,
@@ -61,14 +63,17 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     }
 
     const getCurrentWord = async () => {
+        console.log("getcurr")
+
         await wordService.getWord(word.id).then(el => {
             setCurrentWord(el.data);
             setUpdWord(!updWord);
-            loadForm();
+
         });
     }
 
     useEffect(() => {
+        console.log("useeffect")
         getNotLibsOfWord();
         getNotPartsOfSpeechOfWord();
         loadForm();
@@ -86,7 +91,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             "ru": translationRu,
             "ua": translationUa
         }).then(el => {
-            getCurrentWord();
+            getCurrentWord().then(el =>  loadForm());
             if (partOfSpeech !== currentWord.partOfSpeech){
                 setUpdAllWords(true)
             }
