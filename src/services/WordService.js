@@ -3,7 +3,6 @@ import axios from "axios";
 class WordService {
     serverURL = "http://localhost:8080";
 
-//TODO hardcode libraries ID
     getWordsFromLib (idLib) {
         return axios.get(this.serverURL + "/lib/" + idLib + "/words/get").then(el => el.data);
     }
@@ -39,7 +38,6 @@ class WordService {
     }
 
     deleteWord(id) {
-        //TODO response
         return axios.delete(this.serverURL + "/word/" + id + "/delete")
     }
 

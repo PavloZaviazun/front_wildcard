@@ -25,9 +25,6 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     const [translation1, setTranslation1] = useState(JSON.parse(currentWord.translation));
 
     function loadForm() {
-        console.log("loadform")
-
-        setTranslation1(JSON.parse(currentWord.translation))
 
         form.setFieldsValue({word: currentWord.word,
             partOfSpeech: currentWord.partOfSpeech,
@@ -44,8 +41,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     const getNotLibsOfWord = () => {
         const promise = getLibsOfWord();
-        Promise.all([promise]).then(value => {
-            const nonAddedLi = libraries.filter(el => !value[0].find(el2 => el.id === el2.id));
+        promise.then(value => {
+            const nonAddedLi = libraries.filter(el => !value.find(el2 => el.id === el2.id));
             setNotAddedToLibs(nonAddedLi);
         });
     }
@@ -56,28 +53,25 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     const getNotPartsOfSpeechOfWord = () => {
         const promise = getPartsOfSpeechOfWord();
-        Promise.all([promise]).then(value => {
-            const nonParts = partsOfSpeech.filter(el => !value[0].find(el2 => el === el2));
+        promise.then(value => {
+            const nonParts = partsOfSpeech.filter(el => !value.find(el2 => el === el2));
             setNotPartsOfSpeechOfWord(nonParts);
         });
     }
 
     const getCurrentWord = async () => {
-        console.log("getcurr")
-
         await wordService.getWord(word.id).then(el => {
             setCurrentWord(el.data);
             setUpdWord(!updWord);
-
+            setTranslation1(JSON.parse(el.data.translation))
         });
     }
 
     useEffect(() => {
-        console.log("useeffect")
         getNotLibsOfWord();
         getNotPartsOfSpeechOfWord();
         loadForm();
-    }, [updWord, words]);
+    }, [updWord, words, translation1]);
 
     const updateWord = values => {
         const newWord = values.word;
@@ -91,7 +85,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             "ru": translationRu,
             "ua": translationUa
         }).then(el => {
-            getCurrentWord().then(el =>  loadForm());
+            getCurrentWord();
             if (partOfSpeech !== currentWord.partOfSpeech){
                 setUpdAllWords(true)
             }
