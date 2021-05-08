@@ -27,7 +27,9 @@ export const AllWordsFromDB = () => {
 
     const searchByLetter = (letter) => {
         dispatch(setLetter(letter));
-        wordService.searchByLetter(letter, 0).then(el => dispatch(setWords(el.data.content)))
+        wordService.searchByLetter(letter, 0).then(el => {
+            dispatch(setWords(el.data.content))
+        })
     }
 
     return (

@@ -9,6 +9,11 @@ class LibService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
+    getLibsWithPage(page) {
+        return axios.get(this.serverURL + "/libs/get/page/" + page,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
+    }
+
     getLibsOfWord(idWord) {
         return axios.get(this.serverURL + "/libs/" + idWord,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)

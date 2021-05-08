@@ -9,7 +9,9 @@ export const Words = () => {
     const dispatch = useDispatch();
 
     commonService.getAllPartsOfSpeech().then(el => dispatch(setPartsOfSpeech(el)));
-    libService.getLibs().then(el => dispatch(setLibraries(el)))
+    libService.getLibsWithPage(0).then(el => {
+        dispatch(setLibraries(el.content))
+    })
 
     return (
         <div className={"words-edition"}>

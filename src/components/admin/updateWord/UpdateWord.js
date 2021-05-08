@@ -26,13 +26,15 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     function loadForm() {
 
-        form.setFieldsValue({word: currentWord.word,
+        form.setFieldsValue({
+            word: currentWord.word,
             partOfSpeech: currentWord.partOfSpeech,
             description: currentWord.description,
             example: currentWord.example,
             translationRu: translation1.ru,
             translationUa: translation1.ua,
-            notAddedToLibs: ""})
+            notAddedToLibs: ""
+        })
     }
 
     const getLibsOfWord = async () => {
@@ -86,7 +88,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             "ua": translationUa
         }).then(el => {
             getCurrentWord();
-            if (partOfSpeech !== currentWord.partOfSpeech){
+            if (partOfSpeech !== currentWord.partOfSpeech) {
                 setUpdAllWords(true)
             }
         });
@@ -113,16 +115,19 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         className={"tableForUpdate-name"}
                         name='word'
                         rules={[{
-                                message: 'Please input word!',
-                            },]}>
+                            required: true,
+                            message: 'Please input word!',
+                        },
+                            {
+                                pattern: /[a-z]+/,
+                                message: "не по паттерну",
+                            }]}>
                         <Input/>
                     </Form.Item>
+
                     <Form.Item
                         className={"tableForUpdate-partOS"}
-                        name='partOfSpeech'
-                        rules={[{
-                                message: 'Please input partOfSpeech!',
-                            },]}>
+                        name='partOfSpeech'>
                         <select>
                             <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>
                             {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}
@@ -132,33 +137,37 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         className={"tableForUpdate-description"}
                         name='description'
                         rules={[{
-                                message: 'Please input description!',
-                            },]}>
+                            message: 'Please input description!',
+                        },
+                            {
+                                pattern: '[a-zA-Z\p{P}]+',
+                                message: "не по паттерну",
+                            }]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-example"}
                         name='example'
                         rules={[{
-                                // required: true,
-                                message: 'Please input example!',
-                            },]}>
+                            // required: true,
+                            message: 'Please input example!',
+                        },]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-translationRu"}
                         name='translationRu'
                         rules={[{
-                                message: 'Please input translationRU!',
-                            },]}>
+                            message: 'Please input translationRU!',
+                        },]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-translationUa"}
                         name='translationUa'
                         rules={[{
-                                message: 'Please input translationUA!',
-                            },
+                            message: 'Please input translationUA!',
+                        },
                         ]}>
                         <Input/>
                     </Form.Item>
@@ -166,8 +175,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         className={"tableForUpdate-notAddedLibs"}
                         name='NotAddedToLibs'
                         rules={[{
-                                message: 'Please input NotAddedToLibs!',
-                            },]}>
+                            message: 'Please input NotAddedToLibs!',
+                        },]}>
                         <select name={"NotAddedToLibs"}>
                             <option value={""}/>
                             {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}

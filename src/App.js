@@ -28,6 +28,9 @@ function App() {
                 <Route exact path="/">
                   <Home child={<Body/>}/>
                 </Route>
+                <Route exact path="/library/:name">
+                  <Home child={<Library/>}/>
+                </Route>
                 <Route exact path="/user/:id">
                   <User/>
                 </Route>
@@ -39,9 +42,6 @@ function App() {
                 </Route>
                 <Route exact path="/auth/registration">
                   <Registration/>
-                </Route>
-                <Route exact path="/library/:name">
-                  <Home child={<Library/>}/>
                 </Route>
                 <Route exact path="/admin">
                   <Admin child={<div/>}/>

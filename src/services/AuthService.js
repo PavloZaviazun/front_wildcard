@@ -3,11 +3,11 @@ import axios from "axios";
 class AuthService {
     serverURL = "http://localhost:8080";
 
-    registrationHandle(username, password) {
+    registrationHandle(email, password, nativeLang) {
         const formData = new FormData();
-        formData.set("username", username);
+        formData.set("email", email);
         formData.set("password", password);
-        console.log(formData.get("username"))
+        formData.set("nativeLang", nativeLang)
         return axios.post(this.serverURL + "/register", formData)
     }
 
