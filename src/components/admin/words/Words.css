@@ -61,7 +61,7 @@
 }
 
 .div-head-for-words-description {
-    width: 14%;
+    width: 15%;
 }
 
 .div-head-for-words-example {
@@ -69,11 +69,11 @@
 }
 
 .div-head-for-words-translationRu {
-    width: 15%;
+    width: 17%;
 }
 
 .div-head-for-words-translationUa {
-    width: 15%;
+    width: 17%;
 }
 
 .div-head-for-words-addtoLib {
@@ -86,4 +86,29 @@
 
 .div-head-for-words-delete {
     width: 5%;
+}
+
+.searchWords {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    margin: 0 0 20px 20px;
+}
+
+.alphabet {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.alphabet-div{
+    width: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.alphabet-div:hover {
+    cursor: pointer;
 }

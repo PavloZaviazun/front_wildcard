@@ -1,3 +1,11 @@
+.pageForLibs{
+    width: 100%;
+}
+
+.pageForLibs-search{
+   margin-bottom: 20px;
+}
+
 .AllLibs {
     width: 100%;
     display: flex;

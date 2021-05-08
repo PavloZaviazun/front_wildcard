@@ -37,6 +37,12 @@ class LibService {
         axios.post(this.serverURL + "/lib/add", formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
+
+    searchLib(lib){
+        return axios.get(this.serverURL + "/searchLib/" + lib,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
+    }
+
 }
 
 export const libService = new LibService();

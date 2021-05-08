@@ -48,7 +48,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     }
 
     const getPartsOfSpeechOfWord = async () => {
-        return await wordService.getPartsOfSpeech(word.word).then(el => el.data)
+        return await wordService.getPartsOfSpeechOfWord(word.word).then(el => el.data)
     }
 
     const getNotPartsOfSpeechOfWord = () => {
@@ -174,13 +174,13 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         </select>
                     </Form.Item>
                     <Form.Item className={"tableForUpdate-submit"}>
-
                         <Button htmlType="submit">Submit</Button>
                     </Form.Item>
-                    <div className={"tableForUpdate-delete ant-row ant-form-item"}>
-                        <button onClick={deleteWord}>Delete</button>
-                    </div>
+
                 </Form>
+                <div className={"tableForUpdate-delete"}>
+                    <button onClick={deleteWord}>Delete</button>
+                </div>
             </div>
 
         </div>

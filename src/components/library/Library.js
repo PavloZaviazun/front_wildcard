@@ -12,7 +12,7 @@ export const Library = () => {
     const nameLibrary = window.location.href.split("library/")[1];
     const filtered = libraries.filter(el => el.name === nameLibrary)
     const dispatch = useDispatch();
-    console.log(filtered)
+
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
         const content = document.getElementsByClassName("content");
@@ -26,8 +26,8 @@ export const Library = () => {
     }, [filtered.length]);
 
     const getWord = useCallback(async () => {
-        const data = await wordService.getWordsFromLib(filtered[0].id);
-        dispatch(setWords(data));
+        const data = await wordService.getWordsFromLib(filtered[0].id, 0);
+        dispatch(setWords(data.source));
     }, [filtered])
 
     const shuffle = () => {

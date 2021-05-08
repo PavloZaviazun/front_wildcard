@@ -17,7 +17,7 @@
 
 .updateform-form {
     display: flex;
-    width: 100%;
+    width: 98%;
 }
 
 .ant-input {
@@ -46,7 +46,7 @@
 }
 
 .tableForUpdate-description {
-    width: 14%;
+    width: 15%;
 }
 
 .tableForUpdate-description Input {
@@ -63,7 +63,7 @@
 }
 
 .tableForUpdate-translationRu {
-    width: 15%;
+    width: 17%;
 }
 
 .tableForUpdate-translationRu Input {
@@ -71,7 +71,7 @@
 }
 
 .tableForUpdate-translationUa {
-    width: 15%;
+    width: 17%;
 }
 
 .tableForUpdate-translationUa Input {
@@ -92,10 +92,6 @@
 
 .tableForUpdate-submit button {
     width: 100%;
-}
-
-.tableForUpdate-delete {
-    width: 5%;
 }
 
 .tableForUpdate-delete button {

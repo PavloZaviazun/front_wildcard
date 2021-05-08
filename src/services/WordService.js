@@ -4,8 +4,8 @@ class WordService {
     serverURL = "http://localhost:8080";
     myStorage = window.localStorage;
 
-    getWordsFromLib (idLib) {
-        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get",
+    getWordsFromLib (idLib, page) {
+        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get/page/" + page,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
     }
 
@@ -47,13 +47,18 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getAllWordsFromBD() {
-        return axios.get(this.serverURL + "/words/get",
+    getPartsOfSpeechOfWord (word) {
+        return axios.get(this.serverURL + "/partsOfSpeech/" + word,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getPartsOfSpeech (word) {
-        return axios.get(this.serverURL + "/partsOfSpeech/" + word,
+    searchByWord(word, page) {
+        return axios.get(this.serverURL + "/searchByWord/" + word + "/page/" + page,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    searchByLetter(letter, page) {
+        return axios.get(this.serverURL + "/searchByLetter/" + letter + "/page/" + page,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 }
