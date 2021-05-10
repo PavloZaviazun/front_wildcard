@@ -20,8 +20,8 @@ export const Header = () => {
                 вероятно тут будет поиск или слоган
             </div>
                 {token == null ?
-                    <Link to={"/auth/login"}><div>Login/Registration</div></Link> :
-                    <Link to={"/account"}><div>Account</div></Link>}
+                    <Link to={"/auth/login"}><div>Вхід/Реєстрація</div></Link> :
+                    <Link to={"/account"}><div>Профіль</div></Link>}
         </div>
     )
 }

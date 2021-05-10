@@ -6,11 +6,13 @@ export const Account = () => {
     const [user, setUser] = useState({});
     const [nativeLangs, setNativeLangs] = useState([]);
     const [avaliableLangs, setAvaliableLangs] = useState([]);
-    const [flag, setFlag] = useState(false);
+    const [emailChange, setEmailChange] = useState(false);
 
     const findAvaliableLangs = () => {
         nativeLangs.filter(el => el === user.nativeLang)
     }
+
+
 
     useEffect(() => {
         let nativeLang = userService.getUserByToken().then(user => {
@@ -36,7 +38,7 @@ export const Account = () => {
 
     const changeFlag = (e) => {
         e.preventDefault();
-        setFlag(!flag)
+        setEmailChange(!emailChange)
     }
 
     return(
@@ -45,10 +47,10 @@ export const Account = () => {
                 <div>E-mail:</div>
                 <div>{user.email}</div>
             </div>
-            <button onClick={changeFlag} className={flag ? "change-email" : ""}>Change e-mail</button>
+            <button onClick={changeFlag} className={emailChange ? "change-email" : ""}>Change e-mail</button>
             <form onSubmit={handleUser}>
                 <div className={"new-row"}>
-                    <div className={!flag ? "change-email" : ""}><input defaultValue={user.email} type={"text"}/></div>
+                    <div className={!emailChange ? "change-email" : ""}><input defaultValue={user.email} type={"text"}/></div>
                 </div>
                 <div className={"new-row"}>
                     <div>Native language:</div>

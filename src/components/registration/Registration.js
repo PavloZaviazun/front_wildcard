@@ -1,8 +1,11 @@
 import "./Registration.css"
-import {authService} from "../../services/AuthService";
+import {authService} from "../../services";
+import {useState} from "react";
+import {Redirect} from "react-router-dom";
 
 export const Registration = () => {
 
+    const [regResponse, setRegResponse] = useState("");
     const registrationHandle = (e) => {
         e.preventDefault();
         const email = e.target[0].value;
@@ -10,31 +13,38 @@ export const Registration = () => {
         const repeatPassword = e.target[2].value;
         const nativeLang = e.target[3].value;
         if (password === repeatPassword) {
-            authService.registrationHandle(email, password, nativeLang).then(el => console.log(el));
+            authService.registrationHandle(email, password, nativeLang)
+                .then(el => {
+                    setRegResponse(el.data)
+                    console.log(el.data)
+
+                });
         }
         else {
             //TODO показать сообщение что пароли не совпадают
         }
+
     }
+
 
     return (
         <div className={"reg-div"}>
             <div className={"reg-div-form"}>
                 <div>
                     <form onSubmit={registrationHandle}>
-                        <div>Введите ваш e-mail</div>
-                        <div><input placeholder={"E-mail"}/></div>
-                        <div>Введите ваш пароль</div>
-                        <div><input type={"password"} placeholder={"Пароль"}/></div>
-                        <div>Повторите пароль</div>
-                        <div><input type={"password"} placeholder={"Повторите пароль"}/></div>
-                        <div>Язык по-умолчанию</div>
+                        <div><input placeholder={"Введіть e-mail"}/></div>
+                        <div><input type={"password"} placeholder={"Введіть пароль"}/></div>
+                        <div><input type={"password"} placeholder={"Повторіть пароль"}/></div>
+                        <div>Мова за змовчуванням:</div>
                         <div><select>
                             <option defaultValue={"true"}>UA</option>
                             <option>RU</option>
                         </select>
                         </div>
-                        <button>Регистрация</button>
+                        <button>Реєстрація</button>
+                        {regResponse}
+                        {regResponse === "На ваш e-mail відправлено листа для підтвердження реєстрації" ?
+                            <Redirect to={"/auth/login"}/>  : null}
                     </form>
                 </div>
             </div>

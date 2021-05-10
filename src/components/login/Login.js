@@ -3,11 +3,14 @@ import {Link} from "react-router-dom";
 import {authService, userService} from "../../services";
 import {useDispatch, useSelector} from "react-redux";
 import {setUser} from "../../redux";
+import {Redirect} from "react-router";
 
 export const Login = () => {
     const dispatch = useDispatch();
     const {user: {user}} = useSelector(state => state);
-    console.log(user)
+    let loginResponse;
+
+    if(loginResponse === "") <Redirect to="/"/>
 
     const handleUser = () => {
         userService.getUserByToken().then(user => {
@@ -32,23 +35,23 @@ export const Login = () => {
     return (
         <div className={"login-div"}>
             <div className={"login-div-form"}>
-                <div>Введите логин(e-mail) и пароль</div>
+
                 <div>
                     <form onSubmit={loginHandle}>
                         <div>
-                            <input placeholder={"Логин"}/>
+                            <input placeholder={"Введіть e-mail"}/>
                         </div>
                         <div>
-                            <input type={"password"} placeholder={"Пароль"}/>
+                            <input type={"password"} placeholder={"Введіть пароль"}/>
                         </div>
                         <div>
-                            <button>Войти</button>
+                            <button>Вхід</button>
                         </div>
                     </form>
                 </div>
                 <div className={"login-div-reg"}>
-                    <div>Ещё нет логина?</div>
-                    <div>Перейдите <Link to={"/auth/registration"}>на страницу регистрации</Link></div>
+                    <div>Ще немає профілю?</div>
+                    <div>Перейдіть <Link to={"/auth/registration"}>на сторінку реєстрації</Link></div>
                 </div>
             </div>
         </div>
