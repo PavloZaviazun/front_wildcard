@@ -1,8 +1,20 @@
 import "./Login.css"
 import {Link} from "react-router-dom";
-import {authService} from "../../services/AuthService";
+import {authService, userService} from "../../services";
+import {useDispatch, useSelector} from "react-redux";
+import {setUser} from "../../redux";
 
 export const Login = () => {
+    const dispatch = useDispatch();
+    const {user: {user}} = useSelector(state => state);
+    console.log(user)
+
+    const handleUser = () => {
+        userService.getUserByToken().then(user => {
+            console.log(user)
+            dispatch(setUser(user))
+        });
+    }
 
     const loginHandle = (e) => {
         e.preventDefault();
@@ -11,6 +23,9 @@ export const Login = () => {
         const myStorage = window.localStorage;
         authService.loginHandle(username, password).then(el => {
             myStorage.setItem("session", el.headers.authorization);
+            if(el.headers.authorization != null) {
+                handleUser()
+            }
         });
     }
 

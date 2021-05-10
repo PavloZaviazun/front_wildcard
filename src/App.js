@@ -16,6 +16,7 @@ import {AddNewWord} from "./components/admin/addNewWord";
 import {Redirect} from "react-router";
 import {AddNewLibrary} from "./components/admin/addNewLibrary";
 import {AllLibraries} from "./components/admin/allLibraries";
+import {Account} from "./components/account";
 
 function App() {
 
@@ -57,6 +58,9 @@ function App() {
                 </Route>
                 <Route exact path="/admin/alllibraries">
                   <Admin child={<AllLibraries/>}/>
+                </Route>
+                <Route exact path="/account">
+                  <Account/>
                 </Route>
               </Switch>
             </PageLayout>

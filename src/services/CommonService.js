@@ -6,6 +6,10 @@ class CommonService {
     getAllPartsOfSpeech() {
         return axios.get(this.serverURL + "/partsOfSpeech").then(el => el.data)
     }
+
+    getAllNativeLanguages() {
+        return axios.get(this.serverURL + "/langs").then(el => el.data)
+    }
 }
 
 export const commonService = new CommonService();

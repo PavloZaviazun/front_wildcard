@@ -1,10 +1,16 @@
 import "./Header.css"
 import {Link} from "react-router-dom";
 import Logo from "../../images/wildcard.jpg"
+import {useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export const Header = () => {
 
+    const token = window.localStorage.getItem("session");
+    const {user: {user}} = useSelector(state => state);
+    useEffect(() => {
 
+    }, [user])
     return(
         <div className={"div-header"}>
             <div>
@@ -13,9 +19,9 @@ export const Header = () => {
             <div>
                 вероятно тут будет поиск или слоган
             </div>
-            <div>
-               <Link to={"/auth/login"}>Login/Registration</Link>
-            </div>
+                {token == null ?
+                    <Link to={"/auth/login"}><div>Login/Registration</div></Link> :
+                    <Link to={"/account"}><div>Account</div></Link>}
         </div>
     )
 }
