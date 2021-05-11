@@ -10,7 +10,9 @@ class UserService {
     }
 
     addWordToUserFav(id) {
-        return axios.post(this.serverURL + `/user/add/fav/word/${id}`,
+        const formData = new FormData();
+        formData.set("id", id);
+        return axios.post(this.serverURL + `/user/add/fav/word`, formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
