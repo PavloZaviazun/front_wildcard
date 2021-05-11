@@ -3,7 +3,7 @@ import {Card} from "../card";
 import {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setWords} from "../../redux";
-import {wordService} from "../../services";
+import {userService, wordService} from "../../services";
 
 
 export const Library = () => {
@@ -35,6 +35,10 @@ export const Library = () => {
         dispatch(setWords(words));
     }
 
+    const handleWord = (el) => {
+        userService.addWordToUserFav(el.id).then(el => console.log(el.data));
+    }
+
     return (
 
         <div className={"div-forcard"}>
@@ -51,7 +55,7 @@ export const Library = () => {
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
-                {words.map(e => <p key={e.id}>{e.word}</p>)}
+                {words.map(el => <div key={el.id}>{el.word}<div onClick={() => handleWord(el)}>+</div></div>)}
             </div>
         </div>
     )

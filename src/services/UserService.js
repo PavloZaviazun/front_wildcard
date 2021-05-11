@@ -9,6 +9,11 @@ class UserService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
+    addWordToUserFav(id) {
+        return axios.post(this.serverURL + `/user/add/fav/word/${id}`,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
     updateUser(id, nativeLang, email) {
         const formData = new FormData();
         formData.set("nativeLang", nativeLang);
