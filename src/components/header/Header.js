@@ -17,7 +17,8 @@ export const Header = () => {
                 <Link to={"/"}><img src={Logo} alt={"Logo"}/></Link>
             </div>
             <div>
-                вероятно тут будет поиск или слоган
+                вероятно тут будет поиск или слоган<br/>
+                <Link to={"/admin"}>ADMIN PANEL</Link>
             </div>
                 {token == null ?
                     <Link to={"/auth/login"}><div>Вхід/Реєстрація</div></Link> :

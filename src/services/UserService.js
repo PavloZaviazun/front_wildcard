@@ -14,7 +14,7 @@ class UserService {
         formData.set("nativeLang", nativeLang);
         formData.set("email", email);
         return axios.patch(this.serverURL + `/user/${id}/update`, formData,
-            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
+            {headers: {"Authorization": this.myStorage.getItem("session")}});
     }
 
 }

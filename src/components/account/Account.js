@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {commonService, userService} from "../../services";
 
 export const Account = () => {
+    const [message, setMessage] = useState("");
+
     const [user, setUser] = useState({});
     const [nativeLangs, setNativeLangs] = useState([]);
     const [avaliableLangs, setAvaliableLangs] = useState([]);
@@ -33,7 +35,7 @@ export const Account = () => {
         e.preventDefault();
         const email = e.target[0].value;
         const nativeLang = e.target[1].value;
-        userService.updateUser(user.id, nativeLang, email).then(el => el);
+        userService.updateUser(user.id, nativeLang, email).then(el => setMessage(el.data));
     }
 
     const changeFlag = (e) => {
@@ -63,6 +65,7 @@ export const Account = () => {
             </form>
             <div>Custom Library:</div>
             <div>{user.customLibs}</div>
+            <div>{message}</div>
         </div>
     )
 }
