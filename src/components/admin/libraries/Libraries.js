@@ -5,6 +5,7 @@ import {setWords} from "../../../redux";
 import {useEffect} from "react";
 
 export const Libraries = () => {
+
     const dispatch = useDispatch();
     dispatch(setWords([]));
 

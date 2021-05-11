@@ -5,6 +5,9 @@ import {useSelector} from "react-redux";
 import {Input, Form, Button} from "antd";
 
 export const UpdateWord = ({word, setUpdAllWords}) => {
+
+    const [message, setMessage] = useState("");
+
     const [form] = Form.useForm();
     const {partsOfSpeech: {partsOfSpeech}} = useSelector(state => state);
     const {libraries: {libraries}} = useSelector(state => state);
@@ -87,6 +90,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             "ru": translationRu,
             "ua": translationUa
         }).then(el => {
+            setMessage(el.data)
             getCurrentWord();
             if (partOfSpeech !== currentWord.partOfSpeech) {
                 setUpdAllWords(true)
@@ -96,7 +100,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         const newLib = values.NotAddedToLibs;
         if (newLib != null) {
             const Lib = notAddedToLibs.filter(el => el.name === newLib);
-            libService.addToLibExistingWord(Lib[0].id, word.id);
+            libService.addToLibExistingWord(Lib[0].id, word.id).then(el => setMessage(el.data));
             getNotLibsOfWord();
         }
     }
@@ -108,6 +112,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     }
 
     return (
+        <div>
         <div className={"updateForm"}>
             <div className={"updateform-form"}>
                 <Form form={form} onFinish={updateWord} className={"tableForUpdate"}>
@@ -191,7 +196,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                     <button onClick={deleteWord}>Delete</button>
                 </div>
             </div>
-
+        </div>
+            <div>{message}</div>
         </div>
     )
 }

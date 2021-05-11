@@ -1,20 +1,21 @@
 import "./Login.css"
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {authService, userService} from "../../services";
 import {useDispatch, useSelector} from "react-redux";
 import {setUser} from "../../redux";
-import {Redirect} from "react-router";
+import {useState} from "react";
 
 export const Login = () => {
+
+    const message = "Successfull logination";
+
     const dispatch = useDispatch();
     const {user: {user}} = useSelector(state => state);
-    let loginResponse;
+    const [loginResponse, setLoginResponse] = useState("");
 
-    if(loginResponse === "") <Redirect to="/"/>
 
     const handleUser = () => {
         userService.getUserByToken().then(user => {
-            console.log(user)
             dispatch(setUser(user))
         });
     }
@@ -26,7 +27,10 @@ export const Login = () => {
         const myStorage = window.localStorage;
         authService.loginHandle(username, password).then(el => {
             myStorage.setItem("session", el.headers.authorization);
-            if(el.headers.authorization != null) {
+            console.log(el)
+            setLoginResponse(el.data)
+            if(el.headers.authorization != null && el.headers.authorization !== "undefined") {
+                console.log("sdsdsfdf")
                 handleUser()
             }
         });
@@ -49,6 +53,8 @@ export const Login = () => {
                         </div>
                     </form>
                 </div>
+                {loginResponse}
+                {loginResponse === message ? <Redirect to="/"/> : null}
                 <div className={"login-div-reg"}>
                     <div>Ще немає профілю?</div>
                     <div>Перейдіть <Link to={"/auth/registration"}>на сторінку реєстрації</Link></div>

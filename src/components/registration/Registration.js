@@ -5,7 +5,11 @@ import {Redirect} from "react-router-dom";
 
 export const Registration = () => {
 
+    const message = "На ваш e-mail відправлено листа для підтвердження реєстрації";
+
     const [regResponse, setRegResponse] = useState("");
+    const [redirect, setRedirect] = useState(false);
+
     const registrationHandle = (e) => {
         e.preventDefault();
         const email = e.target[0].value;
@@ -16,14 +20,17 @@ export const Registration = () => {
             authService.registrationHandle(email, password, nativeLang)
                 .then(el => {
                     setRegResponse(el.data)
-                    console.log(el.data)
-
                 });
         }
         else {
             //TODO показать сообщение что пароли не совпадают
         }
 
+    }
+    if(regResponse === message) {
+        setTimeout(() => {
+            setRedirect(true);
+        }, 3000)
     }
 
 
@@ -43,8 +50,7 @@ export const Registration = () => {
                         </div>
                         <button>Реєстрація</button>
                         {regResponse}
-                        {regResponse === "На ваш e-mail відправлено листа для підтвердження реєстрації" ?
-                            <Redirect to={"/auth/login"}/>  : null}
+                        {redirect ? <Redirect to={"/auth/login"}/> : null}
                     </form>
                 </div>
             </div>

@@ -1,9 +1,13 @@
 import "./AddNewWord.css"
 import {libService, wordService} from "../../../services";
 import {useSelector} from "react-redux";
+import {useState} from "react";
 
 
 export const AddNewWord = () => {
+
+    const [message, setMessage] = useState("");
+
     const {libraries: {libraries}} = useSelector(state => state);
 
     const sendNewWord = (e) => {
@@ -19,17 +23,18 @@ export const AddNewWord = () => {
             wordService.addNewWord(word, partOfSpeech, description, example, {
                 "ru": translationRu,
                 "ua": translationUa
-            });
+            }).then(el => setMessage(el.data));
         } else {
             const found = libraries.filter(el => el.name === library)
             libService.addToLibNotExistingWord(found[0].id, word, partOfSpeech, description, example, {
                 "ru": translationRu,
                 "ua": translationUa
-            });
+            }).then(el => setMessage(el.data));
         }
     }
 
     return (
+        <div>
         <div className={"addition-new-words"}>
             <div className={"div-head-for-words"}>
                 <div className={"div-head-for-addwords-name"}>Word in English</div>
@@ -64,6 +69,8 @@ export const AddNewWord = () => {
                     <button className={"addition-new-words-form-submit"}>Submit</button>
                 </form>
             </div>
+        </div>
+            <div>{message}</div>
         </div>
     )
 }

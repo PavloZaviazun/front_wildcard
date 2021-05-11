@@ -39,7 +39,7 @@ class LibService {
     createNewLib (name) {
         const formData = new FormData();
         formData.set("name", name);
-        axios.post(this.serverURL + "/lib/add", formData,
+        return axios.post(this.serverURL + "/lib/add", formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
