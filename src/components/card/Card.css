@@ -41,7 +41,7 @@
 
 .front-side::after {
     content: "";
-    background-image: url("https://roboticsandautomationnews.com/wp-content/uploads/2016/08/abundant-robotics-apples.png");
+    /*background-image: url("https://roboticsandautomationnews.com/wp-content/uploads/2016/08/abundant-robotics-apples.png");*/
     background-size: 510px;
     top: 0;
     left: 0;

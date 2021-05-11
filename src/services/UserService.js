@@ -9,11 +9,16 @@ class UserService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
-    addWordToUserFav(id) {
+    addWordToUserCustom(id) {
         const formData = new FormData();
         formData.set("id", id);
-        return axios.post(this.serverURL + `/user/add/fav/word`, formData,
+        return axios.post(this.serverURL + `/user/add/customlib/word`, formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    getCustomLibIds() {
+        return axios.get(this.serverURL + "/user/get/customlibids",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
     updateUser(id, nativeLang, email) {
