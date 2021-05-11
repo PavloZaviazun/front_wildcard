@@ -6,7 +6,9 @@ export const Footer = () => {
     return (
 
         <div className={"footer-div"}>
-            тут будет футер
+            <div>
+                <a href={"/feedback"}>Напишіть нам</a>
+            </div>
         </div>
     )
 }

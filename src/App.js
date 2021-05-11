@@ -17,6 +17,7 @@ import {Redirect} from "react-router";
 import {AddNewLibrary} from "./components/admin/addNewLibrary";
 import {AllLibraries} from "./components/admin/allLibraries";
 import {Account} from "./components/account";
+import {FeedBack} from "./components/feedback";
 
 function App() {
 
@@ -61,6 +62,9 @@ function App() {
                 </Route>
                 <Route exact path="/account">
                   <Account/>
+                </Route>
+                <Route exact path="/feedback">
+                  <FeedBack/>
                 </Route>
               </Switch>
             </PageLayout>

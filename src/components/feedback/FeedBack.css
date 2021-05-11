@@ -1,0 +1,36 @@
+.feedback-form-div {
+    width: 400px;
+    height: 320px;
+    background-color: #f1f1f1;
+    align-self: center;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-form label {
+    margin-top: 10px;
+}
+
+.feedback-form button {
+    width: 70px;
+    align-self: center;
+}
+
+.feedback-form input {
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.feedback-message {
+    height: 150px;
+}
+
+.feedback-response {
+    margin-top: 20px;
+    background-color: #ddeede;
+    color: darkgreen;
+    border-radius: 5px ;
+}
