@@ -5,6 +5,7 @@ import "./Card.css"
 
 
 export const Card = () => {
+    const serverURL = "http://localhost:8080";
 
     const {words: {words}, language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
@@ -51,12 +52,16 @@ export const Card = () => {
         }
     }, [cardBack, words, i, words[i]]);
 
+    const background = {
+        backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
+    };
+
     return (
         <div className={"card-component"}>
             <div className={"card-outer"}>
                 <div className={"arrow prev"} onClick={prevArrowClick}/>
                 <div className={"card"} onClick={cardClick}>
-                    <div className={"front-side"}>
+                    <div className={"front-side"} style={background}>
                         <div><span>{word == null || word.length === 0 ? "Cat" : word.word}</span></div>
                     </div>
                     <div className={"back-side"}>

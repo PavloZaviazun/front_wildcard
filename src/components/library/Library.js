@@ -1,12 +1,16 @@
 import './Library.css';
 import {Card} from "../card";
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setWords} from "../../redux";
 import {userService, wordService} from "../../services";
 
 
 export const Library = () => {
+
+    const message = "Слово додано до бібліотеки обраних";
+    const [customLibIds, setCustomLibIds] = useState([]);
+    const [wasChanged, setWasChanged] = useState(false);
 
     const {words: {words}, libraries: {libraries}} = useSelector(state => state);
     const nameLibrary = window.location.href.split("library/")[1];
@@ -21,9 +25,11 @@ export const Library = () => {
     }
 
     useEffect(() => {
-        if (filtered.length > 0)
+        if (filtered.length > 0) {
             getWord();
-    }, [filtered.length]);
+        }
+        userService.getCustomLibIds().then(el => setCustomLibIds(el))
+    }, [filtered.length, wasChanged]);
 
     const getWord = useCallback(async () => {
         const data = await wordService.getWordsFromLib(filtered[0].id, 0);
@@ -36,8 +42,9 @@ export const Library = () => {
     }
 
     const handleWord = (el) => {
-        userService.addWordToUserFav(el.id).then(el => console.log(el.data));
+        userService.addWordToUserCustom(el.id).then(el => setWasChanged(!wasChanged));
     }
+
 
     return (
 
@@ -50,12 +57,14 @@ export const Library = () => {
                     <button id="shuffle" onClick={shuffle}>Shuffle</button>
                 </div>
                 <div>
-                    <button>Add to fav</button>
+                    <button>Add to custom Lib</button>
                 </div>
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
-                {words.map(el => <div key={el.id}>{el.word}<div onClick={() => handleWord(el)}>+</div></div>)}
+                {words.map(el => <div key={el.id}>{el.word}
+                    <div onClick={() => handleWord(el)}>{customLibIds.includes(el.id) ? "-" : "+"}</div>
+                </div>)}
             </div>
         </div>
     )
