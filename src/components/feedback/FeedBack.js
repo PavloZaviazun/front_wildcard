@@ -1,13 +1,25 @@
 import "./FeedBack.css"
 import {commonService} from "../../services";
 import {useState} from "react";
+import {Redirect} from "react-router-dom";
 
 export const FeedBack = () => {
-    const [message, setMessage] = useState("");
+
+    const message = "Ваше повідомлення отримано, дякуємо за зворотній зв'язок";
+
+    const [response, setResponse] = useState("");
+    const [redirect, setRedirect] = useState(false);
+
     const sendEmail = (e) => {
         e.preventDefault();
         const form = document.forms.namedItem("feedback-form");
-        commonService.sendFeedback(form).then(el => setMessage(el.data));
+        commonService.sendFeedback(form).then(el => setResponse(el.data));
+    }
+
+    if(response === message) {
+        setTimeout(() => {
+            setRedirect(true);
+        }, 3000)
     }
 
     return (
@@ -25,7 +37,8 @@ export const FeedBack = () => {
                 <button>Send</button>
             </form>
             <div className={"feedback-response"}>
-                {message.length > 0 ? message : ""}
+                {response.length > 0 ? response : ""}
+                {redirect ? <Redirect to={"/"}/> : null}
             </div>
         </div>
     )
