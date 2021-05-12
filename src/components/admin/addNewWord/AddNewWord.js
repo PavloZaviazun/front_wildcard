@@ -13,24 +13,6 @@ export const AddNewWord = () => {
 
     const sendNewWord = (e) => {
         e.preventDefault();
-        // const word = e.target[0].value;
-        // const partOfSpeech = e.target[1].value;
-        // const description = e.target[2].value;
-        // const example = e.target[3].value;
-        // const translationRu = e.target[4].value;
-        // const translationUa = e.target[5].value;
-        // const library = e.target[6].value;
-        // const image = e.target[7];
-        // console.log(image);
-        /*word, partOfSpeech, description, example, {
-                "ru": translationRu,
-                "ua": translationUa
-            }, image*/
-        /*word, partOfSpeech, description, example, {
-                "ru": translationRu,
-                "ua": translationUa
-            }*/
-
         const form = document.forms.namedItem("wordForm");
         const library = form[6].value;
         if (library.length === 0) {

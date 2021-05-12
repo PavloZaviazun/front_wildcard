@@ -20,7 +20,6 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         description: word.description,
         example: word.example,
         id: word.id,
-        image: word.image,
         partOfSpeech: word.partOfSpeech,
         translation: word.translation,
         word: word.word
@@ -28,7 +27,6 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     const [translation1, setTranslation1] = useState(JSON.parse(currentWord.translation));
 
     function loadForm() {
-
         form.setFieldsValue({
             word: currentWord.word,
             partOfSpeech: currentWord.partOfSpeech,
@@ -79,17 +77,11 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     }, [updWord, words, translation1]);
 
     const updateWord = values => {
-        const newWord = values.word;
-        const partOfSpeech = values.partOfSpeech;
-        const description = values.description;
-        const example = values.example;
-        const translationRu = values.translationRu;
-        const translationUa = values.translationUa;
+        const form = document.forms.namedItem("wordForm");
 
-        wordService.updateWord(currentWord.id, newWord, partOfSpeech, description, example, "", {
-            "ru": translationRu,
-            "ua": translationUa
-        }).then(el => {
+        const partOfSpeech = form[1].value;
+
+        wordService.updateWord(currentWord.id, form).then(el => {
             setMessage(el.data)
             getCurrentWord();
             if (partOfSpeech !== currentWord.partOfSpeech) {
@@ -115,10 +107,10 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         <div>
         <div className={"updateForm"}>
             <div className={"updateform-form"}>
-                <Form form={form} onFinish={updateWord} className={"tableForUpdate"}>
+                <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={"wordForm"}>
                     <Form.Item
                         className={"tableForUpdate-name"}
-                        name='word'
+                        name="word"
                         rules={[{
                             required: true,
                             message: 'Please input word!',
@@ -127,20 +119,20 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                                 pattern: /[a-z]+/,
                                 message: "не по паттерну",
                             }]}>
-                        <Input/>
+                        <Input name="word"/>
                     </Form.Item>
 
                     <Form.Item
                         className={"tableForUpdate-partOS"}
-                        name='partOfSpeech'>
-                        <select>
+                        name="partOfSpeech">
+                        <select name="partOfSpeech">
                             <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>
                             {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}
                         </select>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-description"}
-                        name='description'
+                        name="description"
                         rules={[{
                             message: 'Please input description!',
                         },
@@ -148,33 +140,33 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                                 pattern: '[a-zA-Z\p{P}]+',
                                 message: "не по паттерну",
                             }]}>
-                        <Input/>
+                        <Input name="description"/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-example"}
-                        name='example'
+                        name="example"
                         rules={[{
                             // required: true,
                             message: 'Please input example!',
                         },]}>
-                        <Input/>
+                        <Input name="example"/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-translationRu"}
-                        name='translationRu'
+                        name="translationRu"
                         rules={[{
                             message: 'Please input translationRU!',
                         },]}>
-                        <Input/>
+                        <Input name="translationRu"/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-translationUa"}
-                        name='translationUa'
+                        name="translationUa"
                         rules={[{
                             message: 'Please input translationUA!',
                         },
                         ]}>
-                        <Input/>
+                        <Input name="translationUa"/>
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-notAddedLibs"}
@@ -186,6 +178,10 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                             <option value={""}/>
                             {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
                         </select>
+                    </Form.Item>
+                    <Form.Item
+                        name="image">
+                        <Input type={"file"} name="image"/>
                     </Form.Item>
                     <Form.Item className={"tableForUpdate-submit"}>
                         <Button htmlType="submit">Submit</Button>

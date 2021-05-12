@@ -9,14 +9,6 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
     }
 
-    // addNewWord (word, partOfSpeech, description, example, translation, image) {
-// formData.set("word", word);
-    // formData.set("partOfSpeech", partOfSpeech);
-    // formData.set("description", description);
-    // formData.set("example", example);
-    // formData.set("translation", JSON.stringify(translation));
-    // formData.set("image", image);
-
     addNewWord(form) {
         const formData = new FormData(form);
         return axios.post(
@@ -30,14 +22,8 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    updateWord(id, word, partOfSpeech, description, example, image, translation) {
-        const formData = new FormData();
-        formData.set("word", word);
-        formData.set("partOfSpeech", partOfSpeech);
-        formData.set("description", description);
-        formData.set("example", example);
-        formData.set("image", "");
-        formData.set("translation", JSON.stringify(translation));
+    updateWord(id, form) {
+        const formData = new FormData(form);
         return axios.patch(
             this.serverURL + "/word/" + id + "/update", formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}
