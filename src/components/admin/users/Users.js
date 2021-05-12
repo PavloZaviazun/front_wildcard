@@ -14,7 +14,7 @@ export const Users = () => {
     console.log(pageObj.content)
     return (
         <div>
-            {pageObj.content.map(el => el.username)}
+            {/*{pageObj.content.map(el => el.username)}*/}
         </div>
     )
 }

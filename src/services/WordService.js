@@ -49,6 +49,11 @@ class WordService {
         return axios.get(this.serverURL + "/searchByLetter/" + letter + "/page/" + page,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
+
+    getAllNotApprovedWords() {
+        return axios.get(this.serverURL + "/words/getnotapproved",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
 }
 
 export const wordService = new WordService();

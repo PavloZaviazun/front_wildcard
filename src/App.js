@@ -18,6 +18,7 @@ import {AddNewLibrary} from "./components/admin/addNewLibrary";
 import {AllLibraries} from "./components/admin/allLibraries";
 import {Account} from "./components/account";
 import {FeedBack} from "./components/feedback";
+import {NotApproved} from "./components/admin/notApproved/NotApproved";
 
 function App() {
 
@@ -50,6 +51,9 @@ function App() {
                 </Route>
                 <Route exact path="/admin/allwords">
                   <Admin child={<AllWordsFromDB/>}/>
+                </Route>
+                <Route exact path="/admin/notapprovedwords">
+                  <Admin child={<NotApproved/>}/>
                 </Route>
                 <Route exact path="/admin/addnewword">
                   <Admin child={<AddNewWord/>}/>
