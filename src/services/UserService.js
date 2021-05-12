@@ -29,6 +29,11 @@ class UserService {
             {headers: {"Authorization": this.myStorage.getItem("session")}});
     }
 
+    getUsers(page) {
+        return axios.get(this.serverURL + `/users/get/page/${page}`,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
 }
 
 export const userService = new UserService();
