@@ -1,0 +1,23 @@
+.user-details-div {
+    display: flex;
+}
+
+.user-details-id {
+    min-width: 20px;
+}
+
+.user-details-email {
+    min-width: 220px;
+}
+
+.user-details-nativeLang {
+    min-width: 50px;
+}
+
+.user-details-role {
+    min-width: 70px;
+}
+
+.user-details-enabled {
+    min-width: 70px;
+}

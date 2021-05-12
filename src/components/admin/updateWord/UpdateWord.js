@@ -76,9 +76,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         loadForm();
     }, [updWord, words, translation1]);
 
-    const updateWord = values => {
-        const form = document.forms.namedItem("wordForm");
-
+    const updateWord = (id) => {
+        const form = document.forms.namedItem(`wordForm${currentWord.id}`);
         const partOfSpeech = form[1].value;
 
         wordService.updateWord(currentWord.id, form).then(el => {
@@ -89,8 +88,8 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             }
         });
 
-        const newLib = values.NotAddedToLibs;
-        if (newLib != null) {
+        const newLib = form[6].value;
+        if (newLib != null && newLib !== "") {
             const Lib = notAddedToLibs.filter(el => el.name === newLib);
             libService.addToLibExistingWord(Lib[0].id, word.id).then(el => setMessage(el.data));
             getNotLibsOfWord();
@@ -107,7 +106,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         <div>
         <div className={"updateForm"}>
             <div className={"updateform-form"}>
-                <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={"wordForm"}>
+                <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={`wordForm${word.id}`}>
                     <Form.Item
                         className={"tableForUpdate-name"}
                         name="word"
@@ -170,7 +169,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-notAddedLibs"}
-                        name='NotAddedToLibs'
+                        name="NotAddedToLibs"
                         rules={[{
                             message: 'Please input NotAddedToLibs!',
                         },]}>

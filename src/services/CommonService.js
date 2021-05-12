@@ -14,6 +14,11 @@ class CommonService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
+    getAllRoles() {
+        return axios.get(this.serverURL + "/roles",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
+    }
+
     sendFeedback(form) {
         const formData = new FormData(form);
         return axios.post(this.serverURL + "/feedback" , formData,
