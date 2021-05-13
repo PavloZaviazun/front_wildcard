@@ -17,6 +17,7 @@ export const Words = () => {
         <div className={"words-edition"}>
             <div><Link to={`/admin/addnewword`}>Добавить слово</Link></div>
             <div><Link to={`/admin/allwords`}>Посмотреть все слова</Link></div>
+            <div><Link to={`/admin/notapprovedwords`}>Слова custLib not Approved</Link></div>
         </div>
     )
 }

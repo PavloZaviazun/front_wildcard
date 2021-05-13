@@ -1,6 +1,6 @@
 import "./Account.css";
 import {useEffect, useState} from "react";
-import {commonService, userService} from "../../services";
+import {authService, commonService, userService} from "../../services";
 
 export const Account = () => {
     const [message, setMessage] = useState("");
@@ -43,8 +43,18 @@ export const Account = () => {
         setEmailChange(!emailChange)
     }
 
+    const logout = () => {
+
+        authService.logOut().then(el => console.log(el));
+        // localStorage.clear();
+        // window.location.href = "/";
+    }
+
     return(
         <div>
+            <div>
+                <button onClick={logout}>Logout</button>
+            </div>
             <div className={"new-row"}>
                 <div>E-mail:</div>
                 <div>{user.email}</div>

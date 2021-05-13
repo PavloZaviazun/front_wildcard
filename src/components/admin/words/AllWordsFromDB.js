@@ -69,6 +69,7 @@ export const AllWordsFromDB = () => {
                 <div className={"alphabet-div"} onClick={() => searchByLetter("Z")}>Z</div>
             </div>
             <div className={"div-head-for-words"}>
+                <div className={"div-head-for-words-approve"}>Approve</div>
                 <div className={"div-head-for-words-name"}>Word</div>
                 <div className={"div-head-for-words-partOS"}>Part of speech</div>
                 <div className={"div-head-for-words-description"}>Description</div>

@@ -2,7 +2,7 @@ import "./UpdateWord.css";
 import {libService, wordService} from "../../../services";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {Input, Form, Button} from "antd";
+import {Input, Form, Button, Checkbox} from "antd";
 
 export const UpdateWord = ({word, setUpdAllWords}) => {
 
@@ -28,6 +28,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     function loadForm() {
         form.setFieldsValue({
+            approved: currentWord.approved,
             word: currentWord.word,
             partOfSpeech: currentWord.partOfSpeech,
             description: currentWord.description,
@@ -78,8 +79,9 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     const updateWord = () => {
         const form = document.forms.namedItem(`wordForm${currentWord.id}`);
-        const partOfSpeech = form[1].value;
-
+        const partOfSpeech = form[2].value;
+        console.log(form[0])
+        console.log(form[0].checked)
         wordService.updateWord(currentWord.id, form).then(el => {
             setMessage(el.data)
             getCurrentWord();
@@ -88,7 +90,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
             }
         });
 
-        const newLib = form[6].value;
+        const newLib = form[7].value;
         if (newLib != null && newLib !== "") {
             const Lib = notAddedToLibs.filter(el => el.name === newLib);
             libService.addToLibExistingWord(Lib[0].id, word.id).then(el => setMessage(el.data));
@@ -107,6 +109,9 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         <div className={"updateForm"}>
             <div className={"updateform-form"}>
                 <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={`wordForm${word.id}`}>
+                    <Form.Item name="approved" valuePropName="checked" noStyle>
+                        <Checkbox name={"approved"}/>
+                    </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-name"}
                         name="word"
@@ -120,7 +125,6 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                             }]}>
                         <Input name="word"/>
                     </Form.Item>
-
                     <Form.Item
                         className={"tableForUpdate-partOS"}
                         name="partOfSpeech">
@@ -169,7 +173,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                     </Form.Item>
                     <Form.Item
                         className={"tableForUpdate-notAddedLibs"}
-                        name="NotAddedToLibs"
+                        name='NotAddedToLibs'
                         rules={[{
                             message: 'Please input NotAddedToLibs!',
                         },]}>

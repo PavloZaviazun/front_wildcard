@@ -50,10 +50,15 @@
 
 .div-for-table{
     width: 100%;
+    display: flex;
 }
 
 .div-head-for-words-name {
     width: 10%;
+}
+
+.div-head-for-words-approved {
+    width: 4%;
 }
 
 .div-head-for-words-partOS {
@@ -69,11 +74,11 @@
 }
 
 .div-head-for-words-translationRu {
-    width: 17%;
+    width: 15%;
 }
 
 .div-head-for-words-translationUa {
-    width: 17%;
+    width: 15%;
 }
 
 .div-head-for-words-addtoLib {

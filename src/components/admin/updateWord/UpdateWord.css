@@ -30,6 +30,14 @@
 
 }
 
+.tableForUpdate-approved {
+    width:4%
+}
+
+.tableForUpdate-approved Checkbox{
+    width: 100%;
+}
+
 .tableForUpdate-name {
     width: 10%;
 }
