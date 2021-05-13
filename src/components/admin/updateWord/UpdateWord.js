@@ -76,7 +76,7 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         loadForm();
     }, [updWord, words, translation1]);
 
-    const updateWord = (id) => {
+    const updateWord = () => {
         const form = document.forms.namedItem(`wordForm${currentWord.id}`);
         const partOfSpeech = form[1].value;
 

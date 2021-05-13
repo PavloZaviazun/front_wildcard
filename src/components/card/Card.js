@@ -51,10 +51,12 @@ export const Card = () => {
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
     }, [cardBack, words, i, words[i]]);
-
-    const background = {
-        backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
-    };
+    let background;
+    if(word.image) {
+        background = {
+            backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
+        };
+    }
 
     return (
         <div className={"card-component"}>

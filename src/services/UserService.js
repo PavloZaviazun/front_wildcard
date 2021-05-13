@@ -29,6 +29,12 @@ class UserService {
             {headers: {"Authorization": this.myStorage.getItem("session")}});
     }
 
+    updateUserAdmin(id, form) {
+        const formData = new FormData(form);
+        return axios.patch(this.serverURL + `/user/${id}/adminUpdate`, formData,
+            {headers: {"Authorization": this.myStorage.getItem("session")}});
+    }
+
     getUsers(page) {
         return axios.get(this.serverURL + `/users/get/page/${page}`,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
