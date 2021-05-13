@@ -4,7 +4,6 @@ import {Provider} from "react-redux";
 
 import {PageLayout} from "./layouts";
 import {Home} from "./components/home";
-import {User} from "./components/user";
 import {Login} from "./components/login";
 import {Registration} from "./components/registration";
 import {Library} from "./components/library";
@@ -33,9 +32,6 @@ function App() {
                 </Route>
                 <Route exact path="/library/:name">
                   <Home child={<Library/>}/>
-                </Route>
-                <Route exact path="/user/:id">
-                  <User/>
                 </Route>
                 <Route exact path="/auth" >
                   <Redirect to={"/auth/login"}/>
