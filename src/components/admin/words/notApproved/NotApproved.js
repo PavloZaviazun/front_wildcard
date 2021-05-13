@@ -1,7 +1,7 @@
 import "./NotApproved.css"
 import {UpdateWord} from "../updateWord";
-import {wordService} from "../../../services";
-import {setWords} from "../../../redux";
+import {wordService} from "../../../../services";
+import {setWords} from "../../../../redux";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 

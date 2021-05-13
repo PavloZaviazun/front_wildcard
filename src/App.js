@@ -11,13 +11,21 @@ import store from "./redux";
 import {Admin} from "./components/admin";
 import {Body} from "./components/body";
 import {AllWordsFromDB} from "./components/admin/words/AllWordsFromDB";
-import {AddNewWord} from "./components/admin/addNewWord";
+import {AddNewWord} from "./components/admin/words/addNewWord";
 import {Redirect} from "react-router";
-import {AddNewLibrary} from "./components/admin/addNewLibrary";
-import {AllLibraries} from "./components/admin/allLibraries";
-import {Account} from "./components/account";
+import {AddNewLibrary} from "./components/admin/libraries/addNewLibrary";
+import {AllLibraries} from "./components/admin/libraries/allLibraries";
+import {Profile} from "./components/account/profile";
 import {FeedBack} from "./components/feedback";
-import {NotApproved} from "./components/admin/notApproved/NotApproved";
+import {NotApproved} from "./components/admin/words/notApproved/NotApproved";
+import {Libraries} from "./components/admin/libraries";
+import {AllUsers} from "./components/admin/users/allUsers";
+import {Words} from "./components/admin/words";
+import {Users} from "./components/admin/users/Users";
+import {Account} from "./components/account";
+import {CustomLib} from "./components/account/customLib";
+import {MyWords} from "./components/account/myWords";
+import {FavLibs} from "./components/account/favLibs";
 
 function App() {
 
@@ -43,28 +51,52 @@ function App() {
                   <Registration/>
                 </Route>
                 <Route exact path="/admin">
-                  <Admin child={<div/>}/>
-                </Route>
-                <Route exact path="/admin/allwords">
-                  <Admin child={<AllWordsFromDB/>}/>
-                </Route>
-                <Route exact path="/admin/notapprovedwords">
-                  <Admin child={<NotApproved/>}/>
-                </Route>
-                <Route exact path="/admin/addnewword">
-                  <Admin child={<AddNewWord/>}/>
-                </Route>
-                <Route exact path="/admin/addnewlibrary">
-                  <Admin child={<AddNewLibrary/>}/>
-                </Route>
-                <Route exact path="/admin/alllibraries">
-                  <Admin child={<AllLibraries/>}/>
+                  <Admin/>
                 </Route>
                 <Route exact path="/account">
                   <Account/>
                 </Route>
                 <Route exact path="/feedback">
                   <FeedBack/>
+                </Route>
+                <Route exact path="/admin/libraries">
+                  <Admin child={<Libraries/>}/>
+                </Route>
+                <Route exact path="/admin/users">
+                  <Admin child={<Users/>}/>
+                </Route>
+                <Route exact path="/admin/words">
+                  <Admin child={<Words/>}/>
+                </Route>
+                <Route exact path="/admin/libraries/addnew">
+                  <Admin child={[<Libraries/>, <AddNewLibrary/>]}/>
+                </Route>
+                <Route exact path="/admin/libraries/all">
+                  <Admin child={[<Libraries/>, <AllLibraries/>]}/>
+                </Route>
+                <Route exact path="/admin/words/addnew">
+                  <Admin child={[<Words/>, <AddNewWord/>]}/>
+                </Route>
+                <Route exact path="/admin/words/all">
+                  <Admin child={[<Words/>, <AllWordsFromDB/>]}/>
+                </Route>
+                <Route exact path="/admin/words/notapproved">
+                  <Admin child={[<Words/>, <NotApproved/>]}/>
+                </Route>
+                <Route exact path="/admin/users/all">
+                  <Admin child={[<Users/>, <AllUsers/>]}/>
+                </Route>
+                <Route exact path="/account/profile">
+                  <Account child={<Profile/>}/>
+                </Route>
+                <Route exact path="/account/customlib">
+                  <Account child={<CustomLib/>}/>
+                </Route>
+                <Route exact path="/account/mywords">
+                  <Account child={<MyWords/>}/>
+                </Route>
+                <Route exact path="/account/favlibs">
+                  <Account child={<FavLibs/>}/>
                 </Route>
               </Switch>
             </PageLayout>

@@ -1,5 +1,5 @@
 import "./UpdateWord.css";
-import {libService, wordService} from "../../../services";
+import {libService, wordService} from "../../../../services";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Input, Form, Button, Checkbox} from "antd";

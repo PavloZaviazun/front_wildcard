@@ -1,8 +1,8 @@
-import "./Account.css";
+import "./Profile.css";
 import {useEffect, useState} from "react";
-import {authService, commonService, userService} from "../../services";
+import {authService, commonService, userService} from "../../../services";
 
-export const Account = () => {
+export const Profile = () => {
     const [message, setMessage] = useState("");
 
     const [user, setUser] = useState({});

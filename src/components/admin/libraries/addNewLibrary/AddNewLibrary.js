@@ -1,5 +1,5 @@
 import "./AddNewLibrary.css"
-import {libService} from "../../../services";
+import {libService} from "../../../../services";
 import {useState} from "react";
 
 export const AddNewLibrary = () => {

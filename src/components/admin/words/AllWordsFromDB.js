@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {wordService} from "../../../services";
-import {UpdateWord} from "../updateWord";
+import {UpdateWord} from "./updateWord";
 import {setLetter, setWords} from "../../../redux";
 import {useDispatch, useSelector} from "react-redux";
 
