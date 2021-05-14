@@ -2,7 +2,7 @@ import './Library.css';
 import {Card} from "../card";
 import {useEffect, useState} from "react";
 import {userService, wordService} from "../../services";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 
 
 export const Library = () => {
@@ -60,7 +60,7 @@ export const Library = () => {
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
                 {words && words.map(el => <div key={el.id}>{el.word}
-                    <div onClick={() => handleWord(el)}>{customLibIds.includes(el.id) ? "-" : "+"}</div>
+                    {/*<div onClick={() => handleWord(el)}>{customLibIds.includes(el.id) ? "-" : "+"}</div>*/}
                 </div>)}
             </div>
         </div>

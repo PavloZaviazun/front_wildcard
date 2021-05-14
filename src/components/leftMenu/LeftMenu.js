@@ -2,6 +2,7 @@ import "./LeftMenu.css"
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {libService} from "../../services";
+import {LeftMenuDetails} from "./leftMenuDetails";
 
 export const LeftMenu = () => {
     const [libs, setLibs] = useState([]);
@@ -15,7 +16,7 @@ export const LeftMenu = () => {
     return (
         <div className={"leftmenu-div"}>
             {libs.map(e =>
-                <div className={"libLink"} key={e.id}><Link to={"/library/" + e.name}>{e.name}</Link></div>
+                <div className={"libLink"} key={e.id}><LeftMenuDetails name={e.name}/></div>
             )}
         </div>
     )
