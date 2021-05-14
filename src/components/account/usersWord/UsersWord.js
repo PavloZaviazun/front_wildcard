@@ -85,7 +85,7 @@ export const UsersWord = () => {
                     </Form>
                 </div>
             </div>
-            <div>{message}</div>
+            {/*<div>{message}</div>*/}
         </div>
     )
 }

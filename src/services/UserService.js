@@ -12,22 +12,32 @@ class UserService {
     addWordToUserCustom(id) {
         const formData = new FormData();
         formData.set("id", id);
-        return axios.post(this.serverURL + `/user/add/customlib/word`, formData,
+        return axios.post(this.serverURL + `/user/customlib/word/add`, formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
     getCustomLibIds() {
-        return axios.get(this.serverURL + "/user/get/customlibids",
+        return axios.get(this.serverURL + "/user/customlibids/get",
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
     getCustomLib() {
-        return axios.get(this.serverURL + "/user/get/customlib",
+        return axios.get(this.serverURL + "/user/customlib/get",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    deleteFromUserCustomLib(id) {
+        return axios.delete(this.serverURL + `/user/customlib/word/${id}/delete`,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    addToUserCustomLib(ident) {
+        return axios.post(this.serverURL + `/user/customlib/word/add`, {ident : ident},
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
     getFavLibs() {
-        return axios.get(this.serverURL + "/user/get/favlibs",
+        return axios.get(this.serverURL + "/user/favlibs/get",
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
