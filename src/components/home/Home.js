@@ -4,8 +4,10 @@ import {libService} from "../../services";
 import {setLibraries, setWords} from "../../redux";
 import {useDispatch} from "react-redux";
 import {useCallback, useEffect} from "react";
+import {withRouter} from "react-router-dom";
 
-export const Home = (child) => {
+export const Home = ({child}) => {
+
     const dispatch = useDispatch();
 
     const getLibraries = useCallback(async () => {
@@ -17,15 +19,16 @@ export const Home = (child) => {
         getLibraries();
         dispatch(setWords([]))
     }, [])
-
     return (
         <div className={"home-div"}>
             <div className={"for-leftmenu"}>
                 <LeftMenu/>
             </div>
             <div className={"for-body"}>
-                {child.child}
+                {child}
             </div>
         </div>
     )
 }
+
+withRouter(Home)

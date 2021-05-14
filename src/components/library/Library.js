@@ -29,7 +29,7 @@ export const Library = () => {
             getWord();
         }
         userService.getCustomLibIds().then(el => setCustomLibIds(el))
-    }, [filtered.length, wasChanged]);
+    }, [filtered.length]);
 
     const getWord = useCallback(async () => {
         const data = await wordService.getWordsFromLib(filtered[0].id, 0);

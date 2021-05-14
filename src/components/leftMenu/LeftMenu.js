@@ -1,13 +1,19 @@
 import "./LeftMenu.css"
-import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {libService} from "../../services";
 
 export const LeftMenu = () => {
-        const {libraries: {libraries}} = useSelector(state => state);
-
+        const [libs, setLibs] = useState([]);
+        useEffect(() => {
+            libService.getLibs().then(el => {
+                setLibs(el)
+            });
+        }, []);
     return(
         <div className={"leftmenu-div"}>
-            {libraries.map(e =>
-                <div className={"libLink"} key={e.id}><a href={"/library/" + e.name}>{e.name}</a></div>
+            {libs.map(e =>
+                <div className={"libLink"} key={e.id}><Link to={"/library/" + e.name}>{e.name}</Link></div>
             )}
         </div>
     )
