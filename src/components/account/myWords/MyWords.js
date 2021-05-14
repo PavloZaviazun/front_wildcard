@@ -1,21 +1,22 @@
 import "./MyWords.css";
 import {UsersWord} from "../usersWord";
 import {useEffect, useState} from "react";
-import {commonService, userService} from "../../../services";
+import {userService} from "../../../services";
 
 export const MyWords = () => {
-    // const [usersWords, setUsersWords] = useState([]);
     const [notApproved, setNotApproved] = useState([]);
+    const [flag, setFlag] = useState(false);
 
     const filterApproved = (data) => {
         const notapproved = data.filter(el => !el.approved)
         setNotApproved(notapproved)
+        setFlag(false)
     }
 
     useEffect(() => {
         userService.getCustomLib().then(el => filterApproved(el.data))
 
-    }, [])
+    }, [flag])
 
     return (
         <div className={"users-words"}>
@@ -30,7 +31,7 @@ export const MyWords = () => {
                     <div>TranslationUa</div>
                     <div>Submit</div>
                 </div>
-                <div className={"users-words-form-add"}><UsersWord/></div>
+                <div className={"users-words-form-add"}><UsersWord setFlag={setFlag}/></div>
             </div>
             <div>
                 <div>Мои добавленные слова</div>
@@ -44,7 +45,7 @@ export const MyWords = () => {
                     <div>Submit</div>
                 </div>
                 <div>
-                    {notApproved && notApproved.map(el => <div key={el.id}><UsersWord word={el}/></div>)}
+                    {notApproved && notApproved.map(el => <div key={el.id}><UsersWord word={el} setFlag={setFlag}/></div>)}
                 </div>
             </div>
         </div>

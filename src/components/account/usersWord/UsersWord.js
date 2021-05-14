@@ -5,7 +5,7 @@ import {commonService, libService, userService, wordService} from "../../../serv
 import {setPartsOfSpeech} from "../../../redux";
 import {useEffect, useState} from "react";
 
-export const UsersWord = ({word}) => {
+export const UsersWord = ({word, setFlag}) => {
 
     const [form] = Form.useForm();
     const [partsOfSpeech, setPartsOfSpeech] = useState([]);
@@ -13,22 +13,19 @@ export const UsersWord = ({word}) => {
 
     function loadForm() {
         form.setFieldsValue({
-            word: word.word,
-            partOfSpeech: word.partOfSpeech,
-            description: word.description,
-            example: word.example,
-            translationRu: translation1.ru,
-            translationUa: translation1.ua,
+            word: word === undefined ? "" : word.word,
+            partOfSpeech: word === undefined ? "" : word.partOfSpeech,
+            description: word === undefined ? "" : word.description,
+            example: word === undefined ? "" : word.example,
+            translationRu: word === undefined ? "" : translation1.ru,
+            translationUa: word === undefined ? "" : translation1.ua,
         })
     }
 
 
     useEffect(() => {
         commonService.getAllPartsOfSpeech().then(el => setPartsOfSpeech(el))
-        if (word !== undefined){
-            loadForm();
-        }
-
+        loadForm();
     }, [])
 
     const handleWord = () => {
@@ -39,6 +36,8 @@ export const UsersWord = ({word}) => {
             const form = document.forms.namedItem(`usersWordForm`);
             userService.addNewWordToUserCustom(form).then(el => console.log(el))
         }
+        setFlag(true);
+        loadForm();
     }
 
     return (
