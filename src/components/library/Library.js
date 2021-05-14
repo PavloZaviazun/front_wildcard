@@ -3,9 +3,13 @@ import {Card} from "../card";
 import {useEffect, useState} from "react";
 import {userService, wordService} from "../../services";
 import {useLocation} from "react-router-dom";
+import {WordElement} from "./wordElement";
 
 
 export const Library = () => {
+
+    const session = window.localStorage.getItem("session");
+
     // const message = "Слово додано до бібліотеки обраних";
     const [customLibIds, setCustomLibIds] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
@@ -23,7 +27,7 @@ export const Library = () => {
     useEffect(() => {
         setLibName(location.pathname.split("/library/")[1]);
         if (libName.length > 0) getWord();
-        userService.getCustomLibIds().then(el => setCustomLibIds(el));
+        if(session != null) userService.getCustomLibIds().then(el => setCustomLibIds(el));
     }, [libName, location]);
 
     const getWord = async () => {
@@ -42,7 +46,6 @@ export const Library = () => {
         userService.addWordToUserCustom(el.id).then(el => setWasChanged(!wasChanged));
     }
 
-
     return (
 
         <div className={"div-forcard"}>
@@ -59,9 +62,14 @@ export const Library = () => {
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
-                {words && words.map(el => <div key={el.id}>{el.word}
-                    {/*<div onClick={() => handleWord(el)}>{customLibIds.includes(el.id) ? "-" : "+"}</div>*/}
-                </div>)}
+                {words && words.map(wordElement => {
+                    return <WordElement
+                    key={wordElement.id}
+                    wordElement={wordElement}
+                    customLibIds={customLibIds}
+                    session={session}
+                    />
+                })}
             </div>
         </div>
     )
