@@ -54,6 +54,11 @@ class WordService {
         return axios.get(this.serverURL + "/words/getnotapproved",
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
+
+    getAllWordsFromLib(libName) {
+        return axios.get(this.serverURL + "/lib/" + libName + "/words/get",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
+    }
 }
 
 export const wordService = new WordService();

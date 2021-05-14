@@ -4,12 +4,23 @@ import {useSelector} from "react-redux";
 import "./Card.css"
 
 
-export const Card = () => {
-    const serverURL = "http://localhost:8080";
+export const Card = ({words}) => {
 
-    const {words: {words}, language: {language}} = useSelector(state => state);
+    const serverURL = "http://localhost:8080";
+    const {language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
-    const [word, setWord] = useState([]);
+
+    const [word, setWord] = useState({
+        approved: true,
+        description: "Little kitten",
+        example: "Little cat is playing on the ground",
+        id: 0,
+        image: "",
+        partOfSpeech: "NOUN",
+        translation: "{\"ru\":\"кот\",\"ua\":\"кіт\"}",
+        word: "Cat"
+    });
+
     let [i, setI] = useState(0);
     let translation = "";
     const cardClick = () => {
@@ -42,7 +53,9 @@ export const Card = () => {
     useEffect(() => {
         let frontSide = document.getElementsByClassName("front-side")[0];
         let backSide = document.getElementsByClassName("back-side")[0];
-        setWord(words.length === 0 ? "" : words[i]);
+        if (words !== undefined && words.length > 0){
+            setWord(words[i])
+        }
         if (cardBack) {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(180deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(360deg)";
@@ -50,9 +63,10 @@ export const Card = () => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-    }, [cardBack, words, i, words[i]]);
+    }, [cardBack, words, i]);
+
     let background;
-    if(word.image) {
+    if(word !== undefined && word.image ) {
         background = {
             backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
         };
@@ -64,12 +78,12 @@ export const Card = () => {
                 <div className={"arrow prev"} onClick={prevArrowClick}/>
                 <div className={"card"} onClick={cardClick}>
                     <div className={"front-side"} style={background}>
-                        <div><span>{word == null || word.length === 0 ? "Cat" : word.word}</span></div>
+                        <div><span>{word.word}</span></div>
                     </div>
                     <div className={"back-side"}>
-                        <div>{word == null || word.length === 0 ? "котик" : getTranslation()}</div>
-                        <div>{word == null || word.length === 0 ? "домашний пушистик" : word.description}</div>
-                        <div>{word == null || word.length === 0 ? "Cat lies on the floor." : word.example}</div>
+                        <div>{getTranslation()}</div>
+                        <div>{ word.description}</div>
+                        <div>{word.example}</div>
                     </div>
                 </div>
                 <div className={"arrow next"} onClick={nextArrowClick}/>

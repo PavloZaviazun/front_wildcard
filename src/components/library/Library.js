@@ -1,21 +1,17 @@
 import './Library.css';
 import {Card} from "../card";
-import {useCallback, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setWords} from "../../redux";
+import {useEffect, useState} from "react";
 import {userService, wordService} from "../../services";
+import {useLocation} from "react-router";
 
 
 export const Library = () => {
-
-    const message = "Слово додано до бібліотеки обраних";
+    // const message = "Слово додано до бібліотеки обраних";
     const [customLibIds, setCustomLibIds] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
-
-    const {words: {words}, libraries: {libraries}} = useSelector(state => state);
-    const nameLibrary = window.location.href.split("library/")[1];
-    const filtered = libraries.filter(el => el.name === nameLibrary)
-    const dispatch = useDispatch();
+    const [libName, setLibName] = useState("");
+    const [words, setWords] = useState([]);
+    const location = useLocation();
 
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
@@ -25,20 +21,21 @@ export const Library = () => {
     }
 
     useEffect(() => {
-        if (filtered.length > 0) {
-            getWord();
-        }
-        userService.getCustomLibIds().then(el => setCustomLibIds(el))
-    }, [filtered.length]);
+        setLibName(location.pathname.split("/library/")[1]);
+        if (libName.length > 0) getWord();
+        userService.getCustomLibIds().then(el => setCustomLibIds(el));
+    }, [libName, location]);
 
-    const getWord = useCallback(async () => {
-        const data = await wordService.getWordsFromLib(filtered[0].id, 0);
-        dispatch(setWords(data.source));
-    }, [filtered])
+    const getWord = async () => {
+        if (location.pathname.split("/library/")[1] === libName) {
+            const data = await wordService.getAllWordsFromLib(libName);
+            setWords(data);
+        }
+    };
 
     const shuffle = () => {
         words.sort(() => Math.random() - 0.5);
-        dispatch(setWords(words));
+        setWords(words);
     }
 
     const handleWord = (el) => {
@@ -50,7 +47,7 @@ export const Library = () => {
 
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
-                <Card/>
+                <Card words={words}/>
             </div>
             <div className={"div-cardbutt"}>
                 <div>
@@ -62,7 +59,7 @@ export const Library = () => {
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
-                {words.map(el => <div key={el.id}>{el.word}
+                {words && words.map(el => <div key={el.id}>{el.word}
                     <div onClick={() => handleWord(el)}>{customLibIds.includes(el.id) ? "-" : "+"}</div>
                 </div>)}
             </div>

@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {libService, wordService} from "../../../../services";
 import {setLibraries, setWords} from "../../../../redux";
 import {UpdateWord} from "../../words/updateWord";
-import {logDOM} from "@testing-library/react";
 
 export const AllLibraries = () => {
     const {libraries: {libraries}} = useSelector(state => state);

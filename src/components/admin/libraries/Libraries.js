@@ -2,7 +2,6 @@ import "./Libraries.css"
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import {setWords} from "../../../redux";
-import {useEffect} from "react";
 
 export const Libraries = () => {
 
