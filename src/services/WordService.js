@@ -55,8 +55,8 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getAllWordsFromLib(libName) {
-        return axios.get(this.serverURL + "/lib/" + libName + "/words/get",
+    getAllWordsFromLib(libName, shuffleFlag) {
+        return axios.get(this.serverURL + "/lib/" + libName + "/words/get/" + shuffleFlag,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
     }
 }
