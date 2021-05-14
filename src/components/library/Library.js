@@ -43,6 +43,13 @@ export const Library = () => {
         flag = true;
     }
 
+    const wordHandle = () => {
+        // let count = 0;
+        // for(el of customLibIds) {
+        //     el === id
+        // }
+    }
+
     return (
 
         <div className={"div-forcard"}>
@@ -54,7 +61,7 @@ export const Library = () => {
                     <button id="shuffle" onClick={shuffle}>Shuffle</button>
                 </div>
                 <div>
-                    <button>Add to custom Lib</button>
+                    <button onClick={wordHandle}>Add to custom Lib</button>
                 </div>
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
