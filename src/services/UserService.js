@@ -18,7 +18,22 @@ class UserService {
 
     getCustomLibIds() {
         return axios.get(this.serverURL + "/user/get/customlibids",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    getCustomLib() {
+        return axios.get(this.serverURL + "/user/get/customlib",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    getFavLibs() {
+        return axios.get(this.serverURL + "/user/get/favlibs",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    deleteFavLib(id) {
+        return axios.delete(this.serverURL + `/user/favlib/${id}/delete`,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
     updateUser(id, nativeLang, email) {

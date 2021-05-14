@@ -1,0 +1,7 @@
+.word-div {
+    display: flex;
+}
+
+.word-div div {
+    padding: 5px;
+}
