@@ -16,13 +16,25 @@ class UserService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
+    addNewWordToUserCustom(form) {
+        const formData = new FormData(form);
+        return axios.post(this.serverURL + `/user/customlib/add/newword`, formData,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
+    updateWordInUserCustom(form, id) {
+        const formData = new FormData(form);
+        return axios.post(this.serverURL + `/user/customlib/word/${id}/update`, formData,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
     getCustomLibIds() {
         return axios.get(this.serverURL + "/user/get/customlibids",
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
     getCustomLib() {
-        return axios.get(this.serverURL + "/user/get/customlib",
+        return axios.get(this.serverURL + "/user/customlib/get",
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 

@@ -1,0 +1,18 @@
+.users-words {
+    width: 100%;
+}
+
+.users-words-add {
+    width: 100%;
+}
+
+.users-words-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.users-words-form-add {
+    width: 100%;
+}

@@ -1,26 +1,51 @@
 import "./UsersWord.css"
 import {Button, Checkbox, Form, Input} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {commonService} from "../../../services";
+import {commonService, libService, userService, wordService} from "../../../services";
 import {setPartsOfSpeech} from "../../../redux";
+import {useEffect, useState} from "react";
 
-export const UsersWord = () => {
+export const UsersWord = ({word}) => {
+
     const [form] = Form.useForm();
-    const {partsOfSpeech: {partsOfSpeech}} = useSelector(state => state);
-    const dispatch = useDispatch();
+    const [partsOfSpeech, setPartsOfSpeech] = useState([]);
+    const [translation1, setTranslation1] = useState(word === undefined ? {} : JSON.parse(word.translation))
 
-    commonService.getAllPartsOfSpeech().then(el => dispatch(setPartsOfSpeech(el)));
+    function loadForm() {
+        form.setFieldsValue({
+            word: word.word,
+            partOfSpeech: word.partOfSpeech,
+            description: word.description,
+            example: word.example,
+            translationRu: translation1.ru,
+            translationUa: translation1.ua,
+        })
+    }
 
 
-    const addUsersWord = () => {
+    useEffect(() => {
+        commonService.getAllPartsOfSpeech().then(el => setPartsOfSpeech(el))
+        if (word !== undefined){
+            loadForm();
+        }
 
+    }, [])
+
+    const handleWord = () => {
+        if (word !== undefined){
+            const form = document.forms.namedItem(`usersWordForm${word.id}`);
+            userService.updateWordInUserCustom(form, word.id).then(el => console.log(el))
+        } else {
+            const form = document.forms.namedItem(`usersWordForm`);
+            userService.addNewWordToUserCustom(form).then(el => console.log(el))
+        }
     }
 
     return (
-        <div>
+        <div className={"users-word"}>
             <div className={"user-add-word"}>
                 <div className={"user-add-word-form"}>
-                    <Form form={form} onFinish={addUsersWord} className={"tableForUsersWord"} name={`usersWordForm`}>
+                    <Form form={form} onFinish={handleWord} className={"tableForUsersWord"} name={word === undefined ? `usersWordForm` : `usersWordForm${word.id}`}>
                         <Form.Item
                             className={"user-add-word-name"}
                             name="word"
@@ -37,7 +62,7 @@ export const UsersWord = () => {
                         <Form.Item
                             className={"user-add-word-partOS"}
                             name="partOfSpeech">
-                            <select name="partOfSpeech">
+                            <select name="partOfSpeech" value={"pa"}>
                                 {partsOfSpeech.map(el => <option key={el} value={el}>{el}</option>)}
                             </select>
                         </Form.Item>
@@ -85,7 +110,7 @@ export const UsersWord = () => {
                     </Form>
                 </div>
             </div>
-            <div>{message}</div>
+            {/*<div>{message}</div>*/}
         </div>
     )
 }

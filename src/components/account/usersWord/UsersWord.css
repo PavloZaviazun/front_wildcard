@@ -1,0 +1,75 @@
+.users-word {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.tableForUsersWord {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user-add-word {
+    width: 100%;
+}
+
+.user-add-word-form {
+    width: 100%;
+}
+
+.user-add-word-name {
+    width: 15%;
+}
+
+.user-add-word-name Input {
+    width: 100%;
+}
+
+.user-add-word-partOS {
+    width: 10%;
+}
+
+.user-add-word-partOS select {
+    width: 100%;
+}
+
+.user-add-word-description {
+    width: 20%;
+}
+
+.user-add-word-description Input {
+    width: 100%;
+}
+
+.user-add-word-example {
+    width: 16%;
+}
+
+.user-add-word-example Input {
+    width: 100%;
+}
+
+.user-add-word-translationRu {
+    width: 17%;
+}
+
+.user-add-word-translationRu Input {
+    width: 100%;
+}
+
+.user-add-word-translationUa {
+    width: 17%;
+}
+
+.user-add-word-translationUa Input {
+    width: 100%;
+}
+
+.user-add-word-submit {
+    width: 5%;
+}
+
+.user-add-word-submit button {
+    width: 100%;
+}
