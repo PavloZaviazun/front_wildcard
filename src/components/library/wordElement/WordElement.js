@@ -45,7 +45,7 @@ export const WordElement = ({wordElement:{id, word}, session, setWasUpdated, was
     return(
         <div>
             <div>{word}</div>
-            {session ?(<div onClick={handleWordElement}>
+             (<div onClick={handleWordElement}>
                 {sign}
             </div>): null}
         </div>

@@ -1,16 +1,19 @@
 import "./Header.css"
 import {Link} from "react-router-dom";
 import Logo from "../../images/wildcard.jpg"
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {userService} from "../../services";
 
 export const Header = () => {
-
     const token = window.localStorage.getItem("session");
-    const {user: {user}} = useSelector(state => state);
-    useEffect(() => {
+    let [role, setRole] = useState("");
 
-    }, [user])
+    useEffect(() => {
+        userService.getUserByToken().then(el => {
+            setRole(el.roles[0]);
+        })
+    }, [role])
+
     return(
         <div className={"div-header"}>
             <div>
@@ -18,11 +21,19 @@ export const Header = () => {
             </div>
             <div>
                 вероятно тут будет поиск или слоган<br/>
-                <Link to={"/admin"}>ADMIN PANEL</Link>
             </div>
+            <div>
+                {role === "ROLE_ADMIN" ?
+                    <Link to={"/admin"}>ADMIN PANEL</Link>
+                    : ""
+                }
+            </div>
+            <div>
                 {token == null ?
                     <Link to={"/auth/login"}><div>Вхід/Реєстрація</div></Link> :
                     <Link to={"/account"}><div>Профіль</div></Link>}
+            </div>
+
         </div>
     )
 }

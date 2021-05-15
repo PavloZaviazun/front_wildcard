@@ -1,29 +1,23 @@
 import React, {useEffect, useState} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, useLocation} from 'react-router-dom'
 import {userService} from "./services";
 
-export const ProtectedRoute = () => {
-
-    let [roles, setRoles] = useState([]);
-
-    const findByRole = async () => {
-        await userService.getUserByToken().then(el => {
-            setRoles(el.roles)
-        })
-    }
+export const ProtectedRoute = ({roles, child}) => {
+    let [role, setRole] = useState("");
+    let [result, setResult] = useState("");
+    const url = useLocation();
 
     useEffect(() => {
-        console.log("rol")
-        findByRole()
-    }, [roles])
-
+        userService.getUserByToken().then(el => {
+            setResult(el.roles.length > 0 && roles.includes(el.roles[0]) ? child : <Redirect to={{pathname: "/"}}/>)
+            setRole(el.roles[0]);
+        })
+    }, [role, result, url.pathname])
 
     return (
-        roles[0] === "ROLE_ADMIN" ? (
-            "rororo"
-        ) : (
-            <Redirect to={{pathname: '/login'}}/>
-        )
+        <div>
+            {result}
+        </div>
     )
 }
 

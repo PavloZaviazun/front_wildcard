@@ -14,8 +14,6 @@ export const Profile = () => {
         nativeLangs.filter(el => el === user.nativeLang)
     }
 
-
-
     useEffect(() => {
         let nativeLang = userService.getUserByToken().then(user => {
             setUser(user)
@@ -44,10 +42,9 @@ export const Profile = () => {
     }
 
     const logout = () => {
-
         authService.logOut().then(el => console.log(el));
-        // localStorage.clear();
-        // window.location.href = "/";
+        localStorage.clear();
+        window.location.href = "/";
     }
 
     return(
