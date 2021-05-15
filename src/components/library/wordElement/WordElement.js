@@ -12,12 +12,11 @@ export const WordElement = ({wordElement:{id, word}, session, setWasUpdated, was
         fetchData();
     }, [wasUpdated])
 
-        for (let el of customLibIds) {
-            if (id === el) {
-                sign = MINUS;
-            }
+    for (let el of customLibIds) {
+        if (id === el) {
+            sign = MINUS;
         }
-
+    }
 
     const fetchData = () => {
         userService.getCustomLibIds().then(el => {
