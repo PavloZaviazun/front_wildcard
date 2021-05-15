@@ -53,6 +53,12 @@ class UserService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
+    //TODO empty body
+    addFavLib(id) {
+        return axios.post(this.serverURL + `/user/favlib/${id}/add`, {},
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
     deleteFavLib(id) {
         return axios.delete(this.serverURL + `/user/favlib/${id}/delete`,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
