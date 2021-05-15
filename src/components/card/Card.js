@@ -5,12 +5,13 @@ import "./Card.css"
 import {userService} from "../../services";
 
 
-export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
+export const Card = ({words, wasUpdated, setWasUpdated}) => {
 
     const serverURL = "http://localhost:8080";
     const {language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
     const [buttonName, setButtonName] = useState("");
+    const [customLibIds, setCustomLibIds] = useState(null);
 
     const [word, setWord] = useState({
         approved: true,
@@ -53,6 +54,10 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
     }
 
     useEffect(() => {
+        userService.getCustomLibIds().then(el => {
+            if (el != null) {
+                return setCustomLibIds(el.data)
+            }})
         let frontSide = document.getElementsByClassName("front-side")[0];
         let backSide = document.getElementsByClassName("back-side")[0];
         if (words !== undefined && words.length > 0){
@@ -65,7 +70,9 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-        if(customLibIds) setButtonName(customLibIds.data.includes(word.id) ? "Delete" : "Add");
+        if(customLibIds) {
+            setButtonName(customLibIds.includes(word.id) ? "Delete" : "Add");
+        }
     }, [cardBack, words, i, buttonName, word]);
 
     let background;
@@ -77,9 +84,11 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
 
     const wordHandle = () => {
         let count = 0;
-        for(let id of customLibIds.data) {
-            if(word.id === id) count++;
-        }
+
+            for (let id of customLibIds) {
+                if (word.id === id) count++;
+            }
+
         if(count === 0) userService.addToUserCustomLib(word.id).then(el => {
             setWasUpdated(!wasUpdated)
         });
@@ -98,7 +107,7 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
                     </div>
                     <div className={"back-side"}>
                         <div>{getTranslation()}</div>
-                        <div>{ word.description}</div>
+                        <div>{word.description}</div>
                         <div>{word.example}</div>
                     </div>
                 </div>
@@ -108,5 +117,5 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
                 <button onClick={wordHandle}>{buttonName}</button>
             </div>
         </div>
-    )
+    );
 }

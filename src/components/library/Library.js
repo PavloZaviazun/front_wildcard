@@ -72,7 +72,6 @@ export const Library = () => {
                     return <WordElement
                     key={wordElement.id}
                     wordElement={wordElement}
-                    customLibIds={customLibIds}
                     session={session}
                     setWasUpdated={setWasUpdated}
                     wasUpdated={wasUpdated}
