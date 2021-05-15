@@ -49,6 +49,13 @@ class LibService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
+    updateLib(id, name) {
+        const formData = new FormData();
+        formData.set("name", name);
+        return axios.post(this.serverURL + `/lib/${id}/update`, formData,
+            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el)
+    }
+
 }
 
 export const libService = new LibService();

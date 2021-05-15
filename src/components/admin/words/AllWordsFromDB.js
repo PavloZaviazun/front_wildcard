@@ -1,16 +1,17 @@
 import {useCallback, useEffect, useState} from "react";
 import {wordService} from "../../../services";
 import {UpdateWord} from "./updateWord";
-import {setLetter, setWords} from "../../../redux";
+import {setWords} from "../../../redux";
 import {useDispatch, useSelector} from "react-redux";
 
 export const AllWordsFromDB = () => {
-    const {words: {words}, letter: {letter}} = useSelector(state => state);
+    const {words: {words}} = useSelector(state => state);
+    const [letter, setLetter] = useState("A");
     const [updAllWords, setUpdAllWords] = useState(false);
     const dispatch = useDispatch();
 
     const getWords = useCallback(async () => {
-        const data = await  wordService.searchByLetter(letter, 1);
+        const data = await  wordService.searchByLetter(letter, 0);
         dispatch(setWords(data.data.content));
     }, [words, updAllWords])
 
@@ -26,7 +27,7 @@ export const AllWordsFromDB = () => {
     }
 
     const searchByLetter = (letter) => {
-        dispatch(setLetter(letter));
+        setLetter(letter);
         wordService.searchByLetter(letter, 0).then(el => {
             dispatch(setWords(el.data.content))
         })

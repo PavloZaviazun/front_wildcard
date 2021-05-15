@@ -1,4 +1,8 @@
-.words-edition  a {
+.admin-users-butt {
+    display: flex;
+}
+
+.admin-users-butt a {
     border: none;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
@@ -9,15 +13,15 @@
     text-decoration: none;
 }
 
-.words-edition a div {
+.admin-users-butt a div {
     background-color: #EFEFEF;
 }
 
-.words-edition a:hover {
+.admin-users-butt a:hover {
     background-color: #dee3e4;
 }
 
-.words-edition a:after {
+.admin-users-butt a:after {
     content: "";
 }
 

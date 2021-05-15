@@ -5,10 +5,7 @@
     flex-direction: row;
 }
 
-.words-edition div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.words-edition a {
     border: none;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
@@ -16,28 +13,27 @@
     height: 50px;
     border-radius: 0;
     cursor: pointer;
-    background-color: #f1f1f1;
-}
-
-.words-edition div a {
     text-decoration: none;
-    color: black;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+.words-edition a div {
+    background-color: #EFEFEF;
 }
 
-.words-edition div:hover {
+.words-edition a:hover {
     background-color: #dee3e4;
 }
-
+.words-edition a:after {
+    content: "";
+}
 .allWordsHereTable {
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.active {
+    background-color: yellow;
 }
 
 .div-head-for-words {

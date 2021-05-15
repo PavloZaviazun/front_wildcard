@@ -1,5 +1,5 @@
 import "./Words.css"
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {commonService, libService} from "../../../services";
 import {setLibraries, setPartsOfSpeech} from "../../../redux";
@@ -15,9 +15,9 @@ export const Words = () => {
 
     return (
         <div className={"words-edition"}>
-            <div><Link to={`/admin/words/addnew`}>Добавить слово</Link></div>
-            <div><Link to={`/admin/words/all`}>Посмотреть все слова</Link></div>
-            <div><Link to={`/admin/words/notapproved`}>Слова custLib not Approved</Link></div>
+            <NavLink activeClassName={"active"} to={`/admin/words/addnew`}><div>Добавить слово</div></NavLink>
+            <NavLink activeClassName={"active"} to={`/admin/words/all`}><div>Посмотреть все слова</div></NavLink>
+            <NavLink activeClassName={"active"} to={`/admin/words/notapproved`}><div>Слова custLib not Approved</div></NavLink>
         </div>
     )
 }

@@ -45,7 +45,11 @@
     width: 100%;
 }
 
-.admin-menu button {
+.admin-menu {
+    display: flex;
+}
+
+.admin-menu a {
     border: none;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
@@ -53,10 +57,23 @@
     height: 50px;
     border-radius: 0;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.admin-menu button:hover {
+.admin-menu a div {
+    background-color: #EFEFEF;
+}
+
+.admin-menu a:hover {
     background-color: #dee3e4;
+}
+
+.admin-menu a:after {
+    content: "";
+}
+
+.active {
+    background-color: yellow;
 }
 
 .admin-child {
@@ -64,3 +81,5 @@
     width: 100%;
     display: flex;
 }
+
+

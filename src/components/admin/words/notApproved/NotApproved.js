@@ -12,7 +12,6 @@ export const NotApproved = () => {
 
     const getWords = useCallback(async () => {
         const data = await  wordService.getAllNotApprovedWords();
-        console.log(data)
         dispatch(setWords(data.data));
     }, [words, updAllWords])
 

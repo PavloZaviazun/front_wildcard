@@ -19,6 +19,7 @@ export const Home = ({child}) => {
         getLibraries();
         dispatch(setWords([]))
     }, [])
+
     return (
         <div className={"home-div"}>
             <div className={"for-leftmenu"}>

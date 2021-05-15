@@ -26,6 +26,7 @@ import {Account} from "./components/account";
 import {CustomLib} from "./components/account/customLib";
 import {MyWords} from "./components/account/myWords";
 import {FavLibs} from "./components/account/favLibs";
+import {ProtectedRoute} from "./ProtectedRoute";
 
 function App() {
 
@@ -35,6 +36,9 @@ function App() {
           <div>
             <PageLayout>
               <Switch>
+                {/*<ProtectedRoute exact path="/">*/}
+                {/*  <Home child={<Body/>}/>*/}
+                {/*</ProtectedRoute>*/}
                 <Route exact path="/">
                   <Home child={<Body/>}/>
                 </Route>
@@ -69,22 +73,22 @@ function App() {
                   <Admin child={<Words/>}/>
                 </Route>
                 <Route exact path="/admin/libraries/addnew">
-                  <Admin child={[<Libraries/>, <AddNewLibrary/>]}/>
+                  <Admin child={[<Libraries key={"lib"}/>, <AddNewLibrary key={"libadd"}/>]}/>
                 </Route>
                 <Route exact path="/admin/libraries/all">
-                  <Admin child={[<Libraries/>, <AllLibraries/>]}/>
+                  <Admin child={[<Libraries key={"lib"}/>, <AllLibraries key={"liball"}/>]}/>
                 </Route>
                 <Route exact path="/admin/words/addnew">
-                  <Admin child={[<Words/>, <AddNewWord/>]}/>
+                  <Admin child={[<Words key={"word"}/>, <AddNewWord key={"wordadd"}/>]}/>
                 </Route>
                 <Route exact path="/admin/words/all">
-                  <Admin child={[<Words/>, <AllWordsFromDB/>]}/>
+                  <Admin child={[<Words key={"word"}/>, <AllWordsFromDB key={"wordall"}/>]}/>
                 </Route>
                 <Route exact path="/admin/words/notapproved">
-                  <Admin child={[<Words/>, <NotApproved/>]}/>
+                  <Admin child={[<Words key={"word"}/>, <NotApproved key={"wordnot"}/>]}/>
                 </Route>
                 <Route exact path="/admin/users/all">
-                  <Admin child={[<Users/>, <AllUsers/>]}/>
+                  <Admin child={[<Users key={"users"}/>, <AllUsers key={"usersall"}/>]}/>
                 </Route>
                 <Route exact path="/account/profile">
                   <Account child={<Profile/>}/>

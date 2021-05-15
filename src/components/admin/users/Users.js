@@ -1,9 +1,12 @@
-import {Link} from "react-router-dom";
+import "./Users.css"
+import {NavLink} from "react-router-dom";
 
 export const Users = () => {
+
+
     return(
-        <div className={"words-edition"}>
-            <div><Link to={`/admin/users/all`}>All users</Link></div>
+        <div className={"admin-users-butt"}>
+            <NavLink activeClassName={"active"} to={`/admin/users/all`}><div>All users</div></NavLink>
         </div>
     )
 }

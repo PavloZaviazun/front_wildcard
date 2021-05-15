@@ -1,34 +1,46 @@
 import "./AllLibraries.css"
-import {useDispatch, useSelector} from "react-redux";
 import {libService, wordService} from "../../../../services";
-import {setLibraries, setWords} from "../../../../redux";
 import {UpdateWord} from "../../words/updateWord";
+import {useCallback, useEffect, useState} from "react";
+import {LibraryDetails} from "../libraryDetails";
 
 export const AllLibraries = () => {
-    const {libraries: {libraries}} = useSelector(state => state);
-    const {words: {words}} = useSelector(state => state);
-    const dispatch = useDispatch();
+
+    const [libraries, setLibraries] = useState([]);
+    const [words, setWords] = useState([]);
+    const [flag, setFlag] = useState(false);
+
+    const getLibraries = useCallback(async () => {
+        const data = await libService.getLibs();
+        setLibraries(data);
+    }, [])
+
+    useEffect(() => {
+        getLibraries();
+    }, [])
 
     const showWords = (id) => {
         wordService.getWordsFromLib(id, 0).then(el => {
-            dispatch(setWords(el.pageList))
+            setWords(el.pageList);
         });
     }
 
     const doSearch = (e) => {
         e.preventDefault();
         const lib = e.target[0].value;
-        libService.searchLib(lib).then(el => dispatch(setLibraries(el)));
+        libService.searchLib(lib).then(el => setLibraries(el));
     }
 
     const sortDesc = () => {
         const sorted = libraries.sort((el, el2) => new Date(el.updateDate).toUTCString() > new Date(el2.updateDate).toUTCString() ? 1 : -1)
-        dispatch(setLibraries(sorted))
+        setLibraries(sorted);
+        setFlag(!flag);
     }
 
     const sortAsc = () => {
         const sorted2 = libraries.sort((el, el2) => new Date(el2.updateDate).toUTCString() > new Date(el.updateDate).toUTCString() ? 1 : -1)
-        dispatch(setLibraries(sorted2))
+        setLibraries(sorted2);
+        setFlag(!flag);
     }
 
     return (
@@ -45,10 +57,11 @@ export const AllLibraries = () => {
             </div>
             <div className={"AllLibs"}>
                 <div className={"divForAllLibraries"}>
-                    {libraries.map(el => {
-                        return <div className={"div-for-OneLib"} key={el.name}>
-                            <button onClick={() => showWords(el.id)}>{el.name}</button>
-                        </div>
+                    {libraries.map(lib => {
+                        return <LibraryDetails
+                            key={lib.id}
+                            showWords={showWords}
+                            lib={lib}/>
                     })}
                 </div>
                 <div className={"allWordsHereTable"}>
