@@ -3,7 +3,9 @@ import {Link, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {userService} from "../../../services";
 
-export const LeftMenuDetails = ({lib:{id, name}}) => {
+export const LeftMenuDetails = ({lib:{id, name}, role}) => {
+    const admin = "ROLE_ADMIN";
+    const user = "ROLE_USER";
     const location = useLocation();
     const PLUS = "+";
     const MINUS = "-";
@@ -48,9 +50,9 @@ export const LeftMenuDetails = ({lib:{id, name}}) => {
     return (
         <div style={style} className={"lib-div"}>
             <div><Link to={"/library/" + name}>{name}</Link></div>
-            <div onClick={handleLib}>
+            {role === admin || role === user ? <div onClick={handleLib}>
                 {sign}
-            </div>
+            </div> : ""}
         </div>
     )
 }

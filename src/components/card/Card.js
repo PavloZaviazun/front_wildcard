@@ -5,8 +5,9 @@ import "./Card.css"
 import {userService} from "../../services";
 
 
-export const Card = ({words, wasUpdated, setWasUpdated}) => {
-
+export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
+    const admin = "ROLE_ADMIN";
+    const user = "ROLE_USER";
     const serverURL = "http://localhost:8080";
     const {language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
@@ -113,9 +114,9 @@ export const Card = ({words, wasUpdated, setWasUpdated}) => {
                 </div>
                 <div className={"arrow next"} onClick={nextArrowClick}/>
             </div>
-            <div>
+            {role === admin || role === user ? <div>
                 <button onClick={wordHandle}>{buttonName}</button>
-            </div>
+            </div> : ""}
         </div>
     );
 }

@@ -1,10 +1,15 @@
 import "./LeftMenu.css"
 import {useEffect, useState} from "react";
-import {libService} from "../../services";
+import {libService, userService} from "../../services";
 import {LeftMenuDetails} from "./leftMenuDetails";
+import {Redirect, useLocation} from "react-router-dom";
 
 export const LeftMenu = () => {
     const [libs, setLibs] = useState([]);
+    let [role, setRole] = useState("");
+    userService.getUserByToken().then(el => {
+        setRole(el.roles[0])
+    })
 
     useEffect(() => {
         libService.getLibs().then(el => {
@@ -16,7 +21,7 @@ export const LeftMenu = () => {
     return (
         <div className={"leftmenu-div"}>
             {libs.map(lib =>
-                <div className={"libLink"} key={lib.id}><LeftMenuDetails lib={lib}/></div>
+                <div className={"libLink"} key={lib.id}><LeftMenuDetails lib={lib} role={role}/></div>
             )}
         </div>
     )

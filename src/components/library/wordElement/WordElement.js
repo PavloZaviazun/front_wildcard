@@ -2,7 +2,9 @@ import "./WordElement.css";
 import {useEffect, useState} from "react";
 import {userService} from "../../../services";
 
-export const WordElement = ({wordElement:{id, word}, session, setWasUpdated, wasUpdated}) => {
+export const WordElement = ({wordElement:{id, word}, role, setWasUpdated, wasUpdated}) => {
+    const admin = "ROLE_ADMIN";
+    const user = "ROLE_USER";
     const PLUS = "+";
     const MINUS = "-";
     let sign = PLUS;
@@ -44,7 +46,7 @@ export const WordElement = ({wordElement:{id, word}, session, setWasUpdated, was
     return(
         <div>
             <div>{word}</div>
-             (<div onClick={handleWordElement}>
+            {role === admin || role === user ? (<div onClick={handleWordElement}>
                 {sign}
             </div>): null}
         </div>

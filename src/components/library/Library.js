@@ -7,9 +7,16 @@ import {WordElement} from "./wordElement";
 
 
 export const Library = () => {
-
+    const admin = "ROLE_ADMIN";
+    const user = "ROLE_USER";
     const session = window.localStorage.getItem("session");
     // const message = "Слово додано до бібліотеки обраних";
+    const token = window.localStorage.getItem("session");
+    let [role, setRole] = useState("");
+    userService.getUserByToken().then(el => {
+        setRole(el.roles[0]);
+    })
+
     const [customLibIds, setCustomLibIds] = useState(null);
     const [libName, setLibName] = useState("");
     const [words, setWords] = useState([]);
@@ -34,7 +41,7 @@ export const Library = () => {
     useEffect(() => {
         setLibName(location.pathname.split("/library/")[1]);
         if (libName.length > 0) getWord(flag, customLibIds);
-        if(session != null) userService.getCustomLibIds()
+        userService.getCustomLibIds()
             .then(el => {
                 setCustomLibIds(el);
             });
@@ -56,6 +63,7 @@ export const Library = () => {
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
                 <Card words={words}
+                      role={role}
                       setWasUpdated={setWasUpdated}
                       wasUpdated={wasUpdated}
                       customLibIds={customLibIds}/>
@@ -72,7 +80,7 @@ export const Library = () => {
                     return <WordElement
                     key={wordElement.id}
                     wordElement={wordElement}
-                    session={session}
+                    role={role}
                     setWasUpdated={setWasUpdated}
                     wasUpdated={wasUpdated}
                     />
