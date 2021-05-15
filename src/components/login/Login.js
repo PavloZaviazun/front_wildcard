@@ -27,10 +27,8 @@ export const Login = () => {
         const myStorage = window.localStorage;
         authService.loginHandle(username, password).then(el => {
             myStorage.setItem("session", el.headers.authorization);
-            console.log(el)
             setLoginResponse(el.data)
             if(el.headers.authorization != null && el.headers.authorization !== "undefined") {
-                console.log("sdsdsfdf")
                 handleUser()
             }
         });
