@@ -2,13 +2,15 @@ import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {useSelector} from "react-redux";
 import "./Card.css"
+import {userService} from "../../services";
 
 
-export const Card = ({words}) => {
+export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
 
     const serverURL = "http://localhost:8080";
     const {language: {language}} = useSelector(state => state);
     const [cardBack, setCardBack] = useState(false);
+    const [buttonName, setButtonName] = useState("");
 
     const [word, setWord] = useState({
         approved: true,
@@ -63,13 +65,27 @@ export const Card = ({words}) => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-    }, [cardBack, words, i]);
+        if(customLibIds !== null) setButtonName(customLibIds.data.includes(word.id) ? "Delete" : "Add");
+    }, [cardBack, words, i, buttonName, word]);
 
     let background;
     if(word !== undefined && word.image ) {
         background = {
             backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
         };
+    }
+
+    const wordHandle = () => {
+        let count = 0;
+        for(let id of customLibIds.data) {
+            if(word.id === id) count++;
+        }
+        if(count === 0) userService.addToUserCustomLib(word.id).then(el => {
+            setWasUpdated(!wasUpdated)
+        });
+        else userService.deleteFromUserCustomLib(word.id).then(el => {
+            setWasUpdated(!wasUpdated)
+        });
     }
 
     return (
@@ -87,6 +103,9 @@ export const Card = ({words}) => {
                     </div>
                 </div>
                 <div className={"arrow next"} onClick={nextArrowClick}/>
+            </div>
+            <div>
+                <button onClick={wordHandle}>{buttonName}</button>
             </div>
         </div>
     )

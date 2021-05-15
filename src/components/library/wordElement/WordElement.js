@@ -1,26 +1,23 @@
 import "./WordElement.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {userService} from "../../../services";
 
-export const WordElement = ({wordElement:{id, word}, customLibIds:{data}, session}) => {
+export const WordElement = ({wordElement:{id, word}, session, setWasUpdated, wasUpdated}) => {
     const PLUS = "+";
     const MINUS = "-";
     let sign = PLUS;
     const [customLibIds, setCustomLibIds] = useState([]);
 
-    if(customLibIds.length === 0 && data != null) {
-        signAssign(data)
-    } else {
-        signAssign(customLibIds)
-    }
+    useEffect(() => {
+        fetchData();
+    }, [wasUpdated])
 
-    function signAssign (value) {
-        for (let el of value) {
+        for (let el of customLibIds) {
             if (id === el) {
                 sign = MINUS;
             }
         }
-    }
+
 
     const fetchData = () => {
         userService.getCustomLibIds().then(el => {
@@ -31,11 +28,17 @@ export const WordElement = ({wordElement:{id, word}, customLibIds:{data}, sessio
     const handleWordElement = () => {
         if(sign === MINUS) {
             userService.deleteFromUserCustomLib(id)
-                .then(el => fetchData())
+                .then(el => {
+                    fetchData();
+                    setWasUpdated(!wasUpdated);
+                })
         }
         if(sign === PLUS) {
             userService.addToUserCustomLib(id)
-                .then(el => fetchData())
+                .then(el => {
+                    fetchData();
+                    setWasUpdated(!wasUpdated);
+                })
         }
     }
 

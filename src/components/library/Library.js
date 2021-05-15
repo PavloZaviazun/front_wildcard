@@ -10,12 +10,19 @@ export const Library = () => {
 
     const session = window.localStorage.getItem("session");
     // const message = "Слово додано до бібліотеки обраних";
-    const [customLibIds, setCustomLibIds] = useState([]);
+    const [customLibIds, setCustomLibIds] = useState(null);
     const [libName, setLibName] = useState("");
     const [words, setWords] = useState([]);
+    const [wasUpdated, setWasUpdated] = useState(false);
     const location = useLocation();
-    const [shuffleFlag, setShuffleFlag] = useState(false);
+    // const [shuffleFlag, setShuffleFlag] = useState(false);
     let flag = false;
+    let wordsId = [];
+    if(words.length > 0) {
+        for(let el of words) {
+            wordsId.push(el.id);
+        }
+    }
 
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
@@ -26,43 +33,38 @@ export const Library = () => {
 
     useEffect(() => {
         setLibName(location.pathname.split("/library/")[1]);
-        if (libName.length > 0) getWord(shuffleFlag);
-        flag = false;
-        if(session != null) userService.getCustomLibIds().then(el => setCustomLibIds(el));
-    }, [libName, location, shuffleFlag]);
+        if (libName.length > 0) getWord(flag, customLibIds);
+        if(session != null) userService.getCustomLibIds()
+            .then(el => {
+                setCustomLibIds(el);
+            });
+    }, [libName, location, wasUpdated]);
 
     const getWord = async (shuffleFlag) => {
         if (location.pathname.split("/library/")[1] === libName) {
-            const data = await wordService.getAllWordsFromLib(libName, shuffleFlag);
+            const data = await wordService.getAllWordsFromLib(libName, shuffleFlag, wordsId);
             setWords(data);
         }
     };
 
-    const shuffle = () => {
-        setShuffleFlag(!shuffleFlag);
-        flag = true;
-    }
-
-    const wordHandle = () => {
-        // let count = 0;
-        // for(el of customLibIds) {
-        //     el === id
-        // }
+    const handleShuffle = () => {
+        getWord(true)
     }
 
     return (
 
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
-                <Card words={words}/>
+                <Card words={words}
+                      setWasUpdated={setWasUpdated}
+                      wasUpdated={wasUpdated}
+                      customLibIds={customLibIds}/>
             </div>
             <div className={"div-cardbutt"}>
                 <div>
-                    <button id="shuffle" onClick={shuffle}>Shuffle</button>
+                    <button id="shuffle" onClick={handleShuffle}>Shuffle</button>
                 </div>
-                <div>
-                    <button onClick={wordHandle}>Add to custom Lib</button>
-                </div>
+
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
@@ -72,6 +74,8 @@ export const Library = () => {
                     wordElement={wordElement}
                     customLibIds={customLibIds}
                     session={session}
+                    setWasUpdated={setWasUpdated}
+                    wasUpdated={wasUpdated}
                     />
                 })}
             </div>

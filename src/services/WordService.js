@@ -55,8 +55,12 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getAllWordsFromLib(libName, shuffleFlag) {
-        return axios.get(this.serverURL + "/lib/" + libName + "/words/get/" + shuffleFlag,
+    getAllWordsFromLib(libName, shuffleFlag, wordsId) {
+        const formData = new FormData();
+        formData.set("shuffleFlag", shuffleFlag);
+        if(wordsId != null) formData.set("wordsId", wordsId);
+        else formData.set("wordsId", null);
+        return axios.post(this.serverURL + "/lib/" + libName + "/words/get", formData,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
     }
 }
