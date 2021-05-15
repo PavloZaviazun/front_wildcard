@@ -22,6 +22,11 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
+    getRandomWords() {
+        return axios.get(this.serverURL + "/randomwords/get",
+            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+    }
+
     updateWord(id, form) {
         const formData = new FormData(form);
         return axios.patch(
