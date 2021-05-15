@@ -8,13 +8,13 @@ export const Admin = ({child}) => {
         <div className={"admin-div"}>
             <div className={"admin-panel"}>
                 <div className={"admin-menu"}>
-                    <NavLink to={"/admin/libraries"} activeClassName={"active"}>
+                    <NavLink to={"/admin/libraries"} activeClassName={"activeBut"}>
                         <div> Libraries</div>
                     </NavLink>
-                    <NavLink to={"/admin/users"} activeClassName={"active"}>
+                    <NavLink to={"/admin/users"} activeClassName={"activeBut"}>
                         <div> Users</div>
                     </NavLink>
-                    <NavLink to={"/admin/words"} activeClassName={"active"}>
+                    <NavLink to={"/admin/words"} activeClassName={"activeBut"}>
                         <div>Words</div>
                     </NavLink>
                 </div>

@@ -32,7 +32,7 @@
     flex-direction: column;
 }
 
-.active {
+.activeBut {
     background-color: yellow;
 }
 
