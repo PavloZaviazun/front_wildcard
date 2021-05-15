@@ -65,7 +65,7 @@ export const Card = ({words, wasUpdated, setWasUpdated, customLibIds}) => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-        if(customLibIds !== null) setButtonName(customLibIds.data.includes(word.id) ? "Delete" : "Add");
+        if(customLibIds) setButtonName(customLibIds.data.includes(word.id) ? "Delete" : "Add");
     }, [cardBack, words, i, buttonName, word]);
 
     let background;
