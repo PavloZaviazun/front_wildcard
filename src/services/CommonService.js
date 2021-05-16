@@ -1,5 +1,4 @@
 import axios from "axios";
-import {userService} from "./UserService";
 
 class CommonService {
     serverURL = "http://localhost:8080";

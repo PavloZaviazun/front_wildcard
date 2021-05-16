@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import {userService} from "./UserService";
 
 class LibService extends React.Component {
     serverURL = "http://localhost:8080";

@@ -9,9 +9,6 @@ import {WordElement} from "./wordElement";
 export const Library = () => {
     const admin = "ROLE_ADMIN";
     const user = "ROLE_USER";
-    const session = window.localStorage.getItem("session");
-    // const message = "Слово додано до бібліотеки обраних";
-    const token = window.localStorage.getItem("session");
     let [role, setRole] = useState("");
     userService.getUserByToken().then(el => {
         setRole(el.roles[0]);

@@ -1,7 +1,6 @@
 import "./FavLibs.css"
 import {useEffect, useState} from "react";
 import {userService} from "../../../services";
-import {CustomLibDetails} from "../customLib/customLibDetails";
 import {FavLibDetails} from "./favLibDetails";
 
 export const FavLibs = () => {

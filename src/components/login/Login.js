@@ -1,24 +1,11 @@
 import "./Login.css"
 import {Link, Redirect} from "react-router-dom";
-import {authService, userService} from "../../services";
-import {useDispatch, useSelector} from "react-redux";
-import {setUser} from "../../redux";
+import {authService} from "../../services";
 import {useState} from "react";
 
 export const Login = () => {
-
     const message = "Successful logination";
-
-    // const dispatch = useDispatch();
-    // const {user: {user}} = useSelector(state => state);
     const [loginResponse, setLoginResponse] = useState("");
-
-
-    // const handleUser = () => {
-    //     userService.getUserByToken().then(user => {
-    //         dispatch(setUser(user))
-    //     });
-    // }
 
     const loginHandle = (e) => {
         e.preventDefault();
@@ -28,9 +15,6 @@ export const Login = () => {
         authService.loginHandle(username, password).then(el => {
             myStorage.setItem("session", el.headers.authorization);
             setLoginResponse(el.data)
-            // if(el.headers.authorization != null && el.headers.authorization !== "undefined") {
-            //     handleUser()
-            // }
         });
     }
 

@@ -1,7 +1,6 @@
 import "./FavLibDetails.css";
 import {Link} from "react-router-dom";
 import {userService} from "../../../../services";
-import {useEffect} from "react";
 
 export const FavLibDetails = ({favLib:{id, name}, setFavLibAction}) => {
 

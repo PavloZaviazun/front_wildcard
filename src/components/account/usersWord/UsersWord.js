@@ -1,15 +1,13 @@
 import "./UsersWord.css"
-import {Button, Checkbox, Form, Input} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {commonService, libService, userService, wordService} from "../../../services";
-import {setPartsOfSpeech} from "../../../redux";
+import {Button, Form, Input} from "antd";
+import {commonService, userService} from "../../../services";
 import {useEffect, useState} from "react";
 
 export const UsersWord = ({word, setFlag}) => {
 
     const [form] = Form.useForm();
     const [partsOfSpeech, setPartsOfSpeech] = useState([]);
-    const [translation1, setTranslation1] = useState(word === undefined ? {} : JSON.parse(word.translation))
+    const translation1 = word === undefined ? {} : JSON.parse(word.translation);
 
     function loadForm() {
         form.setFieldsValue({

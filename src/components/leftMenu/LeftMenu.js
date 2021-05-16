@@ -2,8 +2,6 @@ import "./LeftMenu.css"
 import {useEffect, useState} from "react";
 import {libService, userService} from "../../services";
 import {LeftMenuDetails} from "./leftMenuDetails";
-import {Redirect, useLocation} from "react-router-dom";
-import {Mode} from "../mode/Mode";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setRandom} from "../../redux";
