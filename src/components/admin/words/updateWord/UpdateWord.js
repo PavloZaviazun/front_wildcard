@@ -3,8 +3,20 @@ import {libService, wordService} from "../../../../services";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Input, Form, Button, Checkbox} from "antd";
+import {
+    SENTENCE_PATTERN, TRANSLATION_RU_PATTERN, TRANSLATION_UA_PATTERN,
+    VALIDATION_SENTENCE_MESSAGE,
+    VALIDATION_TRANSLATION_RU_MESSAGE, VALIDATION_TRANSLATION_UA_MESSAGE,
+    VALIDATION_WORD_MESSAGE, WORD_PATTERN
+} from "../../../../util/Constants";
 
 export const UpdateWord = ({word, setUpdAllWords}) => {
+
+    const [wordMessage, setWordMessage] = useState("");
+    const [descriptionMessage, setDescriptionMessage] = useState("");
+    const [exampleMessage, setExampleMessage] = useState("");
+    const [translationRuMessage, setTranslationRuMessage] = useState("");
+    const [translationUaMessage, setTranslationUaMessage] = useState("");
 
     const [message, setMessage] = useState("");
     const [form] = Form.useForm();
@@ -101,6 +113,22 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
         });
     }
 
+    const validationWord = () => {
+        setWordMessage(VALIDATION_WORD_MESSAGE)
+    }
+    const validationDescription = () => {
+        setDescriptionMessage(VALIDATION_SENTENCE_MESSAGE)
+    }
+    const validationExample = () => {
+        setExampleMessage(VALIDATION_SENTENCE_MESSAGE)
+    }
+    const validationTranslationRu = () => {
+        setTranslationRuMessage(VALIDATION_TRANSLATION_RU_MESSAGE)
+    }
+    const validationTranslationUa = () => {
+        setTranslationUaMessage(VALIDATION_TRANSLATION_UA_MESSAGE)
+    }
+
     return (
         <div>
             <div className={"updateForm"}>
@@ -112,16 +140,19 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         <Form.Item
                             className={"tableForUpdate-name"}
                             name="word"
-                            rules={[{
+                            /*rules={[{
                                 required: true,
                                 message: 'Please input word!',
                             },
                                 {
                                     pattern: /[a-z]+/,
                                     message: "не по паттерну",
-                                }]}>
-                            <Input name="word"/>
+                                }]}*/
+                        >
+                            <Input name="word" type={"text"}
+                                   required={true} pattern={WORD_PATTERN} minLength={2} onInvalid={validationWord}/>
                         </Form.Item>
+                        {wordMessage}
                         <Form.Item
                             className={"tableForUpdate-partOS"}
                             name="partOfSpeech">
@@ -132,42 +163,32 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
                         </Form.Item>
                         <Form.Item
                             className={"tableForUpdate-description"}
-                            name="description"
-                            rules={[{
-                                message: 'Please input description!',
-                            },
-                                {
-                                    pattern: '[a-zA-Z\p{P}]+',
-                                    message: "не по паттерну",
-                                }]}>
-                            <Input name="description"/>
+                            name="description">
+                            <Input name="description" type={"text"}
+                                   required={true} pattern={SENTENCE_PATTERN} minLength={2} onInvalid={validationDescription}/>
                         </Form.Item>
+                        {descriptionMessage}
                         <Form.Item
                             className={"tableForUpdate-example"}
-                            name="example"
-                            rules={[{
-                                // required: true,
-                                message: 'Please input example!',
-                            },]}>
-                            <Input name="example"/>
+                            name="example">
+                            <Input name="example" type={"text"}
+                                   required={true} pattern={SENTENCE_PATTERN} minLength={2} onInvalid={validationExample}/>
                         </Form.Item>
+                        {exampleMessage}
                         <Form.Item
                             className={"tableForUpdate-translationRu"}
-                            name="translationRu"
-                            rules={[{
-                                message: 'Please input translationRU!',
-                            },]}>
-                            <Input name="translationRu"/>
+                            name="translationRu">
+                            <Input name="translationRu" type={"text"}
+                                   pattern={TRANSLATION_RU_PATTERN} minLength={2} onInvalid={validationTranslationRu}/>
                         </Form.Item>
+                        {translationRuMessage}
                         <Form.Item
                             className={"tableForUpdate-translationUa"}
-                            name="translationUa"
-                            rules={[{
-                                message: 'Please input translationUA!',
-                            },
-                            ]}>
-                            <Input name="translationUa"/>
+                            name="translationUa">
+                            <Input name="translationUa" type={"text"}
+                                   pattern={TRANSLATION_UA_PATTERN} minLength={2} onInvalid={validationTranslationUa}/>
                         </Form.Item>
+                        {translationUaMessage}
                         <Form.Item
                             className={"tableForUpdate-notAddedLibs"}
                             name='NotAddedToLibs'

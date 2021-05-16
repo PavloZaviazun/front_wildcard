@@ -2,25 +2,17 @@ import "./AddNewWord.css"
 import {libService, wordService} from "../../../../services";
 import {useSelector} from "react-redux";
 import {useState} from "react";
-
+import {VALIDATION_WORD_MESSAGE, VALIDATION_SENTENCE_MESSAGE, VALIDATION_TRANSLATION_RU_MESSAGE,
+    VALIDATION_TRANSLATION_UA_MESSAGE, WORD_PATTERN, SENTENCE_PATTERN, TRANSLATION_RU_PATTERN,
+    TRANSLATION_UA_PATTERN} from "../../../../util/Constants";
 
 export const AddNewWord = () => {
-
-    const VALIDATION_WORD_MESSAGE = "Мін 2 символи латиниці";
-    const VALIDATION_SENTENCE_MESSAGE = "Речення латиницею"
-    const VALIDATION_TRANSLATION_RU_MESSAGE = "Переклади російською через ;"
-    const VALIDATION_TRANSLATION_UA_MESSAGE = "Переклади українською через ;"
 
     const [wordMessage, setWordMessage] = useState("");
     const [descriptionMessage, setDescriptionMessage] = useState("");
     const [exampleMessage, setExampleMessage] = useState("");
     const [translationRuMessage, setTranslationRuMessage] = useState("");
     const [translationUaMessage, setTranslationUaMessage] = useState("");
-    const WORD_PATTERN = "^[A-Za-z]+$";
-    const SENTENCE_PATTERN = "[a-zA-Z0-9, .!@#$%^&*()\"\"'`?&;:]+"
-    const TRANSLATION_RU_PATTERN = "[а-яА-ЯэЭъЪёЁ ;]+"
-    const TRANSLATION_UA_PATTERN = "[а-яА-ЯєЄїЇ'` ;]+"
-
     const [message, setMessage] = useState("");
 
     const {libraries: {libraries}} = useSelector(state => state);
@@ -79,8 +71,7 @@ export const AddNewWord = () => {
                             <option value={"Preposition"}>Preposition</option>
                         </select>
                         <input className={"addition-new-words-form-description"} name={"description"} type={"text"}
-                               required={true} pattern={SENTENCE_PATTERN} minLength={2}
-                               onInvalid={validationDescription}/>
+                               required={true} pattern={SENTENCE_PATTERN} minLength={2} onInvalid={validationDescription}/>
                         {descriptionMessage}
                         <input className={"addition-new-words-form-example"} name={"example"} type={"text"}
                                required={true} pattern={SENTENCE_PATTERN} minLength={2} onInvalid={validationExample}/>

@@ -1,10 +1,10 @@
 import "./AddNewLibrary.css"
 import {libService} from "../../../../services";
 import {useState} from "react";
+import {VALIDATION_WORD_MESSAGE, WORD_PATTERN} from "../../../../util/Constants";
 
 export const AddNewLibrary = () => {
 
-    const VALIDATION_MESSAGE = "Мін 2 символи латиниці";
     const [message, setMessage] = useState("");
     const [nameMessage, setNameMessage] = useState("");
 
@@ -15,7 +15,7 @@ export const AddNewLibrary = () => {
     }
 
     const validationName = () => {
-        setNameMessage(VALIDATION_MESSAGE)
+        setNameMessage(VALIDATION_WORD_MESSAGE)
     }
 
     return (
@@ -23,7 +23,7 @@ export const AddNewLibrary = () => {
             <form onSubmit={createLib}>
                 <label>Name of Lib: </label>
                 <input type={"text"} placeholder={"Введіть назву"}
-                       required={true} pattern={"^[A-Za-z]+$"} minLength={2} onInvalid={validationName}/>
+                       required={true} pattern={WORD_PATTERN} minLength={2} onInvalid={validationName}/>
                 {nameMessage}
                 <button>Create</button>
             </form>

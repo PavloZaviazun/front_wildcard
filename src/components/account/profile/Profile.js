@@ -1,6 +1,7 @@
 import "./Profile.css";
 import {useEffect, useState} from "react";
 import {authService, commonService, userService} from "../../../services";
+import {EMAIL_PATTERN} from "../../../util/Constants";
 
 export const Profile = () => {
     const [message, setMessage] = useState("");
@@ -59,7 +60,7 @@ export const Profile = () => {
                 <div className={"new-row"}>
                     <div className={!emailChange ? "change-email" : ""}>
                         <input defaultValue={user.email} type={"text"}
-                               required={true} pattern={"^[a-zA-Z0-9_.%+-]{3,30}@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,6}$"}/>
+                               required={true} pattern={EMAIL_PATTERN}/>
                     </div>
                 </div>
                 <div className={"new-row"}>
