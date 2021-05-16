@@ -9,12 +9,12 @@ import {setPagination} from "../../../redux";
 export const CustomLib = () => {
 
     const [customLib, setCustomLib] = useState([]);
+    const [wasUpdated, setWasUpdated] = useState(false);
     const currentPage = 1;
     const dispatch = useDispatch();
-
     useEffect(() => {
         fetchCustomLib(currentPage)
-    }, []);
+    }, [wasUpdated]);
 
     const fetchCustomLib = async (page) => {
         const data = await userService.getCustomLib(false, page);
@@ -28,6 +28,8 @@ export const CustomLib = () => {
                 return <CustomLibDetails
                     key={vocabulary.id}
                     word={vocabulary}
+                    wasUpdated={wasUpdated}
+                    setWasUpdated={setWasUpdated}
                 />
             })}
             <div>
