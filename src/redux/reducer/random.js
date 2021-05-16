@@ -1,6 +1,6 @@
 import {SET_RANDOM} from "../action-types";
 
-const initialState = {random: 0};
+const initialState = {random: 10};
 
 export const random = (state = initialState, action) => {
 
