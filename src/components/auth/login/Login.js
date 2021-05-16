@@ -2,10 +2,10 @@ import "./Login.css"
 import {Link, Redirect} from "react-router-dom";
 import {authService} from "../../../services";
 import {useState} from "react";
+import {EMAIL_PATTERN, VALIDATION_PASSWORD} from "../../../util/Constants";
 
 export const Login = () => {
 
-    const VALIDATION_PASSWORD = "Довжина паролю повинна бути 5-30 символів";
     const message = "Successful logination";
     const [loginResponse, setLoginResponse] = useState("");
     const [passMessage, setPassMessage] = useState("");
@@ -33,7 +33,7 @@ export const Login = () => {
                     <form onSubmit={loginHandle}>
                         <div>
                             <input type={"email"} placeholder={"Введіть e-mail"}
-                                   required={true} pattern={"^[a-zA-Z0-9_.%+-]{3,30}@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,6}$"}/>
+                                   required={true} pattern={EMAIL_PATTERN}/>
                         </div>
                         <div>
                             <input type={"password"} placeholder={"Введіть пароль"}

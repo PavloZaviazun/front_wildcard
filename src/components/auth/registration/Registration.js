@@ -2,11 +2,10 @@ import "./Registration.css"
 import {authService} from "../../../services";
 import {useState} from "react";
 import {Redirect} from "react-router-dom";
+import {EMAIL_PATTERN, PASSWORD_COMP, VALIDATION_PASSWORD} from "../../../util/Constants";
 
 export const Registration = () => {
 
-    const PASSWORD_COMP = "Паролі не співпадають!";
-    const VALIDATION_PASSWORD = "Довжина паролю повинна бути 5-30 символів";
     const message = "На ваш e-mail відправлено листа для підтвердження реєстрації";
     const [regResponse, setRegResponse] = useState("");
     const [redirect, setRedirect] = useState(false);
@@ -52,7 +51,7 @@ export const Registration = () => {
                     <form onSubmit={registrationHandle}>
                         <div>
                             <input type={"email"} placeholder={"Введіть e-mail"}
-                                   required={true} pattern={"^[a-zA-Z0-9_.%+-]{3,30}@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,6}$"}/>
+                                   required={true} pattern={EMAIL_PATTERN}/>
                         </div>
                         <div>
                             <input type={"password"} placeholder={"Введіть пароль"}
