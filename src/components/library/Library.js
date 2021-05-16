@@ -41,7 +41,7 @@ export const Library = () => {
     useEffect(() => {
         setLibName(location.pathname.split("/library/")[1]);
         if (libName.length > 0) getWord(flag, customLibIds);
-        userService.getCustomLibIds()
+        if (role === admin || role === user) userService.getCustomLibIds()
             .then(el => {
                 setCustomLibIds(el);
             });

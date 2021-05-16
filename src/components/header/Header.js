@@ -1,18 +1,19 @@
 import "./Header.css"
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Logo from "../../images/wildcard.jpg"
 import {useEffect, useState} from "react";
 import {userService} from "../../services";
 
 export const Header = () => {
     const token = window.localStorage.getItem("session");
+    const location = useLocation();
     let [role, setRole] = useState("");
 
     useEffect(() => {
         userService.getUserByToken().then(el => {
             setRole(el.roles[0]);
         })
-    }, [role])
+    }, [role, location])
 
     return(
         <div className={"div-header"}>

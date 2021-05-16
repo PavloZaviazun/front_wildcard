@@ -47,15 +47,12 @@ function App() {
                             <Route exact path="/feedback">
                                 <FeedBack/>
                             </Route>
-                            <Route exact path="/auth">
-                                <Redirect to={"/auth/login"}/>
-                            </Route>
-                            <Route exact path="/auth/login">
-                                <Login/>
-                            </Route>
-                            <Route exact path="/auth/registration">
-                                <Registration/>
-                            </Route>
+                            <ProtectedRoute exact path="/auth" roles={[]}
+                                            child={<Redirect to={"/auth/login"}/>}/>
+                            <ProtectedRoute exact path="/auth/login" roles={[]}
+                                            child={<Login/>}/>
+                            <ProtectedRoute exact path="/auth/registration" roles={[]}
+                                            child={<Registration/>}/>
                             <ProtectedRoute exact path="/admin" roles={[admin]}
                                             child={<Admin/>}/>
                             <ProtectedRoute exact path="/account" roles={[admin, user]}

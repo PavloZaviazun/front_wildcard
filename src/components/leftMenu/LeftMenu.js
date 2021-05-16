@@ -2,7 +2,6 @@ import "./LeftMenu.css"
 import {useEffect, useState} from "react";
 import {libService, userService} from "../../services";
 import {LeftMenuDetails} from "./leftMenuDetails";
-import {Redirect, useLocation} from "react-router-dom";
 
 export const LeftMenu = () => {
     const [libs, setLibs] = useState([]);
