@@ -59,7 +59,10 @@ export const Profile = () => {
             <button onClick={changeFlag} className={emailChange ? "change-email" : ""}>Change e-mail</button>
             <form onSubmit={handleUser}>
                 <div className={"new-row"}>
-                    <div className={!emailChange ? "change-email" : ""}><input defaultValue={user.email} type={"text"}/></div>
+                    <div className={!emailChange ? "change-email" : ""}>
+                        <input defaultValue={user.email} type={"text"}
+                               required={true} pattern={"^[a-zA-Z0-9_.%+-]{3,30}@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,6}$"}/>
+                    </div>
                 </div>
                 <div className={"new-row"}>
                     <div>Native language:</div>
@@ -70,8 +73,6 @@ export const Profile = () => {
                 </div>
                 <button>Submit</button>
             </form>
-            <div>Custom Library:</div>
-            <div>{user.customLibs}</div>
             <div>{message}</div>
         </div>
     )

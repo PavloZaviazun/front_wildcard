@@ -1,14 +1,17 @@
 import "./Registration.css"
-import {authService} from "../../services";
+import {authService} from "../../../services";
 import {useState} from "react";
 import {Redirect} from "react-router-dom";
 
 export const Registration = () => {
 
+    const PASSWORD_COMP = "Паролі не співпадають!";
+    const VALIDATION_PASSWORD = "Довжина паролю повинна бути 5-30 символів";
     const message = "На ваш e-mail відправлено листа для підтвердження реєстрації";
-
     const [regResponse, setRegResponse] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const [passMessage, setPassMessage] = useState("");
+    const [passRepeatMessage, setPassRepeatMessage] = useState("");
 
     const registrationHandle = (e) => {
         e.preventDefault();
@@ -16,6 +19,7 @@ export const Registration = () => {
         const password = e.target[1].value;
         const repeatPassword = e.target[2].value;
         const nativeLang = e.target[3].value;
+
         if (password === repeatPassword) {
             authService.registrationHandle(email, password, nativeLang)
                 .then(el => {
@@ -23,7 +27,7 @@ export const Registration = () => {
                 });
         }
         else {
-            //TODO показать сообщение что пароли не совпадают
+            setRegResponse(PASSWORD_COMP);
         }
 
     }
@@ -33,15 +37,33 @@ export const Registration = () => {
         }, 3000)
     }
 
+    const validationPass = () => {
+        setPassMessage(VALIDATION_PASSWORD)
+    }
+
+    const validationPassRepeat = () => {
+        setPassRepeatMessage(VALIDATION_PASSWORD)
+    }
 
     return (
         <div className={"reg-div"}>
             <div className={"reg-div-form"}>
                 <div>
                     <form onSubmit={registrationHandle}>
-                        <div><input placeholder={"Введіть e-mail"}/></div>
-                        <div><input type={"password"} placeholder={"Введіть пароль"}/></div>
-                        <div><input type={"password"} placeholder={"Повторіть пароль"}/></div>
+                        <div>
+                            <input type={"email"} placeholder={"Введіть e-mail"}
+                                   required={true} pattern={"^[a-zA-Z0-9_.%+-]{3,30}@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,6}$"}/>
+                        </div>
+                        <div>
+                            <input type={"password"} placeholder={"Введіть пароль"}
+                                   required={true} maxLength={30} minLength={5} onInvalid={validationPass}/>
+                        </div>
+                        {passMessage}
+                        <div>
+                            <input type={"password"} placeholder={"Повторіть пароль"}
+                                   required={true} maxLength={30} minLength={5} onInvalid={validationPassRepeat}/>
+                        </div>
+                        {passRepeatMessage}
                         <div>Мова за змовчуванням:</div>
                         <div><select>
                             <option defaultValue={"true"}>UA</option>

@@ -4,8 +4,8 @@ import {Provider} from "react-redux";
 
 import {PageLayout} from "./layouts";
 import {Home} from "./components/home";
-import {Login} from "./components/login";
-import {Registration} from "./components/registration";
+import {Login} from "./components/auth/login";
+import {Registration} from "./components/auth/registration";
 import {Library} from "./components/library";
 import store from "./redux";
 import {Admin} from "./components/admin";
