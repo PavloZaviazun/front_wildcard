@@ -15,6 +15,10 @@ export const Mode = () => {
     const [wasUpdated, setWasUpdated] = useState(false);
     const location = useLocation();
     const {random:{random}} = useSelector(el => el);
+    let [role, setRole] = useState("");
+    userService.getUserByToken().then(el => {
+        setRole(el.roles[0]);
+    })
 
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
@@ -48,7 +52,9 @@ export const Mode = () => {
                 <Card words={words}
                       setWasUpdated={setWasUpdated}
                       wasUpdated={wasUpdated}
-                      customLibIds={customLibIds}/>
+                      customLibIds={customLibIds}
+                      role={role}
+                />
             </div>
             <button className="collapsible" onClick={collapse}>See all words</button>
             <div className="content">
@@ -59,10 +65,10 @@ export const Mode = () => {
                         session={session}
                         setWasUpdated={setWasUpdated}
                         wasUpdated={wasUpdated}
+                        role={role}
                     />
                 })}
             </div>
         </div>
     )
 }
-
