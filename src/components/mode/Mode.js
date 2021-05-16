@@ -1,9 +1,9 @@
 import './Mode.css';
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import {userService, wordService} from "../../../services";
-import {Card} from "../../card";
-import {WordElement} from "../../library/wordElement";
+import {userService, wordService} from "../../services";
+import {Card} from "../card";
+import {WordElement} from "../library/wordElement";
 import {useSelector} from "react-redux";
 
 export const Mode = () => {

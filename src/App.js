@@ -27,7 +27,7 @@ import {CustomLib} from "./components/account/customLib";
 import {MyWords} from "./components/account/myWords";
 import {FavLibs} from "./components/account/favLibs";
 import {ProtectedRoute} from "./ProtectedRoute";
-import {Mode} from "./components/leftMenu/mode/Mode";
+import {Mode} from "./components/mode/Mode";
 
 function App() {
     const admin = "ROLE_ADMIN";
