@@ -5,7 +5,7 @@ class WordService {
     myStorage = window.localStorage;
 
     getWordsFromLib(idLib, page) {
-        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get/page/" + (page - 1),
+        return axios.get(this.serverURL + `/lib/${idLib}/words/get/page/${page - 1}`,
             {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data);
     }
 
@@ -46,17 +46,17 @@ class WordService {
     }
 
     searchByWord(word, page) {
-        return axios.get(this.serverURL + "/searchByWord/" + word + "/page/" + page,
-            {headers: {"Authorization": this.myStorage.getItem("session")}})
+        return axios.get(this.serverURL + `/searchByWord/${word}/page/${page - 1}`,
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
     searchByLetter(letter, page) {
-        return axios.get(this.serverURL + "/searchByLetter/" + letter + "/page/" + (page - 1),
+        return axios.get(this.serverURL + `/searchByLetter/${letter}/page/${page - 1}`,
             {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     getNotApprovedWordsPage(page) {
-        return axios.get(this.serverURL + "/words/notapproved/get/page/" + (page - 1),
+        return axios.get(this.serverURL + `/words/notapproved/get/page/${page - 1}`,
             {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 

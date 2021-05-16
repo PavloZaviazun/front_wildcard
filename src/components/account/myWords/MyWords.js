@@ -10,17 +10,18 @@ export const MyWords = () => {
     const [notApproved, setNotApproved] = useState([]);
     const currentPage = 1;
     const dispatch = useDispatch();
-    const [flag, setFlag] = useState(false)
+    const [flag, setFlag] = useState(false);
 
     useEffect(() => {
-        fetchCustomLib(currentPage)
-        setFlag(false)
+        fetchCustomLib(currentPage);
+        setFlag(false);
     }, [flag]);
 
     const fetchCustomLib = async (page) => {
         const data = await userService.getCustomLib(true, page);
         setNotApproved(data.pageList);
-        dispatch(setPagination([page, data.pageCount]))
+        dispatch(setPagination([page, data.pageCount]));
+        setFlag(false);
     }
 
 

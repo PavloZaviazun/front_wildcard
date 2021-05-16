@@ -6,7 +6,7 @@ import {
     SET_LETTER,
     SET_USER,
     SET_RANDOM,
-    SET_PAGINATION, SET_LIBS_PAGINATION
+    SET_PAGINATION, SET_LIBS_PAGINATION, SET_SEARCH_PAGINATION
 } from "../action-types";
 
 export const setLibraries = (payload) => ({type: SET_LIBRARIES, payload});
@@ -18,4 +18,5 @@ export const setUser = (payload) => ({type: SET_USER, payload});
 export const setRandom = (payload) => ({type: SET_RANDOM, payload});
 export const setPagination = (payload) => ({type: SET_PAGINATION, payload});
 export const setLibsPagination = (payload) => ({type: SET_LIBS_PAGINATION, payload});
+export const setSearchPagination = (payload) => ({type: SET_SEARCH_PAGINATION, payload});
 

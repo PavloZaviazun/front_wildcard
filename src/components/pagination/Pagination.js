@@ -85,3 +85,24 @@ export const PaginationLibs = ({getLibrariesWithPages}) => {
         </div>
     )
 }
+
+export const SearchPagination = ({doSearch}) => {
+
+    const {searchPagination:{searchPagination} } = useSelector(el => el)
+    let page = searchPagination[0];
+    let pages = searchPagination[1];
+    let e = searchPagination[2];
+    let back = "<<";
+    let forward = ">>";
+
+    return(
+        searchPagination &&
+        <div className={"pagination"}>
+            <button disabled={page === 1} onClick= {() => doSearch(e, 1)}>To first</button>
+            <button disabled={page === 1} onClick= {() => page > 1 ? doSearch(e, page - 1) : ""}> {back} </button>
+            <div>Current page {page}</div>
+            <button disabled={page === pages} onClick= {() => page < pages ? doSearch(e, page + 1) : ""}> {forward} </button>
+            <button disabled={page === pages} onClick= {() => doSearch(e, pages)}>To last</button>
+        </div>
+    )
+}

@@ -16,11 +16,12 @@ export const NotApproved = () => {
         const data = await wordService.getNotApprovedWordsPage(page);
         dispatch(setWords(data.pageList));
         dispatch(setPagination([page, data.pageCount]));
+        setUpdAllWords(false)
     }, [words, updAllWords])
 
     useEffect(() => {
         getWords(currentPage);
-    }, [])
+    }, [updAllWords])
 
     return (
         <div className={"not-approved"}>

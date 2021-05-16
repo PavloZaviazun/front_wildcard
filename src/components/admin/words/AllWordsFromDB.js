@@ -1,14 +1,15 @@
 import {useCallback, useEffect, useState} from "react";
 import {wordService} from "../../../services";
 import {UpdateWord} from "./updateWord";
-import {setPagination, setWords} from "../../../redux";
+import {setPagination, setSearchPagination, setWords} from "../../../redux";
 import {useDispatch, useSelector} from "react-redux";
-import {Pagination} from "../../pagination";
+import {Pagination, SearchPagination} from "../../pagination";
 
 export const AllWordsFromDB = () => {
     const {words: {words}} = useSelector(state => state);
     const [letter, setLetter] = useState("A");
     const [updAllWords, setUpdAllWords] = useState(false);
+    const [flagPages, setFlagPages] = useState(false);
     const dispatch = useDispatch();
     const currentPage = 1;
 
@@ -16,30 +17,38 @@ export const AllWordsFromDB = () => {
         const data = await wordService.searchByLetter(letter, page);
         dispatch(setPagination([page, data.data.totalPages]));
         dispatch(setWords(data.data.content));
+        setFlagPages(false)
     }, [words, updAllWords])
 
     useEffect(() => {
         getWords(currentPage);
         setUpdAllWords(false);
+        setFlagPages(false)
     }, [updAllWords])
 
-    const doSearch = (e) => {
+    const doSearch = (e, page) => {
         e.preventDefault();
         const word = e.target[0].value;
-        wordService.searchByWord(word).then(el => dispatch(setWords(el.data)))
+        wordService.searchByWord(word, page).then(el => {
+            dispatch(setWords(el.content))
+            dispatch(setSearchPagination([page, el.totalPages, e]));
+        })
+        setFlagPages(true)
     }
 
     const searchByLetter = (letter) => {
         setLetter(letter);
-        wordService.searchByLetter(letter, 0).then(el => {
-            dispatch(setWords(el.data.content))
+        setFlagPages(false)
+        wordService.searchByLetter(letter, currentPage).then(el => {
+            dispatch(setWords(el.data.content));
+            dispatch(setPagination([currentPage, el.data.totalPages]));
         })
     }
 
     return (
         <div className={"allWordsHereTable"}>
             <div className={"searchWords"}>
-                <form onSubmit={doSearch} className={"searchWord"}>
+                <form onSubmit={e => doSearch(e, 1)} className={"searchWord"} name={"searchWord"}>
                     <input type={"search"}/>
                     <button>Search</button>
                 </form>
@@ -89,9 +98,12 @@ export const AllWordsFromDB = () => {
                     <UpdateWord setUpdAllWords={setUpdAllWords} word={word}/>
                 </div>
             })}
-            <div>
+            {!flagPages && <div>
                 <Pagination getWords={getWords}/>
-            </div>
+            </div>}
+            {flagPages && <div>
+                <SearchPagination doSearch={doSearch}/>
+            </div>}
         </div>
     )
 }
