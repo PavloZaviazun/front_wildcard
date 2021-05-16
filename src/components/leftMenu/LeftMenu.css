@@ -20,3 +20,8 @@
     text-decoration: none;
     margin: 3px;
 }
+
+.mode-div {
+    width: 100%;
+    background: #61dafb;
+}
