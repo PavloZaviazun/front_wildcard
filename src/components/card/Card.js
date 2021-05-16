@@ -55,7 +55,7 @@ export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
     }
 
     useEffect(() => {
-        userService.getCustomLibIds().then(el => {
+       if (role === admin || role === user) userService.getCustomLibIds().then(el => {
             if (el != null) {
                 return setCustomLibIds(el.data)
             }})

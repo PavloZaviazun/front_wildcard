@@ -12,6 +12,7 @@ export const AllWordsFromDB = () => {
 
     const getWords = useCallback(async () => {
         const data = await  wordService.searchByLetter(letter, 0);
+        console.log(data.data)
         dispatch(setWords(data.data.content));
     }, [words, updAllWords])
 

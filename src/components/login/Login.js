@@ -7,18 +7,18 @@ import {useState} from "react";
 
 export const Login = () => {
 
-    const message = "Successfull logination";
+    const message = "Successful logination";
 
-    const dispatch = useDispatch();
-    const {user: {user}} = useSelector(state => state);
+    // const dispatch = useDispatch();
+    // const {user: {user}} = useSelector(state => state);
     const [loginResponse, setLoginResponse] = useState("");
 
 
-    const handleUser = () => {
-        userService.getUserByToken().then(user => {
-            dispatch(setUser(user))
-        });
-    }
+    // const handleUser = () => {
+    //     userService.getUserByToken().then(user => {
+    //         dispatch(setUser(user))
+    //     });
+    // }
 
     const loginHandle = (e) => {
         e.preventDefault();
@@ -28,9 +28,9 @@ export const Login = () => {
         authService.loginHandle(username, password).then(el => {
             myStorage.setItem("session", el.headers.authorization);
             setLoginResponse(el.data)
-            if(el.headers.authorization != null && el.headers.authorization !== "undefined") {
-                handleUser()
-            }
+            // if(el.headers.authorization != null && el.headers.authorization !== "undefined") {
+            //     handleUser()
+            // }
         });
     }
 

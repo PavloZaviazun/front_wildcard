@@ -11,7 +11,7 @@ export const WordElement = ({wordElement:{id, word}, role, setWasUpdated, wasUpd
     const [customLibIds, setCustomLibIds] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        if (role === admin || role === user) fetchData();
     }, [wasUpdated])
 
     for (let el of customLibIds) {

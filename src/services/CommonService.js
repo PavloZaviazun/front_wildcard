@@ -4,13 +4,6 @@ import {userService} from "./UserService";
 class CommonService {
     serverURL = "http://localhost:8080";
     myStorage = window.localStorage;
-    admin = "ROLE_ADMIN";
-    user = "ROLE_USER";
-
-    function1 = async () => {
-        return await userService.getUserByToken().then(el => el.roles)
-    }
-
 
     getAllPartsOfSpeech() {
         return axios.get(this.serverURL + "/partsOfSpeech",

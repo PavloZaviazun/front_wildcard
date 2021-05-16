@@ -14,7 +14,7 @@ export const LeftMenuDetails = ({lib:{id, name}, role}) => {
     const [wasUpdated, setWasUpdated] = useState(false);
 
     useEffect(() => {
-        fetchFavLibs();
+        if (role === admin || role === user)fetchFavLibs();
     }, [wasUpdated]);
 
     for (let el of favLibs) {
