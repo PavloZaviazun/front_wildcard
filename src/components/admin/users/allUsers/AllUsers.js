@@ -1,17 +1,28 @@
 import "./AllUsers.css"
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {userService} from "../../../../services";
 import {UserDetails} from "../userDetails";
+import {Pagination} from "../../../pagination";
+import {setPagination} from "../../../../redux";
+import {useDispatch} from "react-redux";
 
 
 export const AllUsers = () => {
 
-    const [page, setPage] = useState(0);
-    const [pageObj, setPageObj] = useState(null);
+    const [users, setUsers] = useState([]);
+    const currentPage = 1;
+    const dispatch = useDispatch();
+
+    const getUsersPage = useCallback(async (page) => {
+        const data = await userService.getUsers(page);
+        setUsers(data.content);
+        dispatch(setPagination([page, data.totalPages]));
+    }, [])
 
     useEffect(() => {
-        userService.getUsers(page).then(el => setPageObj(el.data));
-    }, []);
+        getUsersPage(currentPage);
+    }, [])
+
 
     return (
         <div>
@@ -22,12 +33,15 @@ export const AllUsers = () => {
                 <div className={"user-details-role"}>Role</div>
                 <div className={"user-details-enabled"}>Enabled</div>
             </div>
-            {pageObj && pageObj.content.map(user => {
+            {users.length > 0 && users.map(user => {
                 return <UserDetails
                     key={user.id}
                     user={user}
                 />
             })}
+            <div>
+                <Pagination getUsersPage={getUsersPage}/>
+            </div>
         </div>
     )
 }

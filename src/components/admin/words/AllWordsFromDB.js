@@ -1,23 +1,25 @@
 import {useCallback, useEffect, useState} from "react";
 import {wordService} from "../../../services";
 import {UpdateWord} from "./updateWord";
-import {setWords} from "../../../redux";
+import {setPagination, setWords} from "../../../redux";
 import {useDispatch, useSelector} from "react-redux";
+import {Pagination} from "../../pagination";
 
 export const AllWordsFromDB = () => {
     const {words: {words}} = useSelector(state => state);
     const [letter, setLetter] = useState("A");
     const [updAllWords, setUpdAllWords] = useState(false);
     const dispatch = useDispatch();
+    const currentPage = 1;
 
-    const getWords = useCallback(async () => {
-        const data = await wordService.searchByLetter(letter, 0);
-        console.log(data.data)
+    const getWords = useCallback(async (page) => {
+        const data = await wordService.searchByLetter(letter, page);
+        dispatch(setPagination([page, data.data.totalPages]));
         dispatch(setWords(data.data.content));
     }, [words, updAllWords])
 
     useEffect(() => {
-        getWords();
+        getWords(currentPage);
         setUpdAllWords(false);
     }, [updAllWords])
 
@@ -87,6 +89,9 @@ export const AllWordsFromDB = () => {
                     <UpdateWord setUpdAllWords={setUpdAllWords} word={word}/>
                 </div>
             })}
+            <div>
+                <Pagination getWords={getWords}/>
+            </div>
         </div>
     )
 }

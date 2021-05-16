@@ -9,12 +9,12 @@ class UserService {
             {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
-    addWordToUserCustom(id) {
-        const formData = new FormData();
-        formData.set("id", id);
-        return axios.post(this.serverURL + `/user/customlib/word/add`, formData,
-            {headers: {"Authorization": this.myStorage.getItem("session")}})
-    }
+    // addWordToUserCustom(id) {
+    //     const formData = new FormData();
+    //     formData.set("id", id);
+    //     return axios.post(this.serverURL + `/user/customlib/word/add`, formData,
+    //         {headers: {"Authorization": this.myStorage.getItem("session")}})
+    // }
 
     addNewWordToUserCustom(form) {
         const formData = new FormData(form);
@@ -33,9 +33,9 @@ class UserService {
             {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
-    getCustomLib() {
-        return axios.get(this.serverURL + "/user/customlib/get",
-            {headers: {"Authorization": this.myStorage.getItem("session")}})
+    getCustomLib(isApproved, page) {
+        return axios.get(this.serverURL + `/user/customlib/get/approved/${isApproved}/page/${page - 1}`,
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
     deleteFromUserCustomLib(id) {
@@ -53,7 +53,6 @@ class UserService {
             {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
-    //TODO empty body
     addFavLib(id) {
         return axios.post(this.serverURL + `/user/favlib/${id}/add`, {},
             {headers: {"Authorization": this.myStorage.getItem("session")}})
@@ -79,8 +78,8 @@ class UserService {
     }
 
     getUsers(page) {
-        return axios.get(this.serverURL + `/users/get/page/${page}`,
-            {headers: {"Authorization": this.myStorage.getItem("session")}})
+        return axios.get(this.serverURL + `/users/get/page/${page - 1}`,
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
 }

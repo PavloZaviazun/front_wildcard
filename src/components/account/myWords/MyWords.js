@@ -2,20 +2,27 @@ import "./MyWords.css";
 import {UsersWord} from "../usersWord";
 import {useEffect, useState} from "react";
 import {userService} from "../../../services";
+import {setPagination} from "../../../redux";
+import {useDispatch} from "react-redux";
+import {Pagination} from "../../pagination";
 
 export const MyWords = () => {
     const [notApproved, setNotApproved] = useState([]);
-    const [flag, setFlag] = useState(false);
-
-    const filterApproved = (data) => {
-        const notapproved = data.filter(el => !el.approved)
-        setNotApproved(notapproved)
-        setFlag(false)
-    }
+    const currentPage = 1;
+    const dispatch = useDispatch();
+    const [flag, setFlag] = useState(false)
 
     useEffect(() => {
-        userService.getCustomLib().then(el => filterApproved(el.data))
-    }, [flag])
+        fetchCustomLib(currentPage)
+        setFlag(false)
+    }, [flag]);
+
+    const fetchCustomLib = async (page) => {
+        const data = await userService.getCustomLib(true, page);
+        setNotApproved(data.pageList);
+        dispatch(setPagination([page, data.pageCount]))
+    }
+
 
     return (
         <div className={"users-words"}>
@@ -44,8 +51,11 @@ export const MyWords = () => {
                     <div>Submit</div>
                 </div>
                 <div>
-                    {notApproved && notApproved.map(el => <div key={el.id}><UsersWord word={el} setFlag={setFlag}/>
+                    {notApproved.length > 0 && notApproved.map(el => <div key={el.id}><UsersWord word={el} setFlag={setFlag}/>
                     </div>)}
+                    <div>
+                        <Pagination fetchCustomLib={fetchCustomLib}/>
+                    </div>
                 </div>
             </div>
         </div>

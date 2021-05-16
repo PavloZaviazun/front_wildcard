@@ -9,8 +9,8 @@ export const Words = () => {
     const dispatch = useDispatch();
 
     commonService.getAllPartsOfSpeech().then(el => dispatch(setPartsOfSpeech(el)));
-    libService.getLibsWithPage(0).then(el => {
-        dispatch(setLibraries(el.content))
+    libService.getLibs().then(el => {
+        dispatch(setLibraries(el))
     })
 
     return (

@@ -3,26 +3,36 @@ import {libService, wordService} from "../../../../services";
 import {UpdateWord} from "../../words/updateWord";
 import {useCallback, useEffect, useState} from "react";
 import {LibraryDetails} from "../libraryDetails";
+import {useDispatch} from "react-redux";
+import {PaginationLibs, PaginationWordsInLibsAdmin} from "../../../pagination";
+import {setLibsPagination, setPagination} from "../../../../redux";
 
 export const AllLibraries = () => {
 
     const [libraries, setLibraries] = useState([]);
     const [words, setWords] = useState([]);
     const [flag, setFlag] = useState(false);
+    const [libId, setLibId] = useState(0)
+    const dispatch = useDispatch();
+    const currentLibPage = 1;
 
-    const getLibraries = useCallback(async () => {
-        const data = await libService.getLibs();
-        setLibraries(data);
+    const getLibrariesWithPages = useCallback(async (page) => {
+        const data = await libService.getLibsWithPage(page);
+        setLibraries(data.content);
+        dispatch(setLibsPagination([page, data.totalPages]));
     }, [])
 
     useEffect(() => {
-        getLibraries();
+        getLibrariesWithPages(currentLibPage);
     }, [])
 
-    const showWords = (id) => {
-        wordService.getWordsFromLib(id, 0).then(el => {
+    const showWords = (id, page) => {
+        setLibId(id)
+        wordService.getWordsFromLib(id, page).then(el => {
             setWords(el.pageList);
+            dispatch(setPagination([page, el.pageCount]));
         });
+
     }
 
     const doSearch = (e) => {
@@ -63,8 +73,9 @@ export const AllLibraries = () => {
                             showWords={showWords}
                             lib={lib}/>
                     })}
+                    <div><PaginationLibs getLibrariesWithPages={getLibrariesWithPages}/></div>
                 </div>
-                <div className={"allWordsHereTable"}>
+                {words.length > 0 && <div className={"allWordsHereTable"}>
                     <div className={"div-head-for-words"}>
                         <div className={"div-head-for-words-name"}>Word</div>
                         <div className={"div-head-for-words-partOS"}>Part of speech</div>
@@ -81,7 +92,10 @@ export const AllLibraries = () => {
                             <UpdateWord word={word}/>
                         </div>
                     })}
-                </div>
+                    <div>
+                        <PaginationWordsInLibsAdmin libId={libId} showWords={showWords}/>
+                    </div>
+                </div>}
             </div>
         </div>
     )

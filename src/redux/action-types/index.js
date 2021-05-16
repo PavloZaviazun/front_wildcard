@@ -6,4 +6,5 @@ export const SET_LETTER = "SET_LETTER";
 export const SET_USER = "SET_USER";
 export const SET_RANDOM = "SET_RANDOM";
 export const SET_PAGINATION = "SET_PAGINATION";
+export const SET_LIBS_PAGINATION = "SET_LIBS_PAGINATION";
 

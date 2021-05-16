@@ -13,7 +13,7 @@ export const LibraryDetails = ({lib, showWords}) => {
     return (
         <div>
             <div className={"div-for-OneLib"}>
-                <button onClick={() => showWords(lib.id)}>{libName}</button>
+                <button onClick={() => showWords(lib.id, 1)}>{libName}</button>
                 <button onClick={rename}>Rename</button>
             </div>
             <div className={!updateLib ? "update-lib" : ""}>

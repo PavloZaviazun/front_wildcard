@@ -11,7 +11,7 @@ class LibService extends React.Component {
     }
 
     getLibsWithPage(page) {
-        return axios.get(this.serverURL + "/libs/get/page/" + page,
+        return axios.get(this.serverURL + "/libs/get/page/" + (page-1),
             {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 

@@ -1,22 +1,25 @@
 import "./NotApproved.css"
 import {UpdateWord} from "../updateWord";
 import {wordService} from "../../../../services";
-import {setWords} from "../../../../redux";
+import {setPagination, setWords} from "../../../../redux";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
+import {Pagination} from "../../../pagination";
 
 export const NotApproved = () => {
     const {words: {words}} = useSelector(state => state);
     const [updAllWords, setUpdAllWords] = useState(false);
     const dispatch = useDispatch();
+    const currentPage = 1;
 
-    const getWords = useCallback(async () => {
-        const data = await wordService.getAllNotApprovedWords();
-        dispatch(setWords(data.data));
+    const getWords = useCallback(async (page) => {
+        const data = await wordService.getNotApprovedWordsPage(page);
+        dispatch(setWords(data.pageList));
+        dispatch(setPagination([page, data.pageCount]));
     }, [words, updAllWords])
 
     useEffect(() => {
-        getWords();
+        getWords(currentPage);
     }, [])
 
     return (
@@ -38,6 +41,9 @@ export const NotApproved = () => {
                     <UpdateWord setUpdAllWords={setUpdAllWords} word={word}/>
                 </div>
             })}
+            <div>
+                <Pagination getWords={getWords}/>
+            </div>
         </div>
     )
 }

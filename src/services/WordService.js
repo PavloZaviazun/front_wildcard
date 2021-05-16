@@ -5,7 +5,7 @@ class WordService {
     myStorage = window.localStorage;
 
     getWordsFromLib(idLib, page) {
-        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get/page/" + page,
+        return axios.get(this.serverURL + "/lib/" + idLib + "/words/get/page/" + (page - 1),
             {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data);
     }
 
@@ -51,13 +51,13 @@ class WordService {
     }
 
     searchByLetter(letter, page) {
-        return axios.get(this.serverURL + "/searchByLetter/" + letter + "/page/" + page,
+        return axios.get(this.serverURL + "/searchByLetter/" + letter + "/page/" + (page - 1),
             {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
-    getAllNotApprovedWords() {
-        return axios.get(this.serverURL + "/words/getnotapproved",
-            {headers: {"Authorization": this.myStorage.getItem("session")}})
+    getNotApprovedWordsPage(page) {
+        return axios.get(this.serverURL + "/words/notapproved/get/page/" + (page - 1),
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
     getAllWordsFromLib(libName, shuffleFlag) {
