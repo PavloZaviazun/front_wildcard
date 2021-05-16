@@ -27,6 +27,7 @@ import {CustomLib} from "./components/account/customLib";
 import {MyWords} from "./components/account/myWords";
 import {FavLibs} from "./components/account/favLibs";
 import {ProtectedRoute} from "./ProtectedRoute";
+import {Mode} from "./components/leftMenu/mode/Mode";
 
 function App() {
     const admin = "ROLE_ADMIN";
@@ -43,6 +44,9 @@ function App() {
                             </Route>
                             <Route exact path="/library/:name">
                                 <Home child={<Library/>}/>
+                            </Route>
+                            <Route exact path="/mode/:name">
+                                <Home child={<Mode/>}/>
                             </Route>
                             <Route exact path="/feedback">
                                 <FeedBack/>

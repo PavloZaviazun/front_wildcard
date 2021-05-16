@@ -22,8 +22,8 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getRandomWords() {
-        return axios.get(this.serverURL + "/randomwords/get",
+    getRandomWords(shuffleFlag) {
+        return axios.get(this.serverURL + `/mode/random/get/${shuffleFlag}`,
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
@@ -60,12 +60,8 @@ class WordService {
             {headers : {"Authorization" : this.myStorage.getItem("session")}})
     }
 
-    getAllWordsFromLib(libName, shuffleFlag, wordsId) {
-        const formData = new FormData();
-        formData.set("shuffleFlag", shuffleFlag);
-        if(wordsId != null) formData.set("wordsId", wordsId);
-        else formData.set("wordsId", null);
-        return axios.post(this.serverURL + "/lib/" + libName + "/words/get", formData,
+    getAllWordsFromLib(libName, shuffleFlag) {
+        return axios.get(this.serverURL + `/lib/${libName}/words/get/${shuffleFlag}`,
             {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data);
     }
 }

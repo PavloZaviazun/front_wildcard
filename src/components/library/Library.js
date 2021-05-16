@@ -15,14 +15,7 @@ export const Library = () => {
     const [words, setWords] = useState([]);
     const [wasUpdated, setWasUpdated] = useState(false);
     const location = useLocation();
-    // const [shuffleFlag, setShuffleFlag] = useState(false);
-    let flag = false;
-    let wordsId = [];
-    if(words.length > 0) {
-        for(let el of words) {
-            wordsId.push(el.id);
-        }
-    }
+    const [shuffleFlag, setShuffleFlag] = useState(0);
 
     const collapse = () => {
         const coll = document.getElementsByClassName("collapsible");
@@ -32,23 +25,26 @@ export const Library = () => {
     }
 
     useEffect(() => {
-        setLibName(location.pathname.split("/library/")[1]);
-        if (libName.length > 0) getWord(flag, customLibIds);
+        if(location.pathname.split("/library/")[1] !== libName) {
+            setLibName(location.pathname.split("/library/")[1]);
+        }
+        if (libName.length > 0) getWord(shuffleFlag);
         if(session != null) userService.getCustomLibIds()
             .then(el => {
                 setCustomLibIds(el);
             });
-    }, [libName, location, wasUpdated]);
+    }, [libName, location, wasUpdated, shuffleFlag]);
 
     const getWord = async (shuffleFlag) => {
         if (location.pathname.split("/library/")[1] === libName) {
-            const data = await wordService.getAllWordsFromLib(libName, shuffleFlag, wordsId);
+            const data = await wordService.getAllWordsFromLib(libName, shuffleFlag);
             setWords(data);
         }
     };
 
     const handleShuffle = () => {
-        getWord(true)
+        setShuffleFlag(shuffleFlag + 1);
+        getWord(shuffleFlag);
     }
 
     return (
