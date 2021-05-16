@@ -16,7 +16,7 @@ export const FeedBack = () => {
         commonService.sendFeedback(form).then(el => setResponse(el.data));
     }
 
-    if(response === message) {
+    if (response === message) {
         setTimeout(() => {
             setRedirect(true);
         }, 3000)

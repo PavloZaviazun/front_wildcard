@@ -15,7 +15,7 @@ export const Header = () => {
         })
     }, [role, location])
 
-    return(
+    return (
         <div className={"div-header"}>
             <div>
                 <Link to={"/"}><img src={Logo} alt={"Logo"}/></Link>
@@ -31,8 +31,12 @@ export const Header = () => {
             </div>
             <div>
                 {token == null ?
-                    <Link to={"/auth/login"}><div>Вхід/Реєстрація</div></Link> :
-                    <Link to={"/account"}><div>Профіль</div></Link>}
+                    <Link to={"/auth/login"}>
+                        <div>Вхід/Реєстрація</div>
+                    </Link> :
+                    <Link to={"/account"}>
+                        <div>Профіль</div>
+                    </Link>}
             </div>
 
         </div>

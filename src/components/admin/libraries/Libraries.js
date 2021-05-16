@@ -3,7 +3,6 @@ import {NavLink} from "react-router-dom";
 
 export const Libraries = () => {
 
-
     return (
         <div>
             <div className={"words-edition"}>

@@ -16,19 +16,18 @@ export const AllUsers = () => {
     return (
         <div>
             <div className={"user-details-div"}>
-            <div className={"user-details-id"}>ID</div>
-            <div className={"user-details-email"}>E-mail</div>
-            <div className={"user-details-nativeLang"}>NLang</div>
-            <div className={"user-details-role"}>Role</div>
-            <div className={"user-details-enabled"}>Enabled</div>
+                <div className={"user-details-id"}>ID</div>
+                <div className={"user-details-email"}>E-mail</div>
+                <div className={"user-details-nativeLang"}>NLang</div>
+                <div className={"user-details-role"}>Role</div>
+                <div className={"user-details-enabled"}>Enabled</div>
             </div>
             {pageObj && pageObj.content.map(user => {
                 return <UserDetails
-                key={user.id}
-                user={user}
+                    key={user.id}
+                    user={user}
                 />
             })}
-
         </div>
     )
 }

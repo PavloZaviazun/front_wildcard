@@ -7,7 +7,6 @@ import {Input, Form, Button, Checkbox} from "antd";
 export const UpdateWord = ({word, setUpdAllWords}) => {
 
     const [message, setMessage] = useState("");
-
     const [form] = Form.useForm();
     const {partsOfSpeech: {partsOfSpeech}} = useSelector(state => state);
     const {libraries: {libraries}} = useSelector(state => state);
@@ -80,8 +79,6 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
     const updateWord = () => {
         const form = document.forms.namedItem(`wordForm${currentWord.id}`);
         const partOfSpeech = form[2].value;
-        console.log(form[0])
-        console.log(form[0].checked)
         wordService.updateWord(currentWord.id, form).then(el => {
             setMessage(el.data)
             getCurrentWord();
@@ -106,96 +103,96 @@ export const UpdateWord = ({word, setUpdAllWords}) => {
 
     return (
         <div>
-        <div className={"updateForm"}>
-            <div className={"updateform-form"}>
-                <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={`wordForm${word.id}`}>
-                    <Form.Item name="approved" valuePropName="checked" noStyle>
-                        <Checkbox name={"approved"}/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-name"}
-                        name="word"
-                        rules={[{
-                            required: true,
-                            message: 'Please input word!',
-                        },
-                            {
-                                pattern: /[a-z]+/,
-                                message: "не по паттерну",
-                            }]}>
-                        <Input name="word"/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-partOS"}
-                        name="partOfSpeech">
-                        <select name="partOfSpeech">
-                            <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>
-                            {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}
-                        </select>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-description"}
-                        name="description"
-                        rules={[{
-                            message: 'Please input description!',
-                        },
-                            {
-                                pattern: '[a-zA-Z\p{P}]+',
-                                message: "не по паттерну",
-                            }]}>
-                        <Input name="description"/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-example"}
-                        name="example"
-                        rules={[{
-                            // required: true,
-                            message: 'Please input example!',
-                        },]}>
-                        <Input name="example"/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-translationRu"}
-                        name="translationRu"
-                        rules={[{
-                            message: 'Please input translationRU!',
-                        },]}>
-                        <Input name="translationRu"/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-translationUa"}
-                        name="translationUa"
-                        rules={[{
-                            message: 'Please input translationUA!',
-                        },
-                        ]}>
-                        <Input name="translationUa"/>
-                    </Form.Item>
-                    <Form.Item
-                        className={"tableForUpdate-notAddedLibs"}
-                        name='NotAddedToLibs'
-                        rules={[{
-                            message: 'Please input NotAddedToLibs!',
-                        },]}>
-                        <select name={"NotAddedToLibs"}>
-                            <option value={""}/>
-                            {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
-                        </select>
-                    </Form.Item>
-                    <Form.Item
-                        name="image">
-                        <Input type={"file"} name="image"/>
-                    </Form.Item>
-                    <Form.Item className={"tableForUpdate-submit"}>
-                        <Button htmlType="submit">Submit</Button>
-                    </Form.Item>
+            <div className={"updateForm"}>
+                <div className={"updateform-form"}>
+                    <Form form={form} onFinish={updateWord} className={"tableForUpdate"} name={`wordForm${word.id}`}>
+                        <Form.Item name="approved" valuePropName="checked" noStyle>
+                            <Checkbox name={"approved"}/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-name"}
+                            name="word"
+                            rules={[{
+                                required: true,
+                                message: 'Please input word!',
+                            },
+                                {
+                                    pattern: /[a-z]+/,
+                                    message: "не по паттерну",
+                                }]}>
+                            <Input name="word"/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-partOS"}
+                            name="partOfSpeech">
+                            <select name="partOfSpeech">
+                                <option value={currentWord.partOfSpeech}>{currentWord.partOfSpeech}</option>
+                                {notPartsOfSpeechOfWord.map(el => <option key={el} value={el}>{el}</option>)}
+                            </select>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-description"}
+                            name="description"
+                            rules={[{
+                                message: 'Please input description!',
+                            },
+                                {
+                                    pattern: '[a-zA-Z\p{P}]+',
+                                    message: "не по паттерну",
+                                }]}>
+                            <Input name="description"/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-example"}
+                            name="example"
+                            rules={[{
+                                // required: true,
+                                message: 'Please input example!',
+                            },]}>
+                            <Input name="example"/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-translationRu"}
+                            name="translationRu"
+                            rules={[{
+                                message: 'Please input translationRU!',
+                            },]}>
+                            <Input name="translationRu"/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-translationUa"}
+                            name="translationUa"
+                            rules={[{
+                                message: 'Please input translationUA!',
+                            },
+                            ]}>
+                            <Input name="translationUa"/>
+                        </Form.Item>
+                        <Form.Item
+                            className={"tableForUpdate-notAddedLibs"}
+                            name='NotAddedToLibs'
+                            rules={[{
+                                message: 'Please input NotAddedToLibs!',
+                            },]}>
+                            <select name={"NotAddedToLibs"}>
+                                <option value={""}/>
+                                {notAddedToLibs.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
+                            </select>
+                        </Form.Item>
+                        <Form.Item
+                            name="image">
+                            <Input type={"file"} name="image"/>
+                        </Form.Item>
+                        <Form.Item className={"tableForUpdate-submit"}>
+                            <Button htmlType="submit">Submit</Button>
+                        </Form.Item>
 
-                </Form>
-                <div className={"tableForUpdate-delete"}>
-                    <button onClick={deleteWord}>Delete</button>
+                    </Form>
+                    <div className={"tableForUpdate-delete"}>
+                        <button onClick={deleteWord}>Delete</button>
+                    </div>
                 </div>
             </div>
-        </div>
             <div>{message}</div>
         </div>
     )

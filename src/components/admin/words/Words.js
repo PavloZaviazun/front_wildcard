@@ -15,9 +15,15 @@ export const Words = () => {
 
     return (
         <div className={"words-edition"}>
-            <NavLink activeClassName={"activeBut"} to={`/admin/words/addnew`}><div>Добавить слово</div></NavLink>
-            <NavLink activeClassName={"activeBut"} to={`/admin/words/all`}><div>Посмотреть все слова</div></NavLink>
-            <NavLink activeClassName={"activeBut"} to={`/admin/words/notapproved`}><div>Слова custLib not Approved</div></NavLink>
+            <NavLink activeClassName={"activeBut"} to={`/admin/words/addnew`}>
+                <div>Добавить слово</div>
+            </NavLink>
+            <NavLink activeClassName={"activeBut"} to={`/admin/words/all`}>
+                <div>Посмотреть все слова</div>
+            </NavLink>
+            <NavLink activeClassName={"activeBut"} to={`/admin/words/notapproved`}>
+                <div>Слова custLib not Approved</div>
+            </NavLink>
         </div>
     )
 }

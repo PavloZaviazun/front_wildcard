@@ -18,7 +18,7 @@ export const FavLibs = () => {
         setFavLibAction(false);
     }
 
-    return(
+    return (
         <div>
             {favLibs && favLibs.data.map(favLib => {
                 return <FavLibDetails

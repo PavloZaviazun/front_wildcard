@@ -6,62 +6,62 @@ class UserService {
 
     getUserByToken() {
         return axios.get(this.serverURL + "/user/get",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el.data)
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el.data)
     }
 
     addWordToUserCustom(id) {
         const formData = new FormData();
         formData.set("id", id);
         return axios.post(this.serverURL + `/user/customlib/word/add`, formData,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     addNewWordToUserCustom(form) {
         const formData = new FormData(form);
         return axios.post(this.serverURL + `/user/customlib/add/newword`, formData,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     updateWordInUserCustom(form, id) {
         const formData = new FormData(form);
         return axios.post(this.serverURL + `/user/customlib/word/${id}/update`, formData,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     getCustomLibIds() {
         return axios.get(this.serverURL + "/user/customlibids/get",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     getCustomLib() {
         return axios.get(this.serverURL + "/user/customlib/get",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     deleteFromUserCustomLib(id) {
         return axios.delete(this.serverURL + `/user/customlib/word/${id}/delete`,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     addToUserCustomLib(ident) {
-        return axios.post(this.serverURL + `/user/customlib/word/add`, {ident : ident},
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+        return axios.post(this.serverURL + `/user/customlib/word/add`, {ident: ident},
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     getFavLibs() {
         return axios.get(this.serverURL + "/user/favlibs/get",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     //TODO empty body
     addFavLib(id) {
         return axios.post(this.serverURL + `/user/favlib/${id}/add`, {},
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     deleteFavLib(id) {
         return axios.delete(this.serverURL + `/user/favlib/${id}/delete`,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
     updateUser(id, nativeLang, email) {
@@ -80,7 +80,7 @@ class UserService {
 
     getUsers(page) {
         return axios.get(this.serverURL + `/users/get/page/${page}`,
-            {headers : {"Authorization" : this.myStorage.getItem("session")}})
+            {headers: {"Authorization": this.myStorage.getItem("session")}})
     }
 
 }

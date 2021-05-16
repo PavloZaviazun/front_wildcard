@@ -4,12 +4,10 @@ import {authService, commonService, userService} from "../../../services";
 
 export const Profile = () => {
     const [message, setMessage] = useState("");
-
     const [user, setUser] = useState({});
     const [nativeLangs, setNativeLangs] = useState([]);
     const [avaliableLangs, setAvaliableLangs] = useState([]);
     const [emailChange, setEmailChange] = useState(false);
-
     const findAvaliableLangs = () => {
         nativeLangs.filter(el => el === user.nativeLang)
     }
@@ -47,7 +45,7 @@ export const Profile = () => {
         window.location.href = "/";
     }
 
-    return(
+    return (
         <div>
             <div>
                 <button onClick={logout}>Logout</button>
@@ -59,7 +57,8 @@ export const Profile = () => {
             <button onClick={changeFlag} className={emailChange ? "change-email" : ""}>Change e-mail</button>
             <form onSubmit={handleUser}>
                 <div className={"new-row"}>
-                    <div className={!emailChange ? "change-email" : ""}><input defaultValue={user.email} type={"text"}/></div>
+                    <div className={!emailChange ? "change-email" : ""}><input defaultValue={user.email} type={"text"}/>
+                    </div>
                 </div>
                 <div className={"new-row"}>
                     <div>Native language:</div>

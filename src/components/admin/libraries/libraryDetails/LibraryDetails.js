@@ -16,7 +16,7 @@ export const LibraryDetails = ({lib, showWords}) => {
                 <button onClick={() => showWords(lib.id)}>{libName}</button>
                 <button onClick={rename}>Rename</button>
             </div>
-            <div  className={!updateLib ? "update-lib" : ""}>
+            <div className={!updateLib ? "update-lib" : ""}>
                 <UpdateLibrary setUpdateLib={setUpdateLib} name={lib.name} setLibName={setLibName} id={lib.id}/>
             </div>
         </div>

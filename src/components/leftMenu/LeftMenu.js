@@ -28,13 +28,13 @@ export const LeftMenu = () => {
     return (
         <div className={"leftmenu-div"}>
             <div className={"mode-div"} onClick={handleRandom}>
-            <Link to={"/mode/random"}>Random mode</Link>
+                <Link to={"/mode/random"}>Random mode</Link>
             </div>
-        <div>
-            {libs.map(lib =>
-                <div className={"libLink"} key={lib.id}><LeftMenuDetails lib={lib} role={role}/></div>
-            )}
-        </div>
+            <div>
+                {libs.map(lib =>
+                    <div className={"libLink"} key={lib.id}><LeftMenuDetails lib={lib} role={role}/></div>
+                )}
+            </div>
         </div>
     )
 }

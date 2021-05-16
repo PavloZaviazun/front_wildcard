@@ -27,6 +27,7 @@ export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
 
     let [i, setI] = useState(0);
     let translation = "";
+
     const cardClick = () => {
         setCardBack(!cardBack);
     }
@@ -55,13 +56,14 @@ export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
     }
 
     useEffect(() => {
-       if (role === admin || role === user) userService.getCustomLibIds().then(el => {
+        if (role === admin || role === user) userService.getCustomLibIds().then(el => {
             if (el != null) {
                 return setCustomLibIds(el.data)
-            }})
+            }
+        })
         let frontSide = document.getElementsByClassName("front-side")[0];
         let backSide = document.getElementsByClassName("back-side")[0];
-        if (words !== undefined && words.length > 0){
+        if (words !== undefined && words.length > 0) {
             setWord(words[i])
         }
         if (cardBack) {
@@ -71,13 +73,13 @@ export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
             ReactDOM.findDOMNode(frontSide).style.transform = "rotateY(0deg)";
             ReactDOM.findDOMNode(backSide).style.transform = "rotateY(180deg)";
         }
-        if(customLibIds) {
+        if (customLibIds) {
             setButtonName(customLibIds.includes(word.id) ? "Delete" : "Add");
         }
     }, [cardBack, words, i, buttonName, word]);
 
     let background;
-    if(word !== undefined && word.image ) {
+    if (word !== undefined && word.image) {
         background = {
             backgroundImage: `url(${serverURL}/cardImages/${word.image})`,
         };
@@ -85,12 +87,10 @@ export const Card = ({words, wasUpdated, setWasUpdated, role}) => {
 
     const wordHandle = () => {
         let count = 0;
-
-            for (let id of customLibIds) {
-                if (word.id === id) count++;
-            }
-
-        if(count === 0) userService.addToUserCustomLib(word.id).then(el => {
+        for (let id of customLibIds) {
+            if (word.id === id) count++;
+        }
+        if (count === 0) userService.addToUserCustomLib(word.id).then(el => {
             setWasUpdated(!wasUpdated)
         });
         else userService.deleteFromUserCustomLib(word.id).then(el => {

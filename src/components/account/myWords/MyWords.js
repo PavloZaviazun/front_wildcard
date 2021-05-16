@@ -15,7 +15,6 @@ export const MyWords = () => {
 
     useEffect(() => {
         userService.getCustomLib().then(el => filterApproved(el.data))
-
     }, [flag])
 
     return (
@@ -45,7 +44,8 @@ export const MyWords = () => {
                     <div>Submit</div>
                 </div>
                 <div>
-                    {notApproved && notApproved.map(el => <div key={el.id}><UsersWord word={el} setFlag={setFlag}/></div>)}
+                    {notApproved && notApproved.map(el => <div key={el.id}><UsersWord word={el} setFlag={setFlag}/>
+                    </div>)}
                 </div>
             </div>
         </div>

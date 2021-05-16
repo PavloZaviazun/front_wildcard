@@ -50,7 +50,6 @@ export const Library = () => {
     }
 
     return (
-
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
                 <Card words={words}
@@ -69,11 +68,11 @@ export const Library = () => {
             <div className="content">
                 {words && words.map(wordElement => {
                     return <WordElement
-                    key={wordElement.id}
-                    wordElement={wordElement}
-                    role={role}
-                    setWasUpdated={setWasUpdated}
-                    wasUpdated={wasUpdated}
+                        key={wordElement.id}
+                        wordElement={wordElement}
+                        role={role}
+                        setWasUpdated={setWasUpdated}
+                        wasUpdated={wasUpdated}
                     />
                 })}
             </div>

@@ -21,13 +21,12 @@ export const Registration = () => {
                 .then(el => {
                     setRegResponse(el.data)
                 });
+        } else {
+            setRegResponse("Пароли не совпадают!")
         }
-        else {
-            //TODO показать сообщение что пароли не совпадают
-        }
-
     }
-    if(regResponse === message) {
+
+    if (regResponse === message) {
         setTimeout(() => {
             setRedirect(true);
         }, 3000)

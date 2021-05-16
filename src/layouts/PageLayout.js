@@ -14,7 +14,7 @@ export const PageLayout = ({children}) => {
                 {children}
             </div>
             <div className={"pl-footer"}>
-                <Footer />
+                <Footer/>
             </div>
         </div>
     )

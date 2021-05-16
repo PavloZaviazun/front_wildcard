@@ -19,7 +19,8 @@ class AuthService {
 
     logOut() {
         return axios.get(this.serverURL + "/logout",
-            {headers : {"Authorization" : this.myStorage.getItem("session")}}).then(el => el)
+            {headers: {"Authorization": this.myStorage.getItem("session")}}).then(el => el)
     }
 }
+
 export const authService = new AuthService();

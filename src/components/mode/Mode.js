@@ -14,7 +14,7 @@ export const Mode = () => {
     const [words, setWords] = useState([]);
     const [wasUpdated, setWasUpdated] = useState(false);
     const location = useLocation();
-    const {random:{random}} = useSelector(el => el);
+    const {random: {random}} = useSelector(el => el);
     let [role, setRole] = useState("");
     userService.getUserByToken().then(el => {
         setRole(el.roles[0]);
@@ -28,11 +28,11 @@ export const Mode = () => {
     }
 
     useEffect(() => {
-        if(location.pathname.split("/mode/")[1] !== modeName) {
+        if (location.pathname.split("/mode/")[1] !== modeName) {
             setModeName(location.pathname.split("/mode/")[1]);
         }
         if (modeName.length > 0) getWord();
-        if(session != null) userService.getCustomLibIds()
+        if (session != null) userService.getCustomLibIds()
             .then(el => {
                 setCustomLibIds(el);
             });
@@ -46,7 +46,6 @@ export const Mode = () => {
     };
 
     return (
-
         <div className={"div-forcard"}>
             <div className={"div-cardspace"}>
                 <Card words={words}

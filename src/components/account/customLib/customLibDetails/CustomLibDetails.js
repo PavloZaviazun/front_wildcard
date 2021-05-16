@@ -1,10 +1,10 @@
 import "./CustomLibDetails.css";
 
 export const CustomLibDetails = (vocabulary) => {
-    const {word:{word, partOfSpeech, description, example, translation}} = vocabulary;
+    const {word: {word, partOfSpeech, description, example, translation}} = vocabulary;
     let translationObj = JSON.parse(translation);
 
-    return(
+    return (
         <div className={"word-div"}>
             <div>{word}</div>
             <div>{partOfSpeech}</div>

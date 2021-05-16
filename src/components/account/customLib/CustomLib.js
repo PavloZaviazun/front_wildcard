@@ -16,12 +16,12 @@ export const CustomLib = () => {
         setCustomLib(data);
     }
 
-    return(
+    return (
         <div>
             {customLib && customLib.data.map(vocabulary => {
                 return <CustomLibDetails
-                key={vocabulary.id}
-                word={vocabulary}
+                    key={vocabulary.id}
+                    word={vocabulary}
                 />
             })}
         </div>

@@ -9,18 +9,11 @@ export const ProtectedRoute = ({roles, child}) => {
 
     useEffect(() => {
         userService.getUserByToken().then(el => {
-            if (el.roles.length > 0 && roles.includes(el.roles[0])){
+            if (el.roles.length > 0 && roles.includes(el.roles[0])) {
                 setResult(child);
             } else if (el.roles.length === 0 && roles.length === 0)
                 setResult(child)
             else setResult(<Redirect to={{pathname: "/"}}/>)
-            // setResult(
-            //     el.roles.length > 0 && roles.includes(el.roles[0])
-            //     ?
-            //     child
-            //     :
-            //     <Redirect to={{pathname: "/"}}/>
-            // )
             setRole(el.roles[0]);
         })
     }, [role, result, url.pathname])

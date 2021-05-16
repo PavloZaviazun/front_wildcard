@@ -27,7 +27,7 @@ export const UsersWord = ({word, setFlag}) => {
     }, [])
 
     const handleWord = () => {
-        if (word !== undefined){
+        if (word !== undefined) {
             const form = document.forms.namedItem(`usersWordForm${word.id}`);
             userService.updateWordInUserCustom(form, word.id).then(el => console.log(el))
         } else {
@@ -42,7 +42,8 @@ export const UsersWord = ({word, setFlag}) => {
         <div className={"users-word"}>
             <div className={"user-add-word"}>
                 <div className={"user-add-word-form"}>
-                    <Form form={form} onFinish={handleWord} className={"tableForUsersWord"} name={word === undefined ? `usersWordForm` : `usersWordForm${word.id}`}>
+                    <Form form={form} onFinish={handleWord} className={"tableForUsersWord"}
+                          name={word === undefined ? `usersWordForm` : `usersWordForm${word.id}`}>
                         <Form.Item
                             className={"user-add-word-name"}
                             name="word"
